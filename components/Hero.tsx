@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from 'scss/components/Hero.module.scss';
 
 interface Props {
   title: string;
@@ -27,11 +26,11 @@ function Hero({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...(id && { id })}
       style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
-      className={styles.hero}>
-      <div className={styles.wrap}>
+    >
+      <div>
         <h1>{title}</h1>
-        <div className={styles.intro}>
-          <div className={styles.children}>{children}</div>
+        <div>
+          <div>{children}</div>
           {buttonText && buttonURL && (
             <p>
               <a href={buttonURL} className="button">

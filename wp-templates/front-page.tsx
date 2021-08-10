@@ -64,14 +64,15 @@ export default function FrontPage(props: any): JSX.Element {
               <div className={styles.feature}>
                 <h3>Page Templates</h3>
                 <p>
-                  Find templates in the the <code>wp-templates/</code> folder. These
-                  use the same convention as the{' '}
+                  Find templates in the the <code>wp-templates/</code> folder.
+                  These use the same convention as the{' '}
                   <a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">
                     WordPress template hierarchy
                   </a>
                   , where <code>single.tsx</code> displays posts and{' '}
                   <code>page.tsx</code> displays pages. Find page-specific CSS
-                  at <code>scss/wp-templates</code>, which is scoped to the page with{' '}
+                  at <code>scss/wp-templates</code>, which is scoped to the page
+                  with{' '}
                   <a href="https://nextjs.org/docs/basic-features/built-in-css-support#adding-component-level-css">
                     CSS modules
                   </a>

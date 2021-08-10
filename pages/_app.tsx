@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { AppContext, AppInitialProps } from 'next/app';
 import { HeadlessProvider } from '@wpengine/headless/react';
 import 'normalize.css/normalize.css';
-import 'scss/main.scss';
+import 'scss/tailwind.scss';
 
 /* eslint-disable react/jsx-props-no-spreading */
 export default function App({

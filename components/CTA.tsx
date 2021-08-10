@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from 'scss/components/CTA.module.scss';
 import Heading, { HeadingProps } from './Heading';
 
 interface Props {
@@ -18,15 +17,13 @@ function CTA({
   headingLevel = 'h1',
 }: Props): JSX.Element {
   return (
-    <section className={styles.cta}>
-      <div className={styles.wrap}>
-        <Heading level={headingLevel} className={styles.title}>
-          {title}
-        </Heading>
-        <div className={styles.intro}>
-          <div className={styles.children}>{children}</div>
+    <section>
+      <div>
+        <Heading level={headingLevel}>{title}</Heading>
+        <div>
+          <div>{children}</div>
           {buttonText && buttonURL && (
-            <div className={styles['button-wrap']}>
+            <div>
               <a href={buttonURL} className="button">
                 {buttonText}
               </a>

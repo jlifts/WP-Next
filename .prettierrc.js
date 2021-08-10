@@ -1,6 +1,6 @@
 module.exports = {
   arrowParens: 'always',
-  jsxBracketSameLine: true,
+  jsxBracketSameLine: false,
   singleQuote: true,
   tabWidth: 2,
   semi: true,

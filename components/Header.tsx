@@ -1,6 +1,5 @@
 import React from 'react';
 import { WPHead } from '@wpengine/headless/next';
-import styles from 'scss/components/Header.module.scss';
 import Link from 'next/link';
 import Head from 'next/head';
 
@@ -49,16 +48,16 @@ function Header({
       </Head>
       <WPHead />
       <header>
-        <div className={styles.wrap}>
-          <div className={styles['title-wrap']}>
-            <p className={styles['site-title']}>
+        <div>
+          <div>
+            <p>
               <Link href="/">
                 <a>{title}</a>
               </Link>
             </p>
-            {description && <p className={styles.description}>{description}</p>}
+            {description && <p>{description}</p>}
           </div>
-          <div className={styles.menu}>
+          <div>
             <ul>
               {menuItems &&
                 menuItems.map((item) => (

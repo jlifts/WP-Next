@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "typings/*.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "typings/*.d.ts", "**/*.ts", "**/*.tsx",
+    "tailwind.config.js", ".eslintrc.js", "postcss.config.js", "next.config.js"],
+  "exclude": ["node_modules" ]
 }
