@@ -12,7 +12,12 @@ module.exports = {
       transformOrigin: {
         0: '0%',
       },
-      // Change
+      height: {
+        '7/8': '87.5%',
+      },
+      width: {
+        '7/8': '87.5%',
+      },
       colors: {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',

@@ -1,15 +1,22 @@
-@import 'variables';
-@import 'typography';
-@import 'custom';
-
 @import '~tailwindcss/base';
 @import '~tailwindcss/components';
 @import '~tailwindcss/utilities';
 
+@import 'variables';
+@import 'typography';
+@import 'custom';
+
+// :root {
+//   --primary: $color-primary;
+//   --secondary: $color-secondary;
+//   --dark-gray: $color-dark-gray;
+//   --light-gray: $color-light-gray;
+//   --mid-gray: $color-mid-gray;
+// }
 :root {
-  --primary: $color-primary;
-  --secondary: $color-secondary;
-  --dark-gray: $color-dark-gray;
-  --light-gray: $color-light-gray;
-  --mid-gray: $color-mid-gray;
+  --primary: #158180;
+  --secondary: #0c3a5c;
+  --light-gray: #f2f2f2;
+  --dark-gray: #1f1f1f;
+  --mid-gray: #707070;
 }

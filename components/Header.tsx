@@ -8,10 +8,7 @@ interface Props {
   description?: string;
 }
 
-function Header({
-  title = 'Headless by WP Engine',
-  description,
-}: Props): JSX.Element {
+function Header({ title = 'Victis Health', description }: Props): JSX.Element {
   // TODO: accept a `menuItems` prop to receive menu items from WordPress.
   const menuItems = [
     { title: 'Home', href: '/' },

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {
@@ -5,7 +7,7 @@ interface Props {
   id?: string;
   bgImage?: string;
   buttonText?: string;
-  buttonURL?: string;
+  buttonURL?: any;
   button2Text?: string;
   button2URL?: string;
   children?: React.ReactNode;
@@ -26,17 +28,26 @@ function Hero({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...(id && { id })}
       style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
+      className="h-7/8 flex items-center justify-center mt-8"
     >
-      <div>
-        <h1>{title}</h1>
+      <div className="text-white">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-7xl uppercase font-bold font-mont tracking-widest">
+            {title}
+          </h1>
+          <h2 className="font-cochin uppercase text-xl tracking-wide">
+            Science You Can Trust, Pain Relief You Can Feel
+          </h2>
+        </div>
         <div>
           <div>{children}</div>
           {buttonText && buttonURL && (
-            <p>
-              <a href={buttonURL} className="uppercase">
-                {buttonText}
-              </a>
-            </p>
+            <div className="flex flex-row">
+              <div className=" border-b-2 px-12" />
+              <p className="uppercase text-white font-rale border-b-2">
+                <Link href={buttonURL}>{buttonText}</Link>
+              </p>
+            </div>
           )}
           {button2Text && button2URL && (
             <p>

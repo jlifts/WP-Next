@@ -8,6 +8,7 @@ const templates: Templates<NextTemplate> = {
   category: import('./category'),
   page: import('./page'),
   single: import('./single'),
+  shop: import('./shop'),
 };
 
 export default templates;
