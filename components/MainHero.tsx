@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 interface Props {
-  title: string;
+  title?: string;
   id?: string;
   bgImage?: string;
   buttonText?: string;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 function Hero({
-  title = 'Hero Title',
+  title = '',
   id,
   bgImage,
   buttonText,
@@ -27,10 +27,18 @@ function Hero({
     <section
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...(id && { id })}
-      style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
-      className="h-7/8 flex items-center justify-center mt-8"
+      className="h-4/6 w-5/8 flex items-center justify-center mt-8 z-40"
     >
-      <div className="text-white">
+      <div
+        className={bgImage && `h-4/6 w-5/8 absolute z-20 bg-black opacity-30 `}
+      />
+      <div
+        style={{
+          backgroundImage: bgImage ? `url(${bgImage})` : 'none',
+        }}
+        className="h-4/6 w-5/8 absolute z-10 bg-cover"
+      />
+      <div className="text-white z-30">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-7xl uppercase font-bold font-mont tracking-widest">
             {title}

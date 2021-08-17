@@ -3,6 +3,27 @@
 @import 'variables';
 @import 'typography';
 
+body {
+  overflow-x: hidden;
+}
+input:focus-within ~ label,
+input:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-6;
+}
+
+input:focus-within ~ label {
+  @apply text-secondary;
+}
+
+textarea:focus-within ~ label,
+textarea:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-6;
+}
+
+textarea:focus-within ~ label {
+  @apply text-secondary;
+}
+
 .rotate {
   transform: rotate(45deg) translateY(11px);
 }
@@ -11,4 +32,7 @@
 }
 .disapear {
   opacity: 0;
+}
+.active {
+  border-bottom: 1px solid white;
 }

@@ -23,20 +23,28 @@ function Posts({
 }: Props): JSX.Element {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <section {...(id && { id })}>
-      <div className="wrap">
-        {heading && <Heading level={headingLevel}>{heading}</Heading>}
-        {intro && <p>{intro}</p>}
+    <section {...(id && { id })} className="text-white font-rale">
+      <div className="flex flex-col">
+        <div className="flex flex-col justify-center items-center">
+          {heading && (
+            <div className="text-xl font-bold">
+              <Heading level={headingLevel}>{heading}</Heading>
+            </div>
+          )}
+          {intro && <p>{intro}</p>}
+        </div>
         <div className="posts">
           {posts &&
             posts.map((post) => (
-              <div key={post.id} id={`post-${post.id}`}>
+              <div key={post.id} id={`post-${post.id}`} className="py-8 px-32">
                 <div>
-                  <Heading level={postTitleLevel}>
-                    <Link href={post.uri}>
-                      <a>{post.title}</a>
-                    </Link>
-                  </Heading>
+                  <div className="font-bold text-lg">
+                    <Heading level={postTitleLevel}>
+                      <Link href={post.uri}>
+                        <a>{post.title}</a>
+                      </Link>
+                    </Heading>
+                  </div>
                   <div
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: post.excerpt ?? '' }}

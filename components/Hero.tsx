@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 interface Props {
-  title: string;
+  title?: string;
   id?: string;
   bgImage?: string;
   buttonText?: string;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 function Hero({
-  title = 'Hero Title',
+  title = '',
   id,
   bgImage,
   buttonText,
@@ -23,28 +24,32 @@ function Hero({
 }: Props): JSX.Element {
   return (
     <section
-      // eslint-disable-next-line react/jsx-props-no-spreading
+      className="h-4/6 w-5/8 flex items-center justify-center mt-8 z-30"
       {...(id && { id })}
-      style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
     >
-      <div>
-        <h1>{title}</h1>
+      <div
+        style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
+        className="h-4/6 w-5/8 absolute z-10 bg-cover shadow-2xl"
+      >
         <div>
-          <div>{children}</div>
-          {buttonText && buttonURL && (
-            <p>
-              <a href={buttonURL} className="uppercase">
-                {buttonText}
-              </a>
-            </p>
-          )}
-          {button2Text && button2URL && (
-            <p>
-              <a href={button2URL} className="button button-secondary">
-                {button2Text}
-              </a>
-            </p>
-          )}
+          <h1>{title}</h1>
+          <div>
+            <div>{children}</div>
+            {buttonText && buttonURL && (
+              <p>
+                <a href={buttonURL} className="uppercase">
+                  {buttonText}
+                </a>
+              </p>
+            )}
+            {button2Text && button2URL && (
+              <p>
+                <a href={button2URL} className="button button-secondary">
+                  {button2Text}
+                </a>
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>

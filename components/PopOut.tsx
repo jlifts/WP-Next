@@ -26,7 +26,7 @@ const PopOut = ({
   return (
     <div
       {...(id && { id })}
-      className="flex flex-col text-gray bg-white shadow-xl p-8"
+      className="flex flex-col text-gray bg-white shadow-2xl p-8 z-40"
     >
       <div className="flex flex-col justify-center items-center py-8">
         <Heading className="uppercase font-rale text-lg" level={headingLevel}>
@@ -39,7 +39,7 @@ const PopOut = ({
           {subTitle}
         </Heading>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-4 px-24">
         <p>{body}</p>
         <p>{body2}</p>
         <p>{body3}</p>

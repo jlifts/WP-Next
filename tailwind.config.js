@@ -3,31 +3,47 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      padding: {
+        88: '22rem',
+        18: '4.5rem',
+      },
       scale: {
         '-1': '-1',
       },
       zIndex: {
         '-1': '-1',
+        60: '60',
+        70: '70',
       },
       transformOrigin: {
         0: '0%',
       },
       height: {
         '7/8': '87.5%',
+        '7/10': '70%',
+        '5/8': '62.5%',
+        'screen+': '120vh',
+        'full+': '120%',
       },
       width: {
         '7/8': '87.5%',
+        '7/10': '70%',
+        '5/8': '62.5%',
+        '3/8': '37.5%',
       },
       colors: {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         darkgray: 'var(--dark-gray)',
         lightgray: 'var(--light-gray)',
-        gray: 'var(--mid-gray)',
+        midgray: 'var(--mid-gray)',
+        twitter: 'var(--twitter)',
+        facebook: 'var(--facebook)',
+        instagram: 'var(--instagram)',
       },
       backgroundImage: () => ({
         // 'hero-image': "url('../img/wedding_draft.jpg')",
-        // 'prop-image': "url('../img/example2.jpeg')",
+        // 'prop-image': "url('/images/cbdshelf.jpeg')",
       }),
     },
     screens: {

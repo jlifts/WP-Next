@@ -6,5 +6,22 @@ import Posts from './Posts';
 import Drawer from './Drawer';
 import MainHero from './MainHero';
 import PopOut from './PopOut';
+import FPItem from './FPItem';
+import { ShopNav } from './ShopNav';
+import Cart from './Cart';
+import ContactForm from './ContactForm';
 
-export { CTA, Footer, Header, Hero, MainHero, Posts, Drawer, PopOut };
+export {
+  CTA,
+  Footer,
+  Header,
+  Hero,
+  MainHero,
+  Posts,
+  Drawer,
+  Cart,
+  PopOut,
+  FPItem,
+  ShopNav,
+  ContactForm,
+};

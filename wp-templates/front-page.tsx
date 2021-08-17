@@ -5,7 +5,16 @@ import { usePosts, useGeneralSettings } from '@wpengine/headless/react';
 import { GetStaticPropsContext } from 'next';
 import { getApolloClient, getPosts } from '@wpengine/headless';
 import { AnimatePresence } from 'framer-motion';
-import { CTA, Footer, MainHero, Posts, Drawer, PopOut } from '../components';
+import {
+  CTA,
+  Footer,
+  MainHero,
+  Posts,
+  Drawer,
+  PopOut,
+  FPItem,
+  Cart,
+} from '../components';
 
 /**
  * Example of post variables to query the first six posts in a named category.
@@ -18,20 +27,24 @@ const firstSixInCategory = {
   },
 };
 
-export default function FrontPage(props: any): JSX.Element {
+export default function FrontPage(): JSX.Element {
   const posts = usePosts(firstSixInCategory);
   const settings = useGeneralSettings();
 
   return (
     <AnimatePresence>
       {/* <Header title={settings?.title} description={settings?.description} /> */}
-      <main className="bg-primary w-screen overflow-hidden">
-        <div className="sticky">
-          <Drawer />
-        </div>
-        <section className="h-screen">
-          <div className="absolute top-3 left-3 text-white font-cochin">
-            <div className="flex items-center justify-center">
+      <div className="sticky top-0 bg-primary z-50 text-white" key="drawer">
+        <Cart />
+        <Drawer />
+      </div>
+      <main
+        className="bg-primary w-screen overflow-hidden static z-10"
+        key="main"
+      >
+        <section className="h-screen z-20">
+          <div className="absolute top-3 left-3 text-white font-cochin z-1">
+            <div className="flex items-center justify-center z-10">
               <p className="uppercase">Share</p>
               <div className="border-b-2 px-8 mx-2" />
               <CTA
@@ -47,7 +60,9 @@ export default function FrontPage(props: any): JSX.Element {
               />
             </div>
           </div>
-          <MainHero title="Victis Health" />
+          <div className="flex justify-center items-center h-7/8 w-full z-10">
+            <MainHero title="Victis Health" bgImage="/images/yoga.jpeg" />
+          </div>
           <div className="flex text-white">
             <div className="border-b-2 px-16" />
             <div className="border-b-2 text-xl uppercase font-cochin">
@@ -55,12 +70,22 @@ export default function FrontPage(props: any): JSX.Element {
             </div>
           </div>
           <div className="absolute bottom-0 right-5">
-            <div className="border-l-2 h-48 text-white" />
+            <div className="border-l-2 h-48 text-white z-10" />
           </div>
         </section>
-        <section className="h-screen">
+        <section className="h-screen+">
+          <img
+            src="/images/insta-victis-lawncare2.jpeg"
+            alt="Victis Plant"
+            className="w-3/6 h-4/6 absolute z-10 left-36"
+          />
+          <img
+            src="/images/Victis-BlueTin-front_noCBD-1.jpeg"
+            alt="Victis Cream"
+            className="w-1/4 absolute left-72 shadow-2xl mt-96 z-40"
+          />
           <div className="flex justify-end pt-20 z-30">
-            <div className="w-3/6 h-full">
+            <div className="w-3/5 h-full z-30">
               <PopOut
                 title="About Victis"
                 subTitle="The Victis Advantage"
@@ -72,6 +97,12 @@ export default function FrontPage(props: any): JSX.Element {
             </div>
           </div>
         </section>
+        <section className="h-full+">
+          <FPItem />
+          <FPItem />
+          <FPItem />
+        </section>
+
         <Posts
           posts={posts?.nodes}
           heading="Latest Posts"
@@ -79,6 +110,7 @@ export default function FrontPage(props: any): JSX.Element {
           headingLevel="h2"
           postTitleLevel="h3"
         />
+
         {/* <CTA
           title="Questions or comments?"
           buttonText="Join the discussion on GitHub"
@@ -94,7 +126,7 @@ export default function FrontPage(props: any): JSX.Element {
           </p>
         </CTA> */}
       </main>
-      <Footer copyrightHolder={settings?.title} />
+      <Footer copyrightHolder={settings?.title} key="footer" />
     </AnimatePresence>
   );
 }

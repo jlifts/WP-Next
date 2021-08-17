@@ -16,7 +16,7 @@ import { gql, useQuery } from '@apollo/client';
 
 const menuQuery = gql`
   query MyQuery {
-    menu(id: "dGVybToyNA==") {
+    menu(id: "dGVybToyNQ==") {
       menuItems {
         nodes {
           url
@@ -38,7 +38,7 @@ interface Props {
   open: boolean | any;
 }
 
-const Menu = ({ open }: Props) => {
+const LegalMenu = ({ open }: Props) => {
   const router = useRouter();
   const { data } = useQuery(menuQuery);
   // const menu = data?.menu.menuItems.edges;
@@ -73,7 +73,7 @@ const Menu = ({ open }: Props) => {
 
   return (
     <motion.div
-      className="z-70 text-white space-y-6 font-mont"
+      className="z-70 text-white space-y-6"
       initial={{ x: '100%' }}
       animate={{
         x: 0,
@@ -89,21 +89,6 @@ const Menu = ({ open }: Props) => {
         variants={variants}
         animate={open ? 'open' : 'closed'}
       >
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-full flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/[[...page]]' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/" aria-label="Home">
-            Home
-          </Link>
-        </motion.li>
         {/* {menu &&
           menu.map((item: MenuQuery) => (
             <motion.li
@@ -132,11 +117,11 @@ const Menu = ({ open }: Props) => {
         >
           <div
             className={`${
-              router.pathname === '/shop' ? 'active' : ''
+              router.pathname === '/coa' ? 'active' : ''
             } px-4 mb-3 mr-3`}
           />
-          <Link href="/shop" aria-label="Shop">
-            Shop
+          <Link href="/coa" aria-label="Shop">
+            Certificates of Authentication
           </Link>
         </motion.li>
 
@@ -148,10 +133,10 @@ const Menu = ({ open }: Props) => {
         >
           <div
             className={`${
-              router.pathname === '/about' ? 'active' : ''
+              router.pathname === '/privacy-policy' ? 'active' : ''
             } px-4 mb-3 mr-3`}
           />
-          <Link href="/about">About</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
         </motion.li>
 
         <motion.li
@@ -162,38 +147,10 @@ const Menu = ({ open }: Props) => {
         >
           <div
             className={`${
-              router.pathname === '/contact' ? 'active' : ''
+              router.pathname === '/return-policy' ? 'active' : ''
             } px-4 mb-3 mr-3`}
           />
-          <Link href="/contact">Contact Us</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/faq' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/faq">The FAQs</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/login' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/login">Login</Link>
+          <Link href="/return-policy">Return Policy</Link>
         </motion.li>
       </motion.ul>
     </motion.div>
@@ -208,4 +165,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getNextStaticProps(context);
 }
 
-export default Menu;
+export default LegalMenu;
