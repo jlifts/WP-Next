@@ -1,8 +1,8 @@
 {
-  "name": "getting-started",
+  "name": "victis-headless",
   "version": "1.0.0",
   "private": true,
-  "description": "WordPress Headless Getting Started Template",
+  "description": "WordPress Headless Victis",
   "main": "index.js",
   "scripts": {
     "build": "next build",

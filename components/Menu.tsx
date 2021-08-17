@@ -41,7 +41,7 @@ interface Props {
 const Menu = ({ open }: Props) => {
   const router = useRouter();
   const { data } = useQuery(menuQuery);
-  // const menu = data?.menu.menuItems.edges;
+  const menu = data?.menu.menuItems.nodes;
   // console.log(data);
 
   const variants = {
@@ -104,7 +104,7 @@ const Menu = ({ open }: Props) => {
             Home
           </Link>
         </motion.li>
-        {/* {menu &&
+        {menu &&
           menu.map((item: MenuQuery) => (
             <motion.li
               key={item.id}
@@ -115,16 +115,19 @@ const Menu = ({ open }: Props) => {
             >
               <div
                 className={`${
-                  router.pathname === '/[[...page]]' ? 'active' : ''
+                  router.pathname ===
+                  item.url.replace('http://localhost:3000', '')
+                    ? 'active'
+                    : ''
                 } px-4 mb-3 mr-3`}
               />
               <Link href={item.url} aria-label={item.label}>
                 {item.label}
               </Link>
             </motion.li>
-          ))} */}
+          ))}
 
-        <motion.li
+        {/* <motion.li
           variants={variant}
           //   whileHover={{ scale: 1.1 }}
           //   whileTap={{ scale: 0.95 }}
@@ -194,7 +197,7 @@ const Menu = ({ open }: Props) => {
             } px-4 mb-3 mr-3`}
           />
           <Link href="/login">Login</Link>
-        </motion.li>
+        </motion.li> */}
       </motion.ul>
     </motion.div>
   );

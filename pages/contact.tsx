@@ -19,7 +19,7 @@ const contact = (): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop" />
         </div>
       </div>
-      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10">
+      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">
         <div className="text-5xl font-bold tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
@@ -32,7 +32,7 @@ const contact = (): JSX.Element => {
         style={{ height: '40rem' }}
       >
         <Hero bgImage="/images/cbdshelf.jpeg" />
-        <div className="absolute z-10 bg-midgray h-7/10 w-7/8 transform translate-x-32 translate-y-28">
+        <div className="absolute z-10 bg-midgray h-7/10 w-7/8 transform translate-x-32 translate-y-28 cursor-default">
           <p className="flex justify-center items-end h-full pb-8 font-mont text-xl">
             Victis Health - things about the promise of the brand
           </p>

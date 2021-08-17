@@ -1,13 +1,6 @@
 import React from 'react';
-import Heading, { HeadingProps } from './Heading';
-
-interface Props {
-  title: string;
-  buttonText?: string;
-  buttonURL?: string;
-  children?: React.ReactNode;
-  headingLevel?: HeadingProps['level'];
-}
+import { CTAProps } from 'typings/global';
+import Heading from './Heading';
 
 function CTA({
   title = 'Get in touch',
@@ -15,7 +8,7 @@ function CTA({
   buttonURL,
   children,
   headingLevel = 'h1',
-}: Props): JSX.Element {
+}: CTAProps): JSX.Element {
   return (
     <section>
       <div>

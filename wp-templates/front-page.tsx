@@ -60,8 +60,12 @@ export default function FrontPage(): JSX.Element {
               />
             </div>
           </div>
-          <div className="flex justify-center items-center h-7/8 w-full z-10">
-            <MainHero title="Victis Health" bgImage="/images/yoga.jpeg" />
+          <div className="flex justify-center items-center h-7/8 w-full z-10 text-white">
+            <MainHero
+              title="Victis Health"
+              bgImage="/images/yoga.jpeg"
+              subtitle="Science You Can Trust, Pain Relief You Can Feel"
+            />
           </div>
           <div className="flex text-white">
             <div className="border-b-2 px-16" />

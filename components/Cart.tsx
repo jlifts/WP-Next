@@ -12,7 +12,7 @@ const Drawer: React.FC = () => {
 
   return (
     <nav className="absolute top-0 right-8 z-70">
-      <div className="absolute top-1 right-8 z-70">
+      <div className="absolute top-0 right-8 z-70">
         <button
           type="button"
           aria-label="Nav Menu"
@@ -55,7 +55,7 @@ const Drawer: React.FC = () => {
             />
             <div className="bg-white w-screen h-screen z-50 pt-12">
               <motion.div
-                className="text-black flex items-end h-80 pl-14"
+                className="text-black flex items-end h-80 pl-14 cursor-default"
                 initial={{ y: '100%' }}
                 animate={{
                   y: 0,

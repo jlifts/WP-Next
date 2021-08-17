@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -12,36 +9,14 @@ import { useRouter } from 'next/router';
 import { getNextStaticProps } from '@wpengine/headless/next';
 import { getApolloClient } from '@wpengine/headless';
 import { GetStaticPropsContext } from 'next';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { LEGAL_MENU_QUERY } from 'graphql/Queries';
+import { MenuProps, MenuQuery } from 'typings/global';
 
-const menuQuery = gql`
-  query MyQuery {
-    menu(id: "dGVybToyNQ==") {
-      menuItems {
-        nodes {
-          url
-          label
-          id
-        }
-      }
-    }
-  }
-`;
-
-interface MenuQuery {
-  // [node: string]: { label: string; url: string; id: string };
-  label: string;
-  url: string;
-  id: string;
-}
-interface Props {
-  open: boolean | any;
-}
-
-const LegalMenu = ({ open }: Props) => {
+const LegalMenu = ({ open }: MenuProps) => {
   const router = useRouter();
-  const { data } = useQuery(menuQuery);
-  // const menu = data?.menu.menuItems.edges;
+  const { data } = useQuery(LEGAL_MENU_QUERY);
+  const menus = data?.menu.menuItems.nodes;
   // console.log(data);
 
   const variants = {
@@ -89,8 +64,8 @@ const LegalMenu = ({ open }: Props) => {
         variants={variants}
         animate={open ? 'open' : 'closed'}
       >
-        {/* {menu &&
-          menu.map((item: MenuQuery) => (
+        {menus &&
+          menus.map((item: MenuQuery) => (
             <motion.li
               key={item.id}
               variants={variant}
@@ -100,58 +75,17 @@ const LegalMenu = ({ open }: Props) => {
             >
               <div
                 className={`${
-                  router.pathname === '/[[...page]]' ? 'active' : ''
+                  router.pathname ===
+                  item.url.replace('http://localhost:3000', '')
+                    ? 'active'
+                    : ''
                 } px-4 mb-3 mr-3`}
               />
               <Link href={item.url} aria-label={item.label}>
                 {item.label}
               </Link>
             </motion.li>
-          ))} */}
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-full flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/coa' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/coa" aria-label="Shop">
-            Certificates of Authentication
-          </Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/privacy-policy' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/privacy-policy">Privacy Policy</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/return-policy' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/return-policy">Return Policy</Link>
-        </motion.li>
+          ))}
       </motion.ul>
     </motion.div>
   );
@@ -160,7 +94,7 @@ const LegalMenu = ({ open }: Props) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
   const client = getApolloClient(context);
   void client.query({
-    query: menuQuery,
+    query: LEGAL_MENU_QUERY,
   });
   return getNextStaticProps(context);
 }

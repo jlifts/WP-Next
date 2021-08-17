@@ -6,7 +6,7 @@ const FPItem = (): JSX.Element => {
     <div className="w-screen flex z-10 my-36">
       <div className="text-white flex transform rotate-90 justify-start items-center -ml-36">
         <div className="border-b-2 px-16 mr-3" />
-        <Heading level="h4" className="">
+        <Heading level="h4" className="cursor-default">
           2oz Victis Therapuetic Cream
         </Heading>
       </div>

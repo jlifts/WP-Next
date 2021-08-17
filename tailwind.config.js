@@ -24,6 +24,7 @@ module.exports = {
         '5/8': '62.5%',
         'screen+': '120vh',
         'full+': '120%',
+        120: '30rem',
       },
       width: {
         '7/8': '87.5%',
@@ -35,6 +36,7 @@ module.exports = {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         darkgray: 'var(--dark-gray)',
+        darkgrayAccent: 'var(--dark-gray-accent)',
         lightgray: 'var(--light-gray)',
         midgray: 'var(--mid-gray)',
         twitter: 'var(--twitter)',

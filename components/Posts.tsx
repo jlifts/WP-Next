@@ -1,16 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Link from 'next/link';
-import Heading, { HeadingProps } from './Heading';
-
-interface Props {
-  posts: WPGraphQL.Post[] | undefined;
-  intro?: string;
-  id?: string;
-  heading?: string;
-  headingLevel?: HeadingProps['level'];
-  postTitleLevel?: HeadingProps['level'];
-  readMoreText?: string;
-}
+import { PostProps } from 'typings/global';
+import Heading from './Heading';
 
 function Posts({
   posts,
@@ -20,10 +12,13 @@ function Posts({
   headingLevel = 'h1',
   postTitleLevel = 'h2',
   readMoreText = 'Read more',
-}: Props): JSX.Element {
+}: PostProps): JSX.Element {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <section {...(id && { id })} className="text-white font-rale">
+    <section
+      {...(id && { id })}
+      className="text-white font-rale cursor-default"
+    >
       <div className="flex flex-col">
         <div className="flex flex-col justify-center items-center">
           {heading && (

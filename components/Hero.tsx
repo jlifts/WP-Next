@@ -1,16 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import Link from 'next/link';
 import React from 'react';
-
-interface Props {
-  title?: string;
-  id?: string;
-  bgImage?: string;
-  buttonText?: string;
-  buttonURL?: string;
-  button2Text?: string;
-  button2URL?: string;
-  children?: React.ReactNode;
-}
+import { HeroProps } from 'typings/global';
 
 function Hero({
   title = '',
@@ -21,7 +12,7 @@ function Hero({
   button2Text,
   button2URL,
   children,
-}: Props): JSX.Element {
+}: HeroProps): JSX.Element {
   return (
     <section
       className="h-4/6 w-5/8 flex items-center justify-center mt-8 z-30"
@@ -32,14 +23,12 @@ function Hero({
         className="h-4/6 w-5/8 absolute z-10 bg-cover shadow-2xl"
       >
         <div>
-          <h1>{title}</h1>
+          <h1 className="cursor-default">{title}</h1>
           <div>
             <div>{children}</div>
             {buttonText && buttonURL && (
-              <p>
-                <a href={buttonURL} className="uppercase">
-                  {buttonText}
-                </a>
+              <p className="uppercase">
+                <Link href={buttonURL}>{buttonText}</Link>
               </p>
             )}
             {button2Text && button2URL && (

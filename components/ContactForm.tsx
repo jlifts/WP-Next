@@ -6,15 +6,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from '../pages/api/axios';
+import { ContactData } from 'typings/global';
+import axios from '../pages/api/axios/contact';
 import { EMAIL_REGEX } from '../helpers/email';
-
-type Data = {
-  ename: string;
-  email: string;
-  subject: string;
-  messageBox: string;
-};
 
 const ContactForm = (): JSX.Element => {
   const {
@@ -22,14 +16,14 @@ const ContactForm = (): JSX.Element => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Data>();
+  } = useForm<ContactData>();
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [button, setButton] = useState('Send');
 
-  const onSubmit = handleSubmit(async (data: Data) => {
+  const onSubmit = handleSubmit(async (data: ContactData) => {
     setButton('Sending...');
     const formData = new FormData();
     try {
@@ -61,7 +55,7 @@ const ContactForm = (): JSX.Element => {
     >
       {error && (
         <div
-          className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mb-4"
+          className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mb-4 cursor-default"
           role="alert"
         >
           <p className="font-bold font-items">Error</p>
@@ -70,7 +64,7 @@ const ContactForm = (): JSX.Element => {
       )}
       {message && (
         <div
-          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-3 mb-4"
+          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-3 mb-4 cursor-default"
           role="alert"
         >
           <p className="font-bold font-items">Sent!</p>

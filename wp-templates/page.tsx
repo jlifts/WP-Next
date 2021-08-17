@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGeneralSettings } from '@wpengine/headless/react';
 import { usePost } from '@wpengine/headless/next';
-import { Header, Hero, Footer } from '../components';
+import { Footer, MainHero, Cart, Drawer, ShopNav } from '../components';
 
 export default function Page(): JSX.Element {
   const post = usePost();
@@ -9,13 +9,25 @@ export default function Page(): JSX.Element {
 
   return (
     <>
-      <Header title={settings?.title} description={settings?.description} />
-      <main className="content content-page">
-        {post?.title && <Hero title={post?.title} />}
-        <div className="wrap">
+      {/* <Header title={settings?.title} description={settings?.description} /> */}
+      <div className="sticky top-0 z-70 mx-6" key="drawer">
+        <Cart />
+        <Drawer />
+        <ShopNav catagory="Shop" link="/shop" />
+      </div>
+      <main className="p-12 space-y-4 cursor-default">
+        {post?.title && (
+          <div className="text-3xl flex justify-center tracking-widest text-black">
+            <MainHero
+              title={post?.title}
+              subtitle="Science You Can Trust, Pain Relief You Can Feel"
+            />
+          </div>
+        )}
+        <div className="p-8 tracking-wide leading-8">
           {post && (
             <div>
-              <div>
+              <div className="flex flex-col items-center">
                 {/* eslint-disable-next-line react/no-danger */}
                 <div dangerouslySetInnerHTML={{ __html: post.content ?? '' }} />
               </div>

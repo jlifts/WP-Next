@@ -10,6 +10,8 @@ import FPItem from './FPItem';
 import { ShopNav } from './ShopNav';
 import Cart from './Cart';
 import ContactForm from './ContactForm';
+import Athlete from './Athlete';
+import Card from './Card';
 
 export {
   CTA,
@@ -24,4 +26,6 @@ export {
   FPItem,
   ShopNav,
   ContactForm,
+  Athlete,
+  Card,
 };

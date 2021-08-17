@@ -2,13 +2,12 @@ import React from 'react';
 import { WPHead } from '@wpengine/headless/next';
 import Link from 'next/link';
 import Head from 'next/head';
+import { HeaderProps } from 'typings/global';
 
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-function Header({ title = 'Victis Health', description }: Props): JSX.Element {
+function Header({
+  title = 'Victis Health',
+  description,
+}: HeaderProps): JSX.Element {
   // TODO: accept a `menuItems` prop to receive menu items from WordPress.
   const menuItems = [
     { title: 'Home', href: '/' },
