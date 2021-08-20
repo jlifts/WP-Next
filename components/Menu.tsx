@@ -12,37 +12,16 @@ import { useRouter } from 'next/router';
 import { getNextStaticProps } from '@wpengine/headless/next';
 import { getApolloClient } from '@wpengine/headless';
 import { GetStaticPropsContext } from 'next';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { MenuProps, MenuQuery } from 'typings/global';
+import { MENU_QUERY } from 'graphql/Queries';
 
-const menuQuery = gql`
-  query MyQuery {
-    menu(id: "dGVybToyNA==") {
-      menuItems {
-        nodes {
-          url
-          label
-          id
-        }
-      }
-    }
-  }
-`;
-
-interface MenuQuery {
-  // [node: string]: { label: string; url: string; id: string };
-  label: string;
-  url: string;
-  id: string;
-}
-interface Props {
-  open: boolean | any;
-}
-
-const Menu = ({ open }: Props) => {
+const Menu = ({ open }: MenuProps) => {
   const router = useRouter();
-  const { data } = useQuery(menuQuery);
+  const { data } = useQuery(MENU_QUERY);
   const menu = data?.menu.menuItems.nodes;
   // console.log(data);
+  // console.log(router.asPath);
 
   const variants = {
     open: {
@@ -115,7 +94,7 @@ const Menu = ({ open }: Props) => {
             >
               <div
                 className={`${
-                  router.pathname ===
+                  router.asPath ===
                   item.url.replace('http://localhost:3000', '')
                     ? 'active'
                     : ''
@@ -126,78 +105,6 @@ const Menu = ({ open }: Props) => {
               </Link>
             </motion.li>
           ))}
-
-        {/* <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-full flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/shop' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/shop" aria-label="Shop">
-            Shop
-          </Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/about' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/about">About</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/contact' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/contact">Contact Us</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/faq' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/faq">The FAQs</Link>
-        </motion.li>
-
-        <motion.li
-          variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
-          className="px-3 hover:text-secondary w-3/4 flex"
-        >
-          <div
-            className={`${
-              router.pathname === '/login' ? 'active' : ''
-            } px-4 mb-3 mr-3`}
-          />
-          <Link href="/login">Login</Link>
-        </motion.li> */}
       </motion.ul>
     </motion.div>
   );
@@ -206,7 +113,7 @@ const Menu = ({ open }: Props) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
   const client = getApolloClient(context);
   void client.query({
-    query: menuQuery,
+    query: MENU_QUERY,
   });
   return getNextStaticProps(context);
 }

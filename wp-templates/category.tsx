@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { useGeneralSettings, usePosts } from '@wpengine/headless/react';
 import { Pagination } from '@wpengine/headless/next';

@@ -89,12 +89,31 @@ interface NavProps {
 }
 
 interface MenuQuery {
+  // [node: string]: { label: string; url: string; id: string };
   label: string;
   url: string;
   id: string;
 }
 interface MenuProps {
   open: boolean | any;
+}
+
+interface CatagoryQuery {
+  id: string;
+  name: string;
+  slug: string;
+  image: string | any;
+}
+
+interface ProductQuery {
+  name: string;
+  id?: string;
+  price: string;
+  regularPrice?: string;
+  stockStatus: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  featuredImage?: any;
+  slug: string;
 }
 
 type SignUpData = {

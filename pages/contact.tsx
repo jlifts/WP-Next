@@ -15,8 +15,8 @@ const contact = (): JSX.Element => {
       <div className="sticky top-0 z-70" key="drawer">
         <Cart />
         <Drawer />
-        <div className="ml-12">
-          <ShopNav catagory="Shop" link="/shop" />
+        <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl ml-12">
+          <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
       <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">

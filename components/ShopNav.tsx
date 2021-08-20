@@ -15,28 +15,28 @@ export const ShopNav = ({
 }: NavProps): JSX.Element => {
   const router = useRouter();
   return (
-    <nav className="absolute top-0 transform rotate-90 -translate-x-32 space-y-5 text-xl uppercase">
-      <div className="flex">
+    <nav className="capitalize">
+      <div className="flex my-3 justify-start">
         <div
           className={`${
-            router.asPath === `${link}` ? 'px-32 border-black' : 'px-24'
-          } border-b-2 mr-3 mb-3`}
+            router.asPath === `${link}` ? 'px-10 border-black' : 'px-8'
+          } border-b mr-3 mb-3`}
         />
         <Link href={link}>{catagory}</Link>
       </div>
-      <div className={`${link2 === '#' ? 'hidden border-black' : 'flex'}`}>
+      <div className={`${link2 === '#' ? 'hidden border-black' : 'flex mb-3'}`}>
         <div
           className={`${
-            router.pathname === `${link2}` ? 'px-32 border-black' : 'px-24'
-          } border-b-2 mr-3 mb-3`}
+            router.pathname === `${link2}` ? 'px-10 border-black' : 'px-8'
+          } border-b mr-3 mb-3`}
         />
         <Link href={link2}>{catagory2}</Link>
       </div>
-      <div className={`${link3 === '#' ? 'hidden' : 'flex'}`}>
+      <div className={`${link3 === '#' ? 'hidden' : 'flex mb-3'}`}>
         <div
           className={`${
-            router.pathname === `${link3}` ? 'px-32 border-black' : 'px-24'
-          } border-b-2 mr-3 mb-3`}
+            router.pathname === `${link3}` ? 'px-10 border-black' : 'px-8'
+          } border-b mr-3 mb-3`}
         />
         <Link href={link3}>{catagory3}</Link>
       </div>

@@ -70,7 +70,7 @@ export default function FrontPage(): JSX.Element {
           <div className="flex text-white">
             <div className="border-b-2 px-16" />
             <div className="border-b-2 text-xl uppercase font-cochin">
-              <CTA title="" buttonText="Shop" buttonURL="/shop" />
+              <CTA title="" buttonText="Shop" buttonURL="/shop/all" />
             </div>
           </div>
           <div className="absolute bottom-0 right-5">

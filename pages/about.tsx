@@ -19,7 +19,9 @@ const about = (): JSX.Element => {
       <div className="sticky top-0 z-70 ml-12" key="drawer">
         <Cart />
         <Drawer />
-        <ShopNav catagory="Shop" link="/shop" />
+        <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl">
+          <ShopNav catagory="Shop" link="/shop/all" />
+        </div>
       </div>
       <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">
         <div className="text-5xl font-bold tracking-widest">

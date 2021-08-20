@@ -31,6 +31,7 @@ module.exports = {
         '7/10': '70%',
         '5/8': '62.5%',
         '3/8': '37.5%',
+        120: '30rem',
       },
       colors: {
         primary: 'var(--primary)',

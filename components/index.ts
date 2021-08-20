@@ -12,6 +12,7 @@ import Cart from './Cart';
 import ContactForm from './ContactForm';
 import Athlete from './Athlete';
 import Card from './Card';
+import FAQ from './FAQ';
 
 export {
   CTA,
@@ -22,6 +23,7 @@ export {
   Posts,
   Drawer,
   Cart,
+  FAQ,
   PopOut,
   FPItem,
   ShopNav,
