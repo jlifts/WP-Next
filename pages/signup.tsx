@@ -12,7 +12,7 @@ import { useGeneralSettings } from '@wpengine/headless/react';
 const Login = (): JSX.Element => {
   const settings = useGeneralSettings();
   return (
-    <main className="bg-primary h-screen w-screen">
+    <main className="bg-primary h-full w-screen">
       <div className="sticky top-0 z-70 text-white" key="drawer">
         <Cart />
         <Drawer />
@@ -25,10 +25,10 @@ const Login = (): JSX.Element => {
         // onSubmit={handleSubmit}
       >
         <div className="flex flex-row justify-evenly text-2xl font-bold">
+          <h4 className="cursor-default font-items">Sign Up</h4>
           <div className="text-gray-500 hover:text-black font-items">
-            <Link href="/signup">Sign Up</Link>
+            <Link href="/login">Sign In</Link>
           </div>
-          <h4 className="cursor-default font-items">Sign In</h4>
         </div>
         {/* {error && (
           <div
@@ -72,9 +72,23 @@ const Login = (): JSX.Element => {
           >
             Password
           </label>
-          <div className="absolute text-xs">
-            <Link href="/passwordreset">Forgot Password?</Link>
-          </div>
+        </div>
+        <div className="relative border-b-2 focus-within:border-blue-500 z-10">
+          <input
+            type="password"
+            name="passwordConf"
+            placeholder=" "
+            autoComplete="off"
+            className="block w-full appearance-none focus:outline-none bg-transparent z-10"
+            // required={true}
+            // ref={passwordRef}
+          />
+          <label
+            htmlFor="password"
+            className="absolute top-0 duration-300 z-20 origin-0"
+          >
+            Password Confirmation
+          </label>
         </div>
 
         <button
@@ -83,7 +97,7 @@ const Login = (): JSX.Element => {
           type="submit"
           className="w-full px-3 py-4 text-white bg-secondary rounded-md hover:bg-secondaryAccent focus:bg-secondaryAccent focus:outline-none font-items"
         >
-          Log In
+          Sign Up
         </button>
         <div className="flex justify-center or">or</div>
         <div>
@@ -103,7 +117,7 @@ const Login = (): JSX.Element => {
           </FacebookLoginButton>
         </div>
         <div className="or text-xs">
-          <Link href="/signup">Need to Make an Account? Sign Up</Link>
+          <Link href="/login">Have an Account? Sign In</Link>
         </div>
       </form>
       <Footer copyrightHolder={settings?.title} />

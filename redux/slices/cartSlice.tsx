@@ -3,9 +3,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  items: [],
-  total: 0,
+export interface CartState {
+  items: { [productId: string]: number };
+}
+
+const initialState: CartState = {
+  items: {},
 };
 
 export const cartSlice = createSlice({

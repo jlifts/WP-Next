@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-danger */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -5,14 +6,27 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useGeneralSettings } from '@wpengine/headless/react';
-import { Drawer, Cart, ShopNav, Footer } from 'components';
+import {
+  Drawer,
+  Cart,
+  ShopNav,
+  Footer,
+  AddToCart,
+  QuantityHandler,
+} from 'components';
 import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import { INDIVIDUAL_QUERY } from 'graphql/Queries';
+import { INDIVIDUAL_QUERY, SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
+import { getApolloClient } from '@wpengine/headless';
+import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 
-const products = (): JSX.Element => {
+const products = ({
+  producted,
+  gallerys,
+  featuredImages,
+}: any): JSX.Element => {
   const settings = useGeneralSettings();
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
@@ -20,14 +34,13 @@ const products = (): JSX.Element => {
   const { data } = useQuery(INDIVIDUAL_QUERY, {
     variables: { id: item },
   });
-  // console.log(router.asPath.split('/').slice(0, -1).join('/'));
   const product = data?.product;
+  // console.log(product?.stockStatus);
   const gallery = product?.galleryImages?.edges;
-  // console.log(gallery);
   const featuredImage = data?.product?.featuredImage.node.sourceUrl;
 
   return (
-    <main className="font-cochin h-full">
+    <main className="font-cochin flex flex-col">
       <div className="sticky top-0 z-70" key="drawer">
         <Cart />
         <Drawer />
@@ -52,7 +65,7 @@ const products = (): JSX.Element => {
         <div className="grid grid-cols-2 gap-44 w-screen z-50 h-full pt-5 pb-12 pl-40 mt-24">
           {product && (
             <>
-              <div className="flex flex-col col-span-1">
+              <div className="flex flex-col col-span-1" key={product.id}>
                 <Heading
                   level="h5"
                   className="text-black text-3xl tracking-wide uppercase pb-1 z-40 font-mont"
@@ -61,6 +74,21 @@ const products = (): JSX.Element => {
                 </Heading>
                 <p className="text-black text-xl tracking-wide pb-10 z-40">
                   {product.regularPrice}
+                </p>
+                <div className="flex my-8 justify-between w-5/6">
+                  <QuantityHandler className="border" />
+                  <AddToCart className="text-white bg-black py-2 px-4 font-mont" />
+                </div>
+                <p
+                  className={`${
+                    product.stockStatus === 'IN_STOCK'
+                      ? 'text-green-300 italic'
+                      : 'text-red-300'
+                  } py-3`}
+                >
+                  {product.stockStatus === 'IN_STOCK'
+                    ? 'In Stock'
+                    : 'Out of Stock'}
                 </p>
                 <p
                   className="space-y-2 leading-5"
@@ -77,8 +105,14 @@ const products = (): JSX.Element => {
                 />
                 {gallery &&
                   gallery.map(
-                    (image: { node: { sourceUrl: string | undefined } }) => (
+                    (image: {
+                      node: {
+                        id: React.Key | null | undefined;
+                        sourceUrl: string | undefined;
+                      };
+                    }) => (
                       <img
+                        key={image.node.id}
                         src={image.node.sourceUrl}
                         alt={product.name}
                         className="h-120 z-10"
@@ -95,5 +129,38 @@ const products = (): JSX.Element => {
     </main>
   );
 };
+
+// export async function getStaticPaths(context: GetStaticPathsContext) {
+//   const client = getApolloClient(context);
+//   const { data } = await client.query({
+//     query: SINGLE_PRODUCT_QUERY,
+//     variables: { id: slug },
+//   });
+//   console.log(data);
+//   const singleProducts = data?.productCategory?.products?.nodes;
+//   const slugs = singleProducts?.map((product: { slug: any }) => product?.slug);
+//   const paths = slugs?.map((slug: any) => ({ params: { slug } }));
+//   return { paths, fallback: true };
+// }
+
+// export async function getStaticProps(
+//   { params: { slug } }: any,
+//   context: GetStaticPropsContext,
+// ) {
+//   const client = getApolloClient(context);
+//   const { data } = await client.query({
+//     query: INDIVIDUAL_QUERY,
+//     variables: { id: slug },
+//   });
+
+//   return {
+//     props: {
+//       product: data?.product,
+//       featuredImage: data?.product?.featuredImage.node.sourceUrl,
+//       gallery: data?.product?.galleryImages?.edges,
+//     },
+//     revalidate: 60,
+//   };
+// }
 
 export default products;

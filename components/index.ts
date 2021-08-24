@@ -1,6 +1,6 @@
 import CTA from './CTA';
 import Footer from './Footer';
-import Header from './Header';
+import SEO from './Head';
 import Hero from './Hero';
 import Posts from './Posts';
 import Drawer from './Drawer';
@@ -13,11 +13,21 @@ import ContactForm from './ContactForm';
 import Athlete from './Athlete';
 import Card from './Card';
 import FAQ from './FAQ';
+import AddToCart from './AddToCart';
+import QuantityHandler from './QuantityHandler';
+import CheckoutForm from './CheckoutForm';
+import DiscountSetUp from './DiscountSetUp';
+import PaymentForm from './PaymentForm';
 
 export {
   CTA,
+  AddToCart,
+  QuantityHandler,
+  CheckoutForm,
+  PaymentForm,
+  DiscountSetUp,
   Footer,
-  Header,
+  SEO,
   Hero,
   MainHero,
   Posts,

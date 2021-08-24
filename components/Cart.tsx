@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector } from 'redux/hooks';
+import CartContent from './CartContent';
+import CheckoutDesc from './CheckoutDesc';
+// import { selectCart2, selectMemoizedNumItems } from 'redux/slices/cartSlice2';
 
 const Drawer: React.FC = () => {
   const [open, setOpen] = useState(false);
+  // const numItems = useAppSelector(selectMemoizedNumItems);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -12,7 +17,7 @@ const Drawer: React.FC = () => {
 
   return (
     <nav className="absolute top-0 right-8 z-70">
-      <div className="absolute top-0 right-8 z-70">
+      <div className="absolute top-2 right-8 z-70">
         <button
           type="button"
           aria-label="Nav Menu"
@@ -23,7 +28,7 @@ const Drawer: React.FC = () => {
             icon={faShoppingCart}
             className={
               open
-                ? 'hidden'
+                ? 'hidden z-10 '
                 : `cursor-pointer hover:text-secondary w-full h-full`
             }
           />
@@ -31,11 +36,22 @@ const Drawer: React.FC = () => {
             icon={faTimes}
             className={
               open
-                ? 'cursor-pointer text-secondary hover:text-primary transform translate-x-10 w-full h-full'
+                ? 'cursor-pointer text-secondary hover:text-primary w-full h-full'
                 : `hidden`
             }
           />
         </button>
+        {/* <span
+          className={
+            open
+              ? 'hidden'
+              : `text-white bg-black rounded-full px-2 py-0.5 text-xs shadow-xl absolute left-1 ${
+                  !numItems ? 'hidden' : ''
+                }`
+          }
+        >
+          {numItems}
+        </span> */}
       </div>
       <AnimatePresence>
         {open ? (
@@ -53,9 +69,9 @@ const Drawer: React.FC = () => {
               transition={{ type: 'spring', bounce: 0, duration: 0.2 }}
               key="drawer-div"
             />
-            <div className="bg-white w-screen h-screen z-50 pt-12">
+            <div className="bg-lightgray w-screen h-screen z-50 pt-14">
               <motion.div
-                className="text-black flex items-end h-80 pl-14 cursor-default"
+                className="text-black flex flex-col justify-start h-screen pl-4 cursor-default"
                 initial={{ y: '100%' }}
                 animate={{
                   y: 0,
@@ -65,8 +81,15 @@ const Drawer: React.FC = () => {
                 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
               >
-                {' '}
-                Cart
+                <CartContent
+                  name={undefined}
+                  imageUrl={undefined}
+                  price={undefined}
+                  quantity={undefined}
+                />
+                <div className="absolute bottom-16">
+                  <CheckoutDesc />
+                </div>
               </motion.div>
             </div>
           </motion.div>

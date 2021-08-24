@@ -48,6 +48,7 @@
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.12.2",
     "react-redux": "^7.2.4",
+    "react-social-login-buttons": "^3.5.1",
     "sass": "^1.32.5"
   },
   "devDependencies": {

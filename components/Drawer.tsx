@@ -18,7 +18,7 @@ const Drawer: React.FC = () => {
 
   return (
     <nav className="absolute top-0 right-2 z-90">
-      <div className="absolute top-2 right-2 z-60">
+      <div className="absolute top-3 right-2 z-60">
         <button
           type="button"
           aria-label="Nav Menu"
@@ -28,7 +28,7 @@ const Drawer: React.FC = () => {
           <div className="block w-5 absolute left-1/2 top-3 transform  -translate-x-1/2 -translate-y-1/2 shadow-xl">
             <motion.span
               className={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
-                rotate ? 'rotate' : ''
+                rotate ? 'rotate text-white' : ''
               }`}
             />
             <motion.span
@@ -38,7 +38,7 @@ const Drawer: React.FC = () => {
             />
             <motion.span
               className={`block absolute  mt-4 h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out ${
-                rotateReverse ? 'rotateReverse' : ''
+                rotateReverse ? 'rotateReverse text-white' : ''
               }`}
             />
           </div>

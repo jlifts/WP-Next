@@ -2,14 +2,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/userSlice';
 import cartReducer from './slices/cartSlice';
+import cartReducer2 from './slices/cartSlice2';
 import itemReducer from './slices/itemSlice';
-import collectionReducer from './slices/collectionSlice';
+import productReducer from './slices/productSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     cart: cartReducer,
     item: itemReducer,
-    collection: collectionReducer,
+    product: productReducer,
+    cart2: cartReducer2,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

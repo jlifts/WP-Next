@@ -107,13 +107,13 @@ export default function FrontPage(): JSX.Element {
           <FPItem />
         </section>
 
-        <Posts
+        {/* <Posts
           posts={posts?.nodes}
           heading="Latest Posts"
           intro="The Posts component in wp-templates/front-page.tsx shows the latest six posts from the connected WordPress site."
           headingLevel="h2"
           postTitleLevel="h3"
-        />
+        /> */}
 
         {/* <CTA
           title="Questions or comments?"

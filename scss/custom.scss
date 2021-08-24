@@ -36,3 +36,19 @@ textarea:focus-within ~ label {
 .active {
   border-bottom: 1px solid white;
 }
+#signup-check:checked ~ .check {
+  @apply opacity-100;
+  animation: check-anime 0.5s 1;
+}
+
+@keyframes check-anime {
+  0% {
+    @apply transform scale-100;
+  }
+  50% {
+    @apply transform scale-150 opacity-0;
+  }
+  100% {
+    @apply transform scale-100;
+  }
+}

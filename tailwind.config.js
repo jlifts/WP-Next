@@ -14,11 +14,14 @@ module.exports = {
         '-1': '-1',
         60: '60',
         70: '70',
+        90: '90',
       },
       transformOrigin: {
         0: '0%',
       },
       height: {
+        xs: '8%',
+        '1/8': '12.5%',
         '7/8': '87.5%',
         '7/10': '70%',
         '5/8': '62.5%',
@@ -27,6 +30,8 @@ module.exports = {
         120: '30rem',
       },
       width: {
+        xs: '5%',
+        '1/8': '12.5%',
         '7/8': '87.5%',
         '7/10': '70%',
         '5/8': '62.5%',
@@ -43,6 +48,9 @@ module.exports = {
         twitter: 'var(--twitter)',
         facebook: 'var(--facebook)',
         instagram: 'var(--instagram)',
+      },
+      fontSize: {
+        xs: '.75rem',
       },
       backgroundImage: () => ({
         // 'hero-image': "url('../img/wedding_draft.jpg')",

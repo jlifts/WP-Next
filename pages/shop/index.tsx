@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -8,20 +9,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useGeneralSettings } from '@wpengine/headless/react';
 import { Drawer, Cart, ShopNav, Footer } from 'components';
-import { getNextStaticProps } from '@wpengine/headless/next';
 import { getApolloClient } from '@wpengine/headless';
 import { GetStaticPropsContext } from 'next';
 import Heading from 'components/Heading';
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { STORE_QUERY } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';
 
-const index = (): JSX.Element => {
+const index = ({ catagories }: any): JSX.Element => {
   const settings = useGeneralSettings();
-  const { data } = useQuery(STORE_QUERY);
-  const catagory = data?.productCategories?.nodes?.slice(2).reverse();
-  // console.log(catagory);
 
   return (
     <main className="font-cochin">
@@ -41,24 +37,22 @@ const index = (): JSX.Element => {
             Collections
           </div>
           <div className="grid grid-cols-3 w-7/8 z-50 h-full pb-16">
-            {catagory &&
-              catagory.map((item: CatagoryQuery) => (
+            {catagories &&
+              catagories.map((item: CatagoryQuery) => (
                 <a href={`/shop/${item.slug}`} key={item.id}>
-                  <div className="flex flex-col col-span-1 cursor-pointer">
+                  <div className="relative col-span-1 cursor-pointer">
                     <img
                       src={item.image.sourceUrl}
                       alt={item.name}
-                      className="h-96 z-10"
+                      className="h-96 z-10 w-full"
                     />
-                    <div className="absolute w-7/8">
-                      <div className="h-96 hover:bg-black absolute opacity-50 z-30 " />
-                      <Heading
-                        level="h5"
-                        className="font-bold text-transparent hover:text-white text-xl z-40"
-                      >
-                        {item.name}
-                      </Heading>
-                    </div>
+                    <div className="h-96 w-full bg-black absolute opacity-50 z-30 top-0" />
+                    <Heading
+                      level="h5"
+                      className="top-1/2 right-40 absolute font-bold text-white text-xl z-40"
+                    >
+                      {item.name}
+                    </Heading>
                   </div>
                 </a>
               ))}
@@ -72,10 +66,12 @@ const index = (): JSX.Element => {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const client = getApolloClient(context);
-  void client.query({
+  const { data } = await client.query({
     query: STORE_QUERY,
   });
-  return getNextStaticProps(context);
+  return {
+    props: { catagories: data?.productCategories?.nodes?.slice(2).reverse() },
+  };
 }
 
 export default index;

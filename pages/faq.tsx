@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useGeneralSettings } from '@wpengine/headless/react';
 import { Cart, Drawer, Footer, ShopNav, FAQ } from 'components';
 import Heading from 'components/Heading';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from './api/axios/faq';
 
 interface FaqQuery {
@@ -14,23 +18,8 @@ interface FaqQuery {
   slug: string;
 }
 
-const faq = (): JSX.Element => {
+const faq = ({ faqs }: any): JSX.Element => {
   const settings = useGeneralSettings();
-  // const faqs = axios.get(`/posts`);
-  const [faqs, setFaqs] = useState([]);
-
-  const fetchFaqs = async () => {
-    try {
-      const res = await axios.get('/posts');
-      setFaqs(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    void fetchFaqs();
-  }, [faqs]);
 
   return (
     <main className="">
@@ -67,5 +56,12 @@ const faq = (): JSX.Element => {
     </main>
   );
 };
+
+export async function getStaticProps() {
+  const { data } = await axios.get('/posts');
+  return {
+    props: { faqs: data?.reverse() },
+  };
+}
 
 export default faq;

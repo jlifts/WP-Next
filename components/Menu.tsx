@@ -112,10 +112,10 @@ const Menu = ({ open }: MenuProps) => {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const client = getApolloClient(context);
-  void client.query({
+  const { data } = await client.query({
     query: MENU_QUERY,
   });
-  return getNextStaticProps(context);
+  return getNextStaticProps(data);
 }
 
 export default Menu;

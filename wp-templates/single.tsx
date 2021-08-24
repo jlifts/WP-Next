@@ -5,7 +5,7 @@ import { usePost } from '@wpengine/headless/next';
 import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 import { getApolloClient } from '@wpengine/headless';
 import { gql } from '@apollo/client';
-import { CTA, Footer, Header, Hero } from '../components';
+import { CTA, Footer, Hero } from '../components';
 
 export default function Single(): JSX.Element {
   const post = usePost();
@@ -13,7 +13,7 @@ export default function Single(): JSX.Element {
 
   return (
     <>
-      <Header title={settings?.title} description={settings?.description} />
+      {/* <Header title={settings?.title} description={settings?.description} /> */}
       <main className="content content-single">
         {post?.title && <Hero title={post?.title} />}
         <div className="wrap">

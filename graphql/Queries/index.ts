@@ -123,6 +123,7 @@ export const INDIVIDUAL_QUERY = gql`
           edges {
             node {
               sourceUrl
+              id
             }
           }
         }
