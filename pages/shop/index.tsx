@@ -15,6 +15,7 @@ import Heading from 'components/Heading';
 import React from 'react';
 import { STORE_QUERY } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';
+import { Client } from 'lib/ApolloClient';
 
 const index = ({ catagories }: any): JSX.Element => {
   const settings = useGeneralSettings();
@@ -44,9 +45,9 @@ const index = ({ catagories }: any): JSX.Element => {
                     <img
                       src={item.image.sourceUrl}
                       alt={item.name}
-                      className="h-96 z-10 w-full"
+                      className="h-96 z-30 w-full item"
                     />
-                    <div className="h-96 w-full bg-black absolute opacity-50 z-30 top-0" />
+                    <div className="h-96 w-full bg-black absolute opacity-50 z-10 top-0 hover:opacity-70 hover:grow" />
                     <Heading
                       level="h5"
                       className="top-1/2 right-40 absolute font-bold text-white text-xl z-40"
@@ -65,8 +66,8 @@ const index = ({ catagories }: any): JSX.Element => {
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const client = getApolloClient(context);
-  const { data } = await client.query({
+  // const client = getApolloClient(context);
+  const { data } = await Client.query({
     query: STORE_QUERY,
   });
   return {

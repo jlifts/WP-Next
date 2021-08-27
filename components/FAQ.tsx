@@ -8,14 +8,14 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 export type FaqProps = {
   title?: string;
   content?: string | any;
-  key?: number;
+  keys?: number;
 };
 
-function FAQ({ key, title, content }: FaqProps): JSX.Element {
+function FAQ({ keys, title, content }: FaqProps): JSX.Element {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div key={key} className="w-full px-12 py-3">
+    <div key={keys} className="w-full px-12 py-3">
       <div
         className="flex cursor-pointer w-full"
         onClick={() => setExpanded(!expanded)}

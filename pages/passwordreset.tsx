@@ -1,20 +1,16 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Cart,
   Drawer,
   Footer,
+  PasswordResetForm,
   ShopNav,
   UnAuth,
-  UserCreationForm,
 } from 'components';
 import React from 'react';
-import { useGeneralSettings } from '@wpengine/headless/react';
 
-const Login = (): JSX.Element => {
-  const settings = useGeneralSettings();
+const passwordreset = (): JSX.Element => {
   return (
-    <main className="bg-primary h-full w-screen">
+    <div className="bg-primary font-mont h-full">
       <div className="sticky top-0 z-70 text-white" key="drawer">
         <Cart />
         <Drawer />
@@ -23,11 +19,11 @@ const Login = (): JSX.Element => {
         </div>
       </div>
       <UnAuth>
-        <UserCreationForm />
+        <PasswordResetForm />
       </UnAuth>
-      <Footer copyrightHolder={settings?.title} />
-    </main>
+      <Footer />
+    </div>
   );
 };
 
-export default Login;
+export default passwordreset;

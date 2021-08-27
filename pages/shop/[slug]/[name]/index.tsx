@@ -30,6 +30,7 @@ const products = ({
   const settings = useGeneralSettings();
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
+  const itemPage = router.asPath.split('/').slice(2, -1).toString();
   const item = router.asPath.split('/').pop();
   const { data } = useQuery(INDIVIDUAL_QUERY, {
     variables: { id: item },
@@ -49,7 +50,7 @@ const products = ({
             <ShopNav
               catagory="Collections"
               link="/shop"
-              catagory2="Products"
+              catagory2={`Products / ${itemPage}`}
               link2={lastPage}
               catagory3={product.slug.replaceAll('-', ' ')}
               link3={router.asPath}
@@ -77,7 +78,7 @@ const products = ({
                 </p>
                 <div className="flex my-8 justify-between w-5/6">
                   <QuantityHandler className="border" />
-                  <AddToCart className="text-white bg-black py-2 px-4 font-mont" />
+                  <AddToCart className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black" />
                 </div>
                 <p
                   className={`${

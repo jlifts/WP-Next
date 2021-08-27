@@ -1,35 +1,48 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { usePosts, useGeneralSettings } from '@wpengine/headless/react';
-import { GetStaticPropsContext } from 'next';
-import { getApolloClient, getPosts } from '@wpengine/headless';
+import { useGeneralSettings } from '@wpengine/headless/react';
+// import { GetStaticPropsContext } from 'next';
+// import { getApolloClient, getPosts } from '@wpengine/headless';
 import { AnimatePresence } from 'framer-motion';
+// import { SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
+import axios from '../pages/api/axios/deets';
 import {
   CTA,
   Footer,
   MainHero,
-  Posts,
+  // Posts,
   Drawer,
   PopOut,
   FPItem,
   Cart,
+  FPItemReverse,
 } from '../components';
 
 /**
  * Example of post variables to query the first six posts in a named category.
  * @see https://github.com/wpengine/headless-framework/tree/canary/docs/queries
  */
-const firstSixInCategory = {
-  variables: {
-    first: 6,
-    // where: { categoryName: 'uncategorized' }, // Omit this to get posts from all categories.
-  },
-};
 
-export default function FrontPage(): JSX.Element {
-  const posts = usePosts(firstSixInCategory);
+// const firstSixInCategory = {
+//   variables: {
+//     first: 6,
+//     // where: { categoryName: 'uncategorized' }, // Omit this to get posts from all categories.
+//   },
+// };
+
+// { deets, products }: any
+const FrontPage = (): JSX.Element => {
+  // const posts = usePosts(firstSixInCategory);
   const settings = useGeneralSettings();
+  // const name = products?.product?.name;
+  // const image = products?.product?.featuredImage.node.sourceUrl;
+  // console.log(deets);
+  // console.log(products);
 
   return (
     <AnimatePresence>
@@ -63,7 +76,7 @@ export default function FrontPage(): JSX.Element {
           <div className="flex justify-center items-center h-7/8 w-full z-10 text-white">
             <MainHero
               title="Victis Health"
-              bgImage="/images/yoga.jpeg"
+              bgImage="/images/yoga.webp"
               subtitle="Science You Can Trust, Pain Relief You Can Feel"
             />
           </div>
@@ -79,17 +92,23 @@ export default function FrontPage(): JSX.Element {
         </section>
         <section className="h-screen+">
           <img
-            src="/images/insta-victis-lawncare2.jpeg"
+            src="/images/insta-victis-lawncare2.webp"
             alt="Victis Plant"
             className="w-3/6 h-4/6 absolute z-10 left-36"
           />
           <img
-            src="/images/Victis-BlueTin-front_noCBD-1.jpeg"
+            src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
             className="w-1/4 absolute left-72 shadow-2xl mt-96 z-40"
           />
           <div className="flex justify-end pt-20 z-30">
             <div className="w-3/5 h-full z-30">
+              {/* May Have to hard code */}
+              {/* <PopOut
+                title={deets?.slug.replace('-', ' ')}
+                subTitle={deets?.title}
+                body={deets?.content}
+              /> */}
               <PopOut
                 title="About Victis"
                 subTitle="The Victis Advantage"
@@ -101,39 +120,29 @@ export default function FrontPage(): JSX.Element {
             </div>
           </div>
         </section>
-        <section className="h-full+">
-          <FPItem />
-          <FPItem />
-          <FPItem />
+        <section className="h-full">
+          {/* get rid of hardcode */}
+          <FPItemReverse
+            imageURL="http://localhost:10008/wp-content/uploads/2020/02/Victis-BlueTin-front.jpg"
+            imageName="Therapeutic Cream: 1000MG CBD, 2OZ"
+            ProductTitle="Therapeutic Cream: 1000MG CBD, 2OZ"
+          />
+          <FPItem
+            imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Rest-Melatonin_1.jpg"
+            imageName="Rest + Melatonin: 600 MG CBD"
+            ProductTitle="Rest + Melatonin: 600 MG CBD"
+          />
+          <FPItemReverse
+            imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Tabs_1.jpg"
+            imageName="Dissolvable Tablets: 600MG CBD"
+            ProductTitle="Dissolvable Tablets: 600MG CBD"
+          />
         </section>
-
-        {/* <Posts
-          posts={posts?.nodes}
-          heading="Latest Posts"
-          intro="The Posts component in wp-templates/front-page.tsx shows the latest six posts from the connected WordPress site."
-          headingLevel="h2"
-          postTitleLevel="h3"
-        /> */}
-
-        {/* <CTA
-          title="Questions or comments?"
-          buttonText="Join the discussion on GitHub"
-          buttonURL="https://github.com/wpengine/headless-framework/discussions"
-          headingLevel="h2"
-        >
-          <p>
-            We welcome feature requests, bug reports and questions in the{' '}
-            <a href="https://github.com/wpengine/headless-framework">
-              Headless Framework GitHub repository
-            </a>
-            .
-          </p>
-        </CTA> */}
       </main>
       <Footer copyrightHolder={settings?.title} key="footer" />
     </AnimatePresence>
   );
-}
+};
 
 /**
  * Get additional data from WordPress that is specific to this template.
@@ -143,7 +152,20 @@ export default function FrontPage(): JSX.Element {
  *
  * @see https://github.com/wpengine/headless-framework/tree/canary/docs/queries
  */
-export async function getStaticProps(context: GetStaticPropsContext) {
-  const client = getApolloClient(context);
-  await getPosts(client, firstSixInCategory);
+
+/** context: GetStaticPropsContext */
+export async function getStaticProps() {
+  // const client = getApolloClient(context);
+  // const id = 'cbd-therapeutic-cream-1000mg-2oz-sc';
+  // const { data } = await client.query({
+  //   query: SINGLE_PRODUCT_QUERY,
+  //   variables: { id },
+  // });
+
+  const { data: DATA } = await axios.get('/about-victis');
+  return {
+    props: { deets: DATA },
+  };
 }
+
+export default FrontPage;

@@ -48,6 +48,8 @@ module.exports = {
         twitter: 'var(--twitter)',
         facebook: 'var(--facebook)',
         instagram: 'var(--instagram)',
+        orange: '#F97316',
+        orangeLight: '#FED7AA',
       },
       fontSize: {
         xs: '.75rem',

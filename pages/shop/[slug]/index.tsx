@@ -16,6 +16,7 @@ import { SINGLE_PRODUCT_QUERY, STORE_QUERY } from 'graphql/Queries';
 import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 import { getApolloClient } from '@wpengine/headless';
 import { ProductQuery } from 'typings/global';
+import { Client } from '../../../lib/ApolloClient';
 
 const Products = ({ product }: any): JSX.Element => {
   const router = useRouter();
@@ -68,7 +69,7 @@ const Products = ({ product }: any): JSX.Element => {
                     <p className="text-xl cursor-default">
                       {item.regularPrice}
                     </p>
-                    <AddToCart className="text-white bg-black py-2 px-4 mx-2 font-mont" />
+                    <AddToCart className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black" />
                   </div>
                 </div>
               ))}
@@ -93,8 +94,8 @@ export async function getStaticProps(
   { params: { slug } }: any,
   context: GetStaticPropsContext,
 ) {
-  const client = getApolloClient(context);
-  const { data } = await client.query({
+  // const client = getApolloClient(context);
+  const { data } = await Client.query({
     query: SINGLE_PRODUCT_QUERY,
     variables: { id: slug },
   });

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PopProps } from 'typings/global';
@@ -33,7 +34,12 @@ const PopOut = ({
         </Heading>
       </div>
       <div className="space-y-4 px-24 cursor-default">
-        <p>{body}</p>
+        <p
+          className="space-y-6 leading-5"
+          dangerouslySetInnerHTML={{
+            __html: body ?? '',
+          }}
+        />
         <p>{body2}</p>
         <p>{body3}</p>
         <p>{body4}</p>

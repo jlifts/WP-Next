@@ -21,7 +21,7 @@ export const LEGAL_MENU_QUERY = gql`
     }
   }
 `;
-
+// ($id: String!)
 export const MENU_QUERY = gql`
   query MyQuery {
     menu(id: "dGVybToyNA==") {
@@ -68,24 +68,24 @@ export const STORE_QUERY = gql`
   }
 `;
 
-export const PRODUCT_QUERY = gql`
-  query Collection($id: String!) {
-    productCategory(id: $id, idType: SLUG) {
-      name
-      products {
-        nodes {
-          ... on SimpleProduct {
-            id
-            name
-            price
-            regularPrice
-            stockStatus
-          }
-        }
-      }
-    }
-  }
-`;
+// export const PRODUCT_QUERY = gql`
+//   query Collection($id: String!) {
+//     productCategory(id: $id, idType: SLUG) {
+//       name
+//       products {
+//         nodes {
+//           ... on SimpleProduct {
+//             id
+//             name
+//             price
+//             regularPrice
+//             stockStatus
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export const SINGLE_PRODUCT_QUERY = gql`
   query Collections($id: ID!) {

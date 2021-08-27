@@ -96,7 +96,7 @@ interface MenuQuery {
 }
 interface MenuProps {
   open: boolean | any;
-  data: string | any;
+  data?: string | any;
 }
 
 interface CatagoryQuery {

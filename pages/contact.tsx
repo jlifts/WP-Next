@@ -1,3 +1,5 @@
+/* eslint-disable react/no-danger */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -6,9 +8,11 @@ import React from 'react';
 import Heading from 'components/Heading';
 import { Cart, ContactForm, Drawer, Footer, Hero, ShopNav } from 'components';
 import { useGeneralSettings } from '@wpengine/headless/react';
+import axios from './api/axios/deets';
 
-const contact = (): JSX.Element => {
+const contact = ({ deets }: any): JSX.Element => {
   const settings = useGeneralSettings();
+  const body = deets?.content;
 
   return (
     <main className="flex flex-col">
@@ -31,11 +35,14 @@ const contact = (): JSX.Element => {
         className="flex justify-center items-center z-10 transform -translate-x-24 mb-20"
         style={{ height: '40rem' }}
       >
-        <Hero bgImage="/images/cbdshelf.jpeg" />
+        <Hero bgImage="/images/cbdshelf.webp" />
         <div className="absolute z-10 bg-midgray h-7/10 w-7/8 transform translate-x-32 translate-y-28 cursor-default">
-          <p className="flex justify-center items-end h-full pb-8 font-mont text-xl">
-            Victis Health - things about the promise of the brand
-          </p>
+          <span
+            className="flex justify-center items-end h-full p-12 transform translate-y-7 font-mont text-lg"
+            dangerouslySetInnerHTML={{
+              __html: body ?? '',
+            }}
+          />
         </div>
       </div>
       <ContactForm />
@@ -43,5 +50,12 @@ const contact = (): JSX.Element => {
     </main>
   );
 };
+
+export async function getStaticProps() {
+  const { data } = await axios.get('/contact-page');
+  return {
+    props: { deets: data },
+  };
+}
 
 export default contact;
