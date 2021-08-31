@@ -8,7 +8,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { AthleteProps } from 'typings/global';
-import Heading from './Heading';
+import Heading from '../Heading';
 
 const Athlete = ({
   bgImage,

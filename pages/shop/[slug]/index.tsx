@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/await-thenable */
@@ -23,6 +24,8 @@ const Products = ({ product }: any): JSX.Element => {
   const itemPage = router.asPath.split('/').slice(2).toString();
   const settings = useGeneralSettings();
   const page = router.asPath;
+  // const prices = product[1].price.replace('$', '');
+  // console.log(parseFloat(prices));
 
   return (
     <main className="font-cochin">
@@ -67,7 +70,7 @@ const Products = ({ product }: any): JSX.Element => {
                   </a>
                   <div className="flex items-center justify-between">
                     <p className="text-xl cursor-default">
-                      {item.regularPrice}
+                      ${item?.regularPrice?.replace('$', '')}
                     </p>
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"

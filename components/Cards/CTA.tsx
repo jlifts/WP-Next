@@ -1,6 +1,6 @@
 import React from 'react';
 import { CTAProps } from 'typings/global';
-import Heading from './Heading';
+import Heading from '../Heading';
 
 function CTA({
   title = 'Get in touch',

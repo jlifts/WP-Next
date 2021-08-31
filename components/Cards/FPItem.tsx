@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import { IFPProps } from './FPItemReverse';
-import Heading from './Heading';
+import Heading from '../Heading';
 
 const FPItem = ({
   imageURL,

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Heading from 'components/Heading';
 import useAuth, { User } from 'hooks/useAuth';
 import Link from 'next/link';
-import LogOut from 'pages/logOut';
+// import LogOut from 'pages/logOut';
 import React from 'react';
 import crypto from 'crypto';
 import Socials from './Socials';

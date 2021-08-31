@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-danger */
@@ -74,7 +75,7 @@ const products = ({
                   {product.name}
                 </Heading>
                 <p className="text-black text-xl tracking-wide pb-10 z-40">
-                  {product.regularPrice}
+                  ${product.regularPrice.replace('$', '')}
                 </p>
                 <div className="flex my-8 justify-between w-5/6">
                   <QuantityHandler className="border" />

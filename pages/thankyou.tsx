@@ -1,7 +1,7 @@
 import React from 'react';
 
 const thankyou = () => {
-  return <div></div>;
+  return <div>Thanks Page</div>;
 };
 
 export default thankyou;

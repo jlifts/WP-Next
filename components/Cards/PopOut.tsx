@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PopProps } from 'typings/global';
-import Heading from './Heading';
+import Heading from '../Heading';
 
 const PopOut = ({
   title,

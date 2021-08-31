@@ -3,17 +3,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from 'redux/hooks';
-import { selectCart, selectSubTotalPrice } from 'redux/slices/cartSlice';
 import CartContent from '../Checkout/CartContent';
 import CheckoutDesc from '../Checkout/CheckoutDesc';
 
 const Drawer: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const numItems = useAppSelector(selectCart);
-  const products = useAppSelector((state) => state.product.products);
-  const items = useAppSelector((state) => state.cart.items);
-  const totalPrice = useAppSelector(selectSubTotalPrice);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -45,7 +39,7 @@ const Drawer: React.FC = () => {
             }
           />
         </button>
-        <span
+        {/* <span
           className={
             open
               ? 'hidden'
@@ -55,7 +49,7 @@ const Drawer: React.FC = () => {
           }
         >
           {numItems}
-        </span>
+        </span> */}
       </div>
       <AnimatePresence>
         {open ? (
@@ -85,16 +79,17 @@ const Drawer: React.FC = () => {
                 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
               >
-                {Object.entries(items).map(([id, quantity]) => (
+                {/* {Object.entries(items).map(([id, quantity]) => (
                   <CartContent
                     name={id.name}
+                    id={id}
                     imageUrl={undefined}
                     price={undefined}
                     quantity={quantity}
                   />
-                ))}
+                ))} */}
                 <div className="absolute bottom-16">
-                  <CheckoutDesc subTotal={totalPrice} />
+                  {/* <CheckoutDesc subTotal={totalPrice} /> */}
                 </div>
               </motion.div>
             </div>

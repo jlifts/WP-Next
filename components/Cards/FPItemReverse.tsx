@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
-import Heading from './Heading';
+import Heading from '../Heading';
 
 export interface IFPProps {
   imageURL: string | any;

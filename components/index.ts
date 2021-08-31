@@ -1,25 +1,25 @@
-import CTA from './CTA';
+import CTA from './Cards/CTA';
 import Footer from './Nav/Footer';
 import SEO from './Head';
 import Hero from './Hero';
 import Posts from './Posts';
 import Drawer from './Nav/Drawer';
 import MainHero from './MainHero';
-import PopOut from './PopOut';
-import FPItem from './FPItem';
+import PopOut from './Cards/PopOut';
+import FPItem from './Cards/FPItem';
 import { ShopNav } from './Nav/ShopNav';
 import Cart from './Nav/Cart';
 import ContactForm from './Forms/ContactForm';
-import Athlete from './Athlete';
-import Card from './Card';
-import FAQ from './FAQ';
+import Athlete from './Cards/Athlete';
+import Card from './Cards/Card';
+import FAQ from './Cards/FAQ';
 import AddToCart from './Checkout/AddToCart';
 import QuantityHandler from './Checkout/QuantityHandler';
 import CheckoutForm from './Forms/CheckoutForm';
 import LoginForm from './Forms/LoginForm';
 import DiscountSetUp from './Checkout/DiscountSetUp';
 import PaymentForm from './Forms/PaymentForm';
-import FPItemReverse from './FPItemReverse';
+import FPItemReverse from './Cards/FPItemReverse';
 import Authed from './Auth/Authed';
 import ProfilePage from './ProfilePage';
 import UnAuth from './Auth/UnAuth';
@@ -29,7 +29,8 @@ import Loading from './Auth/Loading';
 import SetPasswordForm from './Forms/SetPasswordForm';
 import ProfileNav from './Nav/ProfileNav';
 import ProfileUpdateForm from './Forms/ProfileUpdateForm';
-import Order from './Order';
+import Order from './Cards/Order';
+import DeleteUserBtn from './Auth/DeleteUserBtn';
 
 export {
   CTA,
@@ -64,4 +65,5 @@ export {
   SetPasswordForm,
   ProfileUpdateForm,
   Order,
+  DeleteUserBtn,
 };
