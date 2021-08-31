@@ -31,11 +31,11 @@ const Menu = ({ open }: MenuProps) => {
 
   const variants = {
     open: {
-      transition: { staggerChildren: 0.07 },
+      transition: { staggerChildren: 0.1 },
       y: 0,
     },
     closed: {
-      transition: { staggerChildren: 0.05, staggerDirection: -1 },
+      transition: { staggerChildren: 0.1, staggerDirection: -1 },
     },
   };
 
@@ -44,7 +44,7 @@ const Menu = ({ open }: MenuProps) => {
       y: 0,
       opacity: 1,
       transition: {
-        y: { stiffness: 1000, velocity: -100 },
+        y: { stiffness: 500, velocity: -100 },
       },
     },
     closed: {
@@ -76,8 +76,8 @@ const Menu = ({ open }: MenuProps) => {
       >
         <motion.li
           variants={variant}
-          //   whileHover={{ scale: 1.1 }}
-          //   whileTap={{ scale: 0.95 }}
+          // whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
           className="px-3 hover:text-secondary w-full flex"
         >
           <div
@@ -95,7 +95,7 @@ const Menu = ({ open }: MenuProps) => {
               key={item.id}
               variants={variant}
               //   whileHover={{ scale: 1.1 }}
-              //   whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div
@@ -115,7 +115,7 @@ const Menu = ({ open }: MenuProps) => {
           <motion.li
             variants={variant}
             //   whileHover={{ scale: 1.1 }}
-            //   whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.99 }}
             className="px-3 hover:text-secondary w-full flex"
           >
             <div
@@ -132,7 +132,7 @@ const Menu = ({ open }: MenuProps) => {
             <motion.li
               variants={variant}
               //   whileHover={{ scale: 1.1 }}
-              //   whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div
@@ -148,7 +148,7 @@ const Menu = ({ open }: MenuProps) => {
             <motion.li
               variants={variant}
               //   whileHover={{ scale: 1.1 }}
-              //   whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div className="px-4 mb-3 mr-3" />

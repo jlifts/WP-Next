@@ -22,9 +22,9 @@ const Login = (): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <UnAuth>
-        <UserCreationForm />
-      </UnAuth>
+      {/* <UnAuth> */}
+      <UserCreationForm />
+      {/* </UnAuth> */}
       <Footer copyrightHolder={settings?.title} />
     </main>
   );

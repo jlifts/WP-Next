@@ -55,7 +55,7 @@ const Products = ({ product }: any): JSX.Element => {
                       <img
                         src={item.featuredImage.node.sourceUrl}
                         alt={item.featuredImage.node.title}
-                        className="h-96 z-10 shadow-2xl"
+                        className="h-96 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
                       <Heading
                         level="h5"
@@ -69,7 +69,10 @@ const Products = ({ product }: any): JSX.Element => {
                     <p className="text-xl cursor-default">
                       {item.regularPrice}
                     </p>
-                    <AddToCart className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black" />
+                    <AddToCart
+                      className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
+                      product={item.id}
+                    />
                   </div>
                 </div>
               ))}

@@ -1,22 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-// import { useDispatch } from 'react-redux';
-// import { setItem } from 'redux/slices/itemSlice';
+import { useDispatch } from 'react-redux';
+import { setToCart } from 'redux/slices/cartSlice';
 
 interface ButtonProps {
   className?: string;
-  handler?: any;
+  product?: any;
 }
 
-const AddToCart = ({ className, handler }: ButtonProps): JSX.Element => {
-  //   const dispatch = useDispatch();
+const AddToCart = ({ className, product }: ButtonProps): JSX.Element => {
+  const dispatch = useDispatch();
 
-  //   const Add = () => {
-  //     dispatch(
-  //       setItem(itemName, quantity, itemImageUrl, itemImageAlt, itemPrice),
-  //     );
-  //   };
+  const handler = () => {
+    dispatch(setToCart(product));
+  };
 
   return (
     <button className={className} type="submit" onClick={handler}>

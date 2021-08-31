@@ -1,11 +1,16 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import Link from 'next/link';
 import React from 'react';
 
-const CheckoutDesc = (): JSX.Element => {
+interface IProps {
+  subTotal?: string;
+}
+
+const CheckoutDesc = ({ subTotal }: IProps): JSX.Element => {
   return (
     <div className="flex flex-col justify-start">
       <p>SubTotal:</p>
-      <p>$100.00</p>
+      <p>${subTotal}</p>
 
       <Link href="/checkout">
         <button

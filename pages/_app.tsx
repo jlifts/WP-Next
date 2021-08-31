@@ -19,6 +19,7 @@ export default function App({
 }: AppContext & AppInitialProps) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>

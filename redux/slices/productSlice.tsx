@@ -5,11 +5,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Product {
+  quantity: number;
   id: string;
   name: string;
   imageUrl: string | any;
   imageAlt: string;
-  price: number;
+  regularPrice: any;
   slug: string;
 }
 
@@ -22,7 +23,7 @@ const initialState: ProductState = {
 };
 
 export const productSlice = createSlice({
-  name: 'product',
+  name: 'products',
   initialState,
   reducers: {
     recievedProducts(state, action: PayloadAction<Product[]>) {
@@ -34,7 +35,6 @@ export const productSlice = createSlice({
   },
 });
 
-// add recievedProducts
 export const { recievedProducts } = productSlice.actions;
 
 // Selectors

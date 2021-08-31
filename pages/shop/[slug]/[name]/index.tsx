@@ -78,7 +78,10 @@ const products = ({
                 </p>
                 <div className="flex my-8 justify-between w-5/6">
                   <QuantityHandler className="border" />
-                  <AddToCart className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black" />
+                  <AddToCart
+                    className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black"
+                    product={product.id}
+                  />
                 </div>
                 <p
                   className={`${

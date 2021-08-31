@@ -6,13 +6,14 @@ import React, { createContext, useContext, ReactNode } from 'react';
 
 export interface User {
   id: string;
+  userId: number;
   databaseId: number;
   firstName: string;
   lastName: string;
   email: string;
   capabilities: string[];
   avatarUrl?: string;
-  role?: string;
+  roles?: string;
 }
 
 interface AuthData {
@@ -35,6 +36,7 @@ export const GET_USER = gql`
   query getUser {
     viewer {
       id
+      userId
       databaseId
       firstName
       lastName

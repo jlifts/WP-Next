@@ -27,6 +27,9 @@ import PasswordResetForm from './Forms/PasswordResetForm';
 import UserCreationForm from './Forms/UserCreationForm';
 import Loading from './Auth/Loading';
 import SetPasswordForm from './Forms/SetPasswordForm';
+import ProfileNav from './Nav/ProfileNav';
+import ProfileUpdateForm from './Forms/ProfileUpdateForm';
+import Order from './Order';
 
 export {
   CTA,
@@ -55,7 +58,10 @@ export {
   Card,
   Authed,
   ProfilePage,
+  ProfileNav,
   UnAuth,
   Loading,
   SetPasswordForm,
+  ProfileUpdateForm,
+  Order,
 };

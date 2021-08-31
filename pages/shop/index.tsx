@@ -15,7 +15,7 @@ import Heading from 'components/Heading';
 import React from 'react';
 import { STORE_QUERY } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';
-import { Client } from 'lib/ApolloClient';
+// import { Client } from 'lib/ApolloClient';
 
 const index = ({ catagories }: any): JSX.Element => {
   const settings = useGeneralSettings();
@@ -66,8 +66,8 @@ const index = ({ catagories }: any): JSX.Element => {
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  // const client = getApolloClient(context);
-  const { data } = await Client.query({
+  const client = getApolloClient(context);
+  const { data } = await client.query({
     query: STORE_QUERY,
   });
   return {

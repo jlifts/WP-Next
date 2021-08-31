@@ -8,7 +8,7 @@ import React from 'react';
 import { useGeneralSettings } from '@wpengine/headless/react';
 // import { GetStaticPropsContext } from 'next';
 // import { getApolloClient, getPosts } from '@wpengine/headless';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 // import { SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
 import axios from '../pages/api/axios/deets';
 import {
@@ -57,21 +57,21 @@ const FrontPage = (): JSX.Element => {
       >
         <section className="h-screen z-20">
           <div className="absolute top-3 left-3 text-white font-cochin z-1">
-            <div className="flex items-center justify-center z-10">
-              <p className="uppercase">Share</p>
-              <div className="border-b-2 px-8 mx-2" />
+            <motion.div className="flex items-center justify-center z-10">
+              <p className="uppercase cursor-default">Share</p>
+              <motion.div className="border-b-2 px-8 mx-2" />
               <CTA
                 title=""
                 buttonText="Instagram"
                 buttonURL="https://www.instagram.com/victishealth/?hl=en"
               />
-              <div className="mx-2">/</div>
+              <div className="mx-2 cursor-default">/</div>
               <CTA
                 title=""
                 buttonText="Facebook"
                 buttonURL="https://www.facebook.com/VictisHealth/"
               />
-            </div>
+            </motion.div>
           </div>
           <div className="flex justify-center items-center h-7/8 w-full z-10 text-white">
             <MainHero
