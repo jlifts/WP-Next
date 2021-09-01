@@ -32,7 +32,7 @@ const QuantityHandler = ({ className }: any): JSX.Element => {
         onChange={() => setQuantity(quantity)}
         min="1"
         max="100"
-        className="w-1/6 transform translate-x-4 text-lg"
+        className="w-1/6 transform translate-x-4 text-lg bg-transparent"
       />
 
       <button type="button">

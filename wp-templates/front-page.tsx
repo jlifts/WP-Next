@@ -123,16 +123,22 @@ const FrontPage = (): JSX.Element => {
         <section className="h-full">
           {/* get rid of hardcode */}
           <FPItemReverse
+            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
+            ProductId="cHJvZHVjdDoxOTEy"
             imageURL="http://localhost:10008/wp-content/uploads/2020/02/Victis-BlueTin-front.jpg"
             imageName="Therapeutic Cream: 1000MG CBD, 2OZ"
             ProductTitle="Therapeutic Cream: 1000MG CBD, 2OZ"
           />
           <FPItem
+            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
+            ProductId="cHJvZHVjdDoyMDQ0"
             imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Rest-Melatonin_1.jpg"
             imageName="Rest + Melatonin: 600 MG CBD"
             ProductTitle="Rest + Melatonin: 600 MG CBD"
           />
           <FPItemReverse
+            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
+            ProductId="cHJvZHVjdDoyMDQ1"
             imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Tabs_1.jpg"
             imageName="Dissolvable Tablets: 600MG CBD"
             ProductTitle="Dissolvable Tablets: 600MG CBD"

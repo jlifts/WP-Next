@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SignUpData } from 'typings/global';
+import { toast } from 'react-toastify';
 import axios from '../../pages/api/axios/omni';
 
 const SignUp = (): JSX.Element => {
@@ -13,7 +14,6 @@ const SignUp = (): JSX.Element => {
   } = useForm<SignUpData>();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
   const [button, setButton] = useState('News Sign Up');
 
   const onSubmit = handleSubmit(async (data: SignUpData) => {
@@ -47,9 +47,29 @@ const SignUp = (): JSX.Element => {
       await axios.post(`/contacts`, json).then((res) => {
         console.log(res);
       });
-      setMessage('Let The Deals Begin!');
+      toast.success(`🦄  Welcome To Team Victis!`, {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch {
       setError('Failed to Sign Up, you may already be signed up.');
+      toast.error(
+        `Sign Up failed, you might alreaady be subscribbed! Error: ${error}`,
+        {
+          position: toast.POSITION.BOTTOM_LEFT,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
     }
     setLoading(false);
     setButton('Sign Up');
@@ -80,26 +100,6 @@ const SignUp = (): JSX.Element => {
       />
       {errors.email && (
         <span className="text-red-500 text-base">This field is required</span>
-      )}
-      {message && (
-        <div
-          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-2 mb-2 w-full"
-          role="alert"
-        >
-          <p className="font-bold font-items">Signed Up!</p>
-          <p>{message}</p>
-        </div>
-      )}
-      {error && (
-        <div
-          className="bg-red-100 border-l-4 border-red-500 text-red-700 p-2 mb-2 w-full"
-          role="alert"
-        >
-          <p className="font-bold font-items">
-            Failed to sign up, you may already be signed up
-          </p>
-          <p>{error}</p>
-        </div>
       )}
       <button
         disabled={loading}

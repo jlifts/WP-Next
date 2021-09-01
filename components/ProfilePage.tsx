@@ -5,10 +5,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import useAuth, { User } from 'hooks/useAuth';
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Order } from 'components';
+import { GET_ORDERS } from 'graphql/Queries';
 import Heading from './Heading';
-import ProfileNav from './Nav/ProfileNav';
 // import axios from '../pages/api/axios/gravatar';
 
 type OrderQuery = {
@@ -19,24 +19,6 @@ type OrderQuery = {
   status: string;
   total: string;
 };
-
-const GET_ORDERS = gql`
-  query getOrders($customerId: Int!) {
-    orders(
-      where: { customerId: $customerId, orderby: { field: DATE } }
-      first: 101000
-    ) {
-      nodes {
-        id
-        databaseId
-        date
-        orderNumber
-        status
-        total
-      }
-    }
-  }
-`;
 
 const ProfilePage = (): JSX.Element => {
   const { user } = useAuth();

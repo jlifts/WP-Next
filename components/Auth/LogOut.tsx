@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useMutation } from '@apollo/client';
 import { LOG_OUT } from 'graphql/Mutations';
-import { GET_USER } from 'hooks/useAuth';
+import { GET_USER } from 'graphql/Queries';
+
 // import { useLogoutMutation } from 'hooks/useLogout';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

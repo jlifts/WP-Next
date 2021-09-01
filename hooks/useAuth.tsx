@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useQuery, gql, ApolloError } from '@apollo/client';
+import { useQuery, ApolloError } from '@apollo/client';
+import { GET_USER } from 'graphql/Queries';
 import React, { createContext, useContext, ReactNode } from 'react';
 
 export interface User {
@@ -31,28 +32,6 @@ const DEFAULT_STATE: AuthData = {
 };
 
 const AuthContext = createContext(DEFAULT_STATE);
-
-export const GET_USER = gql`
-  query getUser {
-    viewer {
-      id
-      userId
-      databaseId
-      firstName
-      lastName
-      email
-      capabilities
-      avatar {
-        url
-      }
-      roles {
-        nodes {
-          name
-        }
-      }
-    }
-  }
-`;
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { data, loading, error } = useQuery(GET_USER);

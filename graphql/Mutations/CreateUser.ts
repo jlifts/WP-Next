@@ -17,6 +17,7 @@ export const REGISTER_USER = gql`
       user {
         databaseId
       }
+      clientMutationId
     }
   }
 `;

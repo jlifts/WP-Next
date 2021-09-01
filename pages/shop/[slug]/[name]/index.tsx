@@ -82,6 +82,7 @@ const products = ({
                   <AddToCart
                     className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black"
                     product={product.id}
+                    productName={product.name}
                   />
                 </div>
                 <p

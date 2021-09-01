@@ -1,5 +1,7 @@
 import { CATAGORIES } from './Catagories';
 import { FDA_QUERY } from './FDA';
+import { GET_ORDERS } from './GetOrders';
+import { GET_USER } from './GetUser';
 import { LEGAL_MENU_QUERY, MENU_QUERY } from './Menu';
 import { PRODUCT_QUERY } from './Product';
 import { PRODUCTS_QUERY } from './Products';
@@ -13,4 +15,6 @@ export {
   PRODUCT_QUERY,
   PRODUCTS_QUERY,
   USER_ADDRESS,
+  GET_USER,
+  GET_ORDERS,
 };

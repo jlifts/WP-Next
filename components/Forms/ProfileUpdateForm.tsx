@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -5,6 +6,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link';
 import { useQuery, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
 import React from 'react';
 import useAuth, { User } from 'hooks/useAuth';
 import { USER_ADDRESS } from 'graphql/Queries';
@@ -34,6 +36,30 @@ const UserCreationForm = (): JSX.Element => {
     });
   }
 
+  if (wasProfileUpdated) {
+    toast.success(`🦄 Profile Updated!`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  if (error) {
+    toast.error(`ERROR: ${error}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   return (
     <div className="flex flex-col col-span-4 w-full justify-center mx-auto">
       <form
@@ -51,16 +77,6 @@ const UserCreationForm = (): JSX.Element => {
             >
               <p className="font-bold font-items">Error</p>
               <p>{error.message}</p>
-            </div>
-          )}
-          {wasProfileUpdated && (
-            <div
-              className="bg-green-100 border-l-4 border-green-500 text-green-700 p-3"
-              role="alert"
-            >
-              <p className="flex justify-center items-center w-full">
-                Profile Details have been updated!
-              </p>
             </div>
           )}
           <div className="relative border-b-2 focus-within:border-blue-500 z-10">

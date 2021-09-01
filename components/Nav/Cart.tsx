@@ -89,7 +89,7 @@ const Drawer: React.FC = () => {
                   />
                 ))} */}
                 <div className="absolute bottom-16">
-                  {/* <CheckoutDesc subTotal={totalPrice} /> */}
+                  {/* <CheckoutDesc subTotal={} disabled={!cart} /> */}
                 </div>
               </motion.div>
             </div>

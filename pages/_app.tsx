@@ -6,9 +6,12 @@ import { HeadlessProvider } from '@wpengine/headless/react';
 import { ApolloProvider } from '@apollo/client';
 
 import { AuthProvider } from 'hooks/useAuth';
+import { ToastContainer } from 'react-toastify';
+import Head from 'components/Head';
 import { Client } from '../lib/ApolloClient';
 import 'normalize.css/normalize.css';
 import 'scss/tailwind.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* eslint-disable react/jsx-props-no-spreading */
 export default function App({
@@ -21,7 +24,9 @@ export default function App({
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>
+          <Head />
           <Component {...pageProps} />
+          <ToastContainer />
         </HeadlessProvider>
       </AuthProvider>
     </ApolloProvider>

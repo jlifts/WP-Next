@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useMutation } from '@apollo/client';
 import { LOG_IN } from 'graphql/Mutations';
-import { GET_USER } from 'hooks/useAuth';
+import { GET_USER } from 'graphql/Queries';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

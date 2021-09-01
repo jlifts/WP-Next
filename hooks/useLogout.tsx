@@ -1,17 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { gql, useMutation, useApolloClient } from '@apollo/client';
-
-const LOGOUT = gql`
-  mutation Logout {
-    logout(input: {}) {
-      status
-    }
-  }
-`;
+import { useMutation, useApolloClient } from '@apollo/client';
+import { LOG_OUT } from 'graphql/Mutations';
 
 export const useLogoutMutation = () => {
   const apolloClient = useApolloClient();
-  const [mutation, mutationResults] = useMutation(LOGOUT);
+  const [mutation, mutationResults] = useMutation(LOG_OUT);
 
   const logoutMutation = async () => {
     // Remove all data from the store since we are now logged out.
