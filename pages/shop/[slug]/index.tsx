@@ -13,7 +13,7 @@ import { Drawer, Cart, ShopNav, Footer, AddToCart } from 'components';
 import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SINGLE_PRODUCT_QUERY, STORE_QUERY } from 'graphql/Queries';
+import { PRODUCTS_QUERY, CATAGORIES } from 'graphql/Queries';
 import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 import { getApolloClient } from '@wpengine/headless';
 import { ProductQuery } from 'typings/global';
@@ -89,7 +89,7 @@ const Products = ({ product }: any): JSX.Element => {
 
 export async function getStaticPaths(context: GetStaticPathsContext) {
   const client = getApolloClient(context);
-  const { data } = await client.query({ query: STORE_QUERY });
+  const { data } = await client.query({ query: CATAGORIES });
   const products = data?.productCategories?.nodes?.slice(2).reverse();
   const slugs = products?.map((product: { slug: any }) => product?.slug);
   const paths = slugs?.map((slug: any) => ({ params: { slug } }));
@@ -102,7 +102,7 @@ export async function getStaticProps(
 ) {
   // const client = getApolloClient(context);
   const { data } = await Client.query({
-    query: SINGLE_PRODUCT_QUERY,
+    query: PRODUCTS_QUERY,
     variables: { id: slug },
   });
 

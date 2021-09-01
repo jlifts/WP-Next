@@ -8,15 +8,8 @@ import { Loading } from 'components';
 import { useRouter } from 'next/router';
 import { Client } from 'lib/ApolloClient';
 import { getApolloClient } from '@wpengine/headless';
+import { LOG_OUT } from 'graphql/Mutations';
 import { GET_USER } from '../hooks/useAuth';
-
-const LOG_OUT = gql`
-  mutation logOut {
-    logout(input: {}) {
-      status
-    }
-  }
-`;
 
 export default function LogOut(): JSX.Element {
   const router = useRouter();

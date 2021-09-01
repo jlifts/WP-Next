@@ -6,9 +6,7 @@ import { HeadlessProvider } from '@wpengine/headless/react';
 import { ApolloProvider } from '@apollo/client';
 
 import { AuthProvider } from 'hooks/useAuth';
-import { Provider } from 'react-redux';
 import { Client } from '../lib/ApolloClient';
-import { store } from '../redux/store';
 import 'normalize.css/normalize.css';
 import 'scss/tailwind.scss';
 
@@ -23,9 +21,7 @@ export default function App({
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
+          <Component {...pageProps} />
         </HeadlessProvider>
       </AuthProvider>
     </ApolloProvider>

@@ -4,33 +4,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import React from 'react';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from 'react-social-login-buttons';
-
-const REGISTER_USER = gql`
-  mutation registerUser(
-    $email: String!
-    $firstName: String!
-    $lastName: String!
-  ) {
-    registerUser(
-      input: {
-        username: $email
-        email: $email
-        firstName: $firstName
-        lastName: $lastName
-      }
-    ) {
-      user {
-        databaseId
-      }
-    }
-  }
-`;
+import { REGISTER_USER } from 'graphql/Mutations';
 
 const UserCreationForm = (): JSX.Element => {
   const [register, { data, loading, error }] = useMutation(REGISTER_USER);

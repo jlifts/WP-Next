@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { LOG_IN } from 'graphql/Mutations';
 import { GET_USER } from 'hooks/useAuth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -11,14 +12,6 @@ import {
   GoogleLoginButton,
   FacebookLoginButton,
 } from 'react-social-login-buttons';
-
-const LOG_IN = gql`
-  mutation logIn($login: String!, $password: String!) {
-    loginWithCookies(input: { login: $login, password: $password }) {
-      status
-    }
-  }
-`;
 
 const LoginForm = (): JSX.Element => {
   const router = useRouter();

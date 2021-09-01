@@ -1,9 +1,16 @@
-import { gql } from '@apollo/client';
+import { REGISTER_USER } from './CreateUser';
+import { DELETE } from './DeleteUser';
+import { LOG_IN } from './Login';
+import { LOG_OUT } from './Logout';
+import { RESET_PASSWORD, SEND_PASSWORD_RESET_EMAIL } from './PasswordReset';
+import { UPDATE_USER } from './UpdateUser';
 
-export const FDA_QUERY = gql`
-  query MyQuery {
-    post(id: "cG9zdDoyOTE5") {
-      content
-    }
-  }
-`;
+export {
+  DELETE,
+  LOG_OUT,
+  LOG_IN,
+  SEND_PASSWORD_RESET_EMAIL,
+  UPDATE_USER,
+  RESET_PASSWORD,
+  REGISTER_USER,
+};

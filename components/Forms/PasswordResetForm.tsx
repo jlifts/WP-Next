@@ -1,20 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Heading from 'components/Heading';
+import { SEND_PASSWORD_RESET_EMAIL } from 'graphql/Mutations';
 import Link from 'next/link';
 import React, { useState } from 'react';
-
-const SEND_PASSWORD_RESET_EMAIL = gql`
-  mutation sendPasswordResetEmail($username: String!) {
-    sendPasswordResetEmail(input: { username: $username }) {
-      user {
-        databaseId
-      }
-    }
-  }
-`;
 
 const PasswordResetForm = (): JSX.Element => {
   const [button, setButton] = useState('Send Password Reset Email');

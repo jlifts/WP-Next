@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { LOG_OUT } from 'graphql/Mutations';
 import { GET_USER } from 'hooks/useAuth';
 // import { useLogoutMutation } from 'hooks/useLogout';
 import { useRouter } from 'next/router';
@@ -10,14 +11,6 @@ import React, { useState } from 'react';
 interface IClassName {
   className?: string;
 }
-
-const LOG_OUT = gql`
-  mutation logOut {
-    logout(input: {}) {
-      status
-    }
-  }
-`;
 
 const LogOut = ({ className }: IClassName): JSX.Element => {
   const router = useRouter();

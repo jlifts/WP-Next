@@ -13,7 +13,7 @@ import { getApolloClient } from '@wpengine/headless';
 import { GetStaticPropsContext } from 'next';
 import Heading from 'components/Heading';
 import React from 'react';
-import { STORE_QUERY } from 'graphql/Queries';
+import { CATAGORIES } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';
 // import { Client } from 'lib/ApolloClient';
 
@@ -68,7 +68,7 @@ const index = ({ catagories }: any): JSX.Element => {
 export async function getStaticProps(context: GetStaticPropsContext) {
   const client = getApolloClient(context);
   const { data } = await client.query({
-    query: STORE_QUERY,
+    query: CATAGORIES,
   });
   return {
     props: { catagories: data?.productCategories?.nodes?.slice(2).reverse() },

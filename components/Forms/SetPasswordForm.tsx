@@ -3,24 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Link from 'next/link';
-
-const RESET_PASSWORD = gql`
-  mutation resetUserPassword(
-    $key: String!
-    $login: String!
-    $password: String!
-  ) {
-    resetUserPassword(
-      input: { key: $key, login: $login, password: $password }
-    ) {
-      user {
-        databaseId
-      }
-    }
-  }
-`;
+import { RESET_PASSWORD } from 'graphql/Mutations';
 
 interface Props {
   resetKey: string;

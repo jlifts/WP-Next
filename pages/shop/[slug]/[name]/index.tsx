@@ -19,7 +19,7 @@ import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import { INDIVIDUAL_QUERY, SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
+import { PRODUCT_QUERY, PRODUCTS_QUERY } from 'graphql/Queries';
 import { getApolloClient } from '@wpengine/headless';
 import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 
@@ -33,7 +33,7 @@ const products = ({
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
   const item = router.asPath.split('/').pop();
-  const { data } = useQuery(INDIVIDUAL_QUERY, {
+  const { data } = useQuery(PRODUCT_QUERY, {
     variables: { id: item },
   });
   const product = data?.product;

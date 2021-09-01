@@ -1,18 +1,11 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { DELETE } from 'graphql/Mutations';
 import useAuth from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-const DELETE = gql`
-  mutation logOut($id: ID!) {
-    deleteUser(input: { id: $id }) {
-      status
-    }
-  }
-`;
 
 const DeleteUserBtn = (): JSX.Element => {
   const router = useRouter();
