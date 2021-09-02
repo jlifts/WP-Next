@@ -1,53 +1,51 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { QuantityHandler } from 'components';
 import React from 'react';
 
 interface CartItems {
   name: string;
-  imageUrl: string;
-  price: string;
+  price: number;
+  image: any;
   quantity: number;
-  id?: string;
+  handleDelete: any;
+  id: string;
+  item: any;
 }
 
 const CartContent = ({
   name,
   id,
-  imageUrl,
   price,
+  image,
   quantity,
+  handleDelete,
+  item,
 }: CartItems): JSX.Element => {
   return (
-    <div className="flex">
+    <div className="flex flex-col h-1/6" key={id}>
       {name && (
-        <>
+        <div className="relative flex">
           <button
             type="button"
-            className="rounded-full bg-black text-white cursor-pointer absolute -top-2 left-2 px-1.5"
-            // onClick={}
+            className="rounded-full bg-black text-white cursor-pointer absolute -top-2 -left-2 px-1.5"
+            onClick={handleDelete}
           >
             X
           </button>
-          <img className="h-xs" alt="cbd" src={imageUrl} />
-        </>
+          <img className="h-full" alt={name} src={image} width={80} />
+        </div>
       )}
-      <div className="text-black pl-1 space-y-1">
-        <p>{name}</p>
-        <p>${price}</p>
-        <div className="flex justify-around px-2">
-          <button type="button">
-            <FontAwesomeIcon icon={faPlus} className="cursor-pointer" />
-          </button>
-          <p>{quantity}</p>
-          <button type="button">
-            <FontAwesomeIcon
-              icon={faMinus}
-              className="cursor-pointer"
-              // onClick={}
-            />
-          </button>
+      <div className="text-black text-sm space-y-1 ">
+        <p className="w-52">{name}</p>
+        <div className="flex">
+          <p>${price.toFixed(2)}</p>
+          <QuantityHandler
+            item={item}
+            quantity={quantity}
+            className="text-xs transform -translate-y-1"
+          />
         </div>
       </div>
     </div>

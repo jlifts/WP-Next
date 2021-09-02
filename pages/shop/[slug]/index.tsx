@@ -74,8 +74,7 @@ const Products = ({ product }: any): JSX.Element => {
                     </p>
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
-                      productName={item.name}
-                      product={item.id}
+                      product={item}
                     />
                   </div>
                 </div>

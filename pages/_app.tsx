@@ -7,7 +7,8 @@ import { ApolloProvider } from '@apollo/client';
 
 import { AuthProvider } from 'hooks/useAuth';
 import { ToastContainer } from 'react-toastify';
-import Head from 'components/Head';
+import Head from 'lib/Head';
+import { CartProvider } from 'Context/CartContext';
 import { Client } from '../lib/ApolloClient';
 import 'normalize.css/normalize.css';
 import 'scss/tailwind.scss';
@@ -24,9 +25,11 @@ export default function App({
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>
-          <Head />
-          <Component {...pageProps} />
-          <ToastContainer />
+          <CartProvider>
+            <Head />
+            <Component {...pageProps} />
+            <ToastContainer />
+          </CartProvider>
         </HeadlessProvider>
       </AuthProvider>
     </ApolloProvider>

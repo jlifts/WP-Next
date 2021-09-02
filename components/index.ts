@@ -1,6 +1,6 @@
 import CTA from './Cards/CTA';
 import Footer from './Nav/Footer';
-import SEO from './Head';
+import SEO from '../lib/Head';
 import Hero from './Hero';
 import Posts from './Posts';
 import Drawer from './Nav/Drawer';
