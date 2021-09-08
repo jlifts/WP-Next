@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import useAuth, { User } from 'hooks/useAuth';
+import useAuth from 'hooks/useAuth';
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Order } from 'components';
@@ -22,7 +22,7 @@ type OrderQuery = {
 
 const ProfilePage = (): JSX.Element => {
   const { user } = useAuth();
-  const { userId, roles } = user as User;
+  const { userId, roles } = user;
   const { data } = useQuery(GET_ORDERS, {
     variables: { customerId: userId },
   });

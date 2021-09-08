@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -6,6 +7,7 @@ import Heading from 'components/Heading';
 import { SEND_PASSWORD_RESET_EMAIL } from 'graphql/Mutations';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import Input from './Input';
 
 const PasswordResetForm = (): JSX.Element => {
   const [button, setButton] = useState('Send Password Reset Email');
@@ -59,23 +61,14 @@ const PasswordResetForm = (): JSX.Element => {
           <p>{error.message}</p>
         </div>
       )}
-      <div className="relative border-b-2 focus-within:border-blue-500 z-10">
-        <input
-          type="text"
-          name="email"
-          placeholder=" "
-          autoComplete="off"
-          className="block w-full appearance-none focus:outline-none bg-transparent z-30"
-          required
-          // ref={emailRef}
-        />
-        <label
-          htmlFor="email"
-          className="absolute top-0 duration-300 origin-0 z-20"
-        >
-          Email
-        </label>
-      </div>
+      <Input
+        name="email"
+        label="Email"
+        type="email"
+        required
+        autoComplete="off"
+        passwordReset={false}
+      />
       <button
         aria-label="Log In"
         disabled={loading}

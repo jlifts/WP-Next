@@ -6,6 +6,7 @@ export const PRODUCT_QUERY = gql`
       ... on SimpleProduct {
         id
         name
+        productId: databaseId
         galleryImages {
           edges {
             node {

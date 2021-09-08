@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -7,24 +10,90 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from 'Context/CartContext';
+import { getFormattedCart, getUpdatedItems } from 'helpers/functions';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_CART_QUERY } from 'graphql/Queries/Cart';
+import { UPDATE_CART } from 'graphql/Mutations';
+import { v4 } from 'uuid';
 import CartContent from '../Checkout/CartContent';
 import CheckoutDesc from '../Checkout/CheckoutDesc';
 
-const Drawer: React.FC = () => {
+const Cart: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useContext(CartContext);
+
   const numItems =
-    cart !== null && Object.keys(cart).length ? cart.totalCount : '';
+    cart !== null && Object.keys(cart).length ? cart.totalProductsCount : '';
   const totalPrice =
-    cart !== null && Object.keys(cart).length ? cart.totalPrice : '';
+    cart !== null && Object.keys(cart).length ? cart.totalProductsPrice : '';
   const totalVariants = cart !== null ? cart?.products?.length : 0;
-  // console.log(cart.products.length);
+  // console.log(cart);
+
+  // // TS Functions for PWA syncronous offline handling
+
+  // const handleRemoveProduct = (e: any, productId: any) => {
+  //   const updatedCart = removeItemFromCart(productId);
+  //   setCart(updatedCart);
+  // };
+
+  // END
+
+  // Get Cart Data.
+  const { loading, error, data, refetch } = useQuery(GET_CART_QUERY, {
+    notifyOnNetworkStatusChange: true,
+    onCompleted: () => {
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data);
+      localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
+
+      // Update cart data in React Context.
+      setCart(updatedCart);
+    },
+  });
+
+  // Update Cart Mutation.
+  const [
+    updateCart,
+    {
+      data: updateCartResponse,
+      loading: updateCartProcessing,
+      error: updateCartError,
+    },
+  ] = useMutation(UPDATE_CART, {
+    onCompleted: () => {
+      void refetch();
+    },
+    onError: () => {
+      if (updateCartError) {
+        const errorMessage = error?.graphQLErrors?.[0]?.message
+          ? error.graphQLErrors[0].message
+          : '';
+        console.error(errorMessage);
+      }
+    },
+  });
+
+  const handleRemoveProduct = (event: any, cartKey: string, products: any) => {
+    event.stopPropagation();
+    if (products.length) {
+      // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
+      const newQty = 0;
+      const updatedItems = getUpdatedItems(products, newQty, cartKey);
+
+      void updateCart({
+        variables: {
+          input: {
+            clientMutationId: v4(),
+            items: updatedItems,
+          },
+        },
+      });
+    }
+  };
 
   const handleOpen = () => {
     setOpen(!open);
   };
-
-  const handleRemoveProduct = () => {};
 
   return (
     <nav className="absolute top-0 right-8 z-70">
@@ -66,7 +135,10 @@ const Drawer: React.FC = () => {
       </div>
       <AnimatePresence>
         {open ? (
-          <motion.div className="grid grid-cols-6 w-screen z-50 h-screen">
+          <motion.div
+            className="grid grid-cols-6 w-screen z-50 h-screen"
+            key="drawer-div"
+          >
             <motion.div
               className={`${
                 totalVariants > 3 ? 'col-span-3' : 'col-span-5'
@@ -80,7 +152,6 @@ const Drawer: React.FC = () => {
                 opacity: 0,
               }}
               transition={{ type: 'spring', bounce: 0, duration: 0.2 }}
-              key="drawer-div"
             />
             <div className="bg-lightgray w-screen h-screen z-50 pt-14 overflow-hidden">
               <motion.div
@@ -112,13 +183,17 @@ const Drawer: React.FC = () => {
                         className={`${totalVariants > 3 ? 'h-1/6' : 'h-48'}`}
                       >
                         <CartContent
+                          key={item.id}
                           item={item}
+                          products={cart.products}
                           name={item.name}
-                          price={item.totalPrice}
-                          image={item.image}
+                          price={item?.totalPrice}
+                          image={item.image.sourceUrl}
                           id={item.id}
                           quantity={item.qty}
                           handleDelete={handleRemoveProduct}
+                          updateCartProcessing={updateCartProcessing}
+                          updateCart={updateCart}
                         />
                       </div>
                     ),
@@ -148,4 +223,4 @@ const Drawer: React.FC = () => {
   );
 };
 
-export default Drawer;
+export default Cart;

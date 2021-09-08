@@ -1,11 +1,4 @@
-import {
-  Cart,
-  Drawer,
-  Footer,
-  PasswordResetForm,
-  ShopNav,
-  UnAuth,
-} from 'components';
+import { Cart, Drawer, Footer, PasswordResetForm, ShopNav } from 'components';
 import React from 'react';
 
 const passwordreset = (): JSX.Element => {
@@ -18,9 +11,7 @@ const passwordreset = (): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <UnAuth>
-        <PasswordResetForm />
-      </UnAuth>
+      <PasswordResetForm />
       <Footer />
     </div>
   );

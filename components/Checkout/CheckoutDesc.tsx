@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable react/jsx-one-expression-per-line */
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface IProps {
   subTotal?: number | any;
@@ -14,8 +15,13 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
   return (
     <div className="flex flex-col justify-start">
       <p>SubTotal:</p>
-      <p>${subTotal ? subTotal.toFixed(2) : 0}</p>
-
+      {subTotal ? (
+        <p>
+          {typeof subTotal !== 'string' ? `$${subTotal?.toFixed(2)}` : subTotal}
+        </p>
+      ) : (
+        <p>$0.00</p>
+      )}
       <button
         type="button"
         disabled={disabled}

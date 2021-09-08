@@ -1,12 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { gql, useQuery, useMutation } from '@apollo/client';
+import { successToastConfig } from 'components/ToastConfig';
 import { CartContext } from 'Context/CartContext';
-import { addFirstProduct, updateCart } from 'helpers/functions';
-import React, { useState, useContext } from 'react';
+import { ADD_TO_CART } from 'graphql/Mutations';
+import { GET_CART_QUERY } from 'graphql/Queries/Cart';
+import {
+  addFirstProduct,
+  getFormattedCart,
+  updateCart,
+} from 'helpers/functions';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { v4 } from 'uuid';
 
@@ -17,40 +26,6 @@ interface ButtonProps {
   quant?: number;
 }
 
-const ADD_TO_CART = gql`
-  mutation AddToCart {
-    addToCart(input: { productId: 10, clientMutationId: "", quantity: 1 }) {
-      cartItem {
-        key
-        quantity
-        subtotal
-        total
-        product {
-          node {
-            id
-            databaseId
-            image {
-              sourceUrl
-            }
-            name
-            onSale
-          }
-        }
-      }
-    }
-  }
-`;
-
-const toastConfig = {
-  position: toast.POSITION.BOTTOM_LEFT,
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-};
-
 const AddToCart = ({
   className,
   product,
@@ -59,34 +34,85 @@ const AddToCart = ({
 }: ButtonProps): JSX.Element => {
   const [cart, setCart] = useContext(CartContext);
 
-  const handler = () => {
-    // Checks that client side has loaded for localstorage
-    if (process.browser) {
-      // If there are items, update
-      let exists = localStorage.getItem('woo-cart');
+  const productQryInput = {
+    clientMutationId: v4(), // Generate a unique id.
+    productId: product.productId,
+    quantity: quant || 1,
+  };
 
-      if (exists) {
-        exists = JSON.parse(exists);
-        const qtyToBeAdded = 1;
+  // TS Functions for PWA syncronous offline handling
+  // const addToCartHandler = () => {
+  //   // Checks that client side has loaded for localstorage
+  //   if (process.browser) {
+  //     // If there are items, update
+  //     let exists = localStorage.getItem('woo-cart');
 
-        const updatedCart = updateCart(exists, product, qtyToBeAdded);
-        setCart(updatedCart);
-      } else {
-        // Add new item by adding to empty array
-        const newCart = addFirstProduct(product);
-        setCart(newCart);
-      }
-      toast.success(
-        `🦄 ${product.name || productName} Added To Cart!`,
-        toastConfig,
-      );
-    }
+  //     if (exists) {
+  //       exists = JSON.parse(exists);
+  //       const qtyToBeAdded = 1;
+
+  //       const updatedCart = updateCart(exists, product, qtyToBeAdded);
+  //       setCart(updatedCart);
+  //     } else {
+  //       // Add new item by adding to empty array
+  //       const newCart = addFirstProduct(product);
+  //       setCart(newCart);
+  //     }
+  //     toast.success(
+  //       `🦄 ${product.name || productName} Added To Cart!`,
+  //       toastConfig,
+  //     );
+  //   }
+  // };
+
+  // Get Cart Data
+  const { data, refetch } = useQuery(GET_CART_QUERY, {
+    notifyOnNetworkStatusChange: true,
+    onCompleted: () => {
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data);
+      localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
+
+      // Update cart data in React Context.
+      setCart(updatedCart);
+    },
+  });
+
+  // Add to Cart Mutation.
+  const [addToCart, { data: addToCartRes, loading: addToCartLoading, error }] =
+    useMutation(ADD_TO_CART, {
+      variables: {
+        input: productQryInput,
+      },
+      onCompleted: () => {
+        // On Success:
+        // Make the GET_CART query to update the cart with new values in React context.
+        void refetch();
+      },
+      onError: () => {
+        if (error) {
+          console.error(error?.graphQLErrors?.[0]?.message ?? '');
+        }
+      },
+    });
+
+  const addToCartHandler = async () => {
+    await addToCart();
+    toast.success(
+      `🦄 ${product.name || productName} Added To Cart!`,
+      successToastConfig,
+    );
   };
 
   return (
     <>
-      <button className={className} type="submit" onClick={handler}>
-        Add To Cart
+      <button
+        className={className}
+        type="submit"
+        onClick={addToCartHandler}
+        disabled={addToCartLoading}
+      >
+        {addToCartLoading ? 'Adding to Cart...' : ' Add To Cart'}
       </button>
     </>
   );

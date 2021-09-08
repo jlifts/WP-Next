@@ -1,16 +1,39 @@
 import { gql } from '@apollo/client';
 
-export const CART_QUERY = gql`
-  query Cart {
+export const GET_CART_QUERY = gql`
+  query GetCart {
     cart {
-      total
-      subtotal
       isEmpty
-      feeTax
-      discountTotal
+      subtotal
+      totalTax
+      total
+      shippingTotal
       appliedCoupons {
         code
         discountAmount
+      }
+      contents {
+        itemCount
+        nodes {
+          quantity
+          total
+          key
+          product {
+            node {
+              ... on SimpleProduct {
+                id
+                name
+                productId: databaseId
+                featuredImage {
+                  node {
+                    sourceUrl
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

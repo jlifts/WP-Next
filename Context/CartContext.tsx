@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useEffect, useState, createContext, ReactNode } from 'react';
 
-const defaultValue = {
+const defaultValue: any = {
   cart: null,
 };
 

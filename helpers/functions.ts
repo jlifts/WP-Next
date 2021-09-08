@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -7,6 +10,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+// TS Functions for PWA syncronous offline handling
 export const getFloat = (string: string | any) => {
   const floatValue = string.match(/[+-]?\d+(\.\d+)?/g)[0];
   return floatValue !== null
@@ -54,7 +59,7 @@ export const isProductInCart = (
   existingProductsInCart: any,
   productId: string,
 ) => {
-  const returnItemThatExists = (item: any, index: number) => {
+  const returnItemThatExists = (item: any, _index: number) => {
     if (productId === item.id) {
       return item;
     }
@@ -134,4 +139,111 @@ export const updateCart = (
   localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
 
   return updatedCart;
+};
+
+export const removeItemFromCart = (productId: any): any => {
+  // Get existing cart data
+  let existingCart: any = localStorage.getItem('woo-cart');
+  existingCart = JSON.parse(existingCart);
+
+  // If there is one Item, delete cart
+  if (existingCart.products.length === 1) {
+    localStorage.removeItem('woo-cart');
+    return null;
+  }
+
+  // Array for exisitng products
+  const productExistsIndex = isProductInCart(existingCart.products, productId);
+
+  if (productExistsIndex > -1) {
+    const productToBeRemoved = existingCart.products[productExistsIndex];
+    const qtyToBeRemoved = productToBeRemoved.qty;
+    const priceToBeDeducted = productToBeRemoved.totalPrice;
+
+    // Begin removal and update cart totals
+    const updatedCart = existingCart;
+    updatedCart.products.splice(productExistsIndex, 1);
+    updatedCart.totalCount -= qtyToBeRemoved;
+    updatedCart.totalPrice -= priceToBeDeducted;
+
+    localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
+    return updatedCart;
+  }
+  return existingCart;
+};
+
+// END
+
+export const getFormattedCart = (data: any) => {
+  let formattedCart: any = null;
+
+  if (undefined === data || !data.cart.contents.nodes.length) {
+    return formattedCart;
+  }
+
+  const givenProducts = data.cart.contents.nodes;
+
+  // Create an empty object.
+  formattedCart = {};
+  formattedCart.products = [];
+  let totalProductsCount = 0;
+
+  for (let i = 0; i < givenProducts.length; i++) {
+    const givenProduct = givenProducts?.[i]?.product?.node;
+    const product: any = {};
+    const total: any = getFloat(givenProducts[i].total);
+
+    product.productId = givenProduct?.productId ?? '';
+    product.cartKey = givenProducts?.[i]?.key ?? '';
+    product.name = givenProduct?.name ?? '';
+    product.qty = givenProducts?.[i]?.quantity;
+    product.regularPrice = total / product?.qty;
+    product.totalPrice = givenProducts?.[i]?.total ?? '';
+    product.image = {
+      sourceUrl: givenProduct?.featuredImage?.node?.sourceUrl ?? '',
+      srcSet: givenProduct?.featuredImage?.node?.srcSet ?? '',
+      title: givenProduct?.featuredImage?.node?.title ?? '',
+      altText: givenProduct?.featuredImage?.node?.altText ?? '',
+    };
+
+    totalProductsCount += givenProducts?.[i]?.quantity;
+
+    // Push each item into the products array.
+    formattedCart.products.push(product);
+  }
+
+  formattedCart.totalProductsCount = totalProductsCount;
+  formattedCart.totalProductsPrice = data?.cart?.total ?? '';
+
+  return formattedCart;
+};
+
+export const getUpdatedItems = (
+  products: any,
+  newQty: any,
+  cartKey: string,
+) => {
+  // Create an empty array.
+  const updatedItems: any = [];
+
+  // Loop through the product array.
+  products.map((cartItem: { cartKey: string; qty: any }) => {
+    // If you find the cart key of the product user is trying to update, push the key and new qty.
+    if (cartItem.cartKey === cartKey) {
+      updatedItems.push({
+        key: cartItem.cartKey,
+        quantity: parseInt(newQty, 10),
+      });
+
+      // Otherwise just push the existing qty without updating.
+    } else {
+      updatedItems.push({
+        key: cartItem.cartKey,
+        quantity: cartItem.qty,
+      });
+    }
+  });
+
+  // Return the updatedItems array with new Qtys.
+  return updatedItems;
 };

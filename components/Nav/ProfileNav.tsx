@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Heading from 'components/Heading';
-import useAuth, { User } from 'hooks/useAuth';
+import useAuth from 'hooks/useAuth';
 import Link from 'next/link';
 // import LogOut from 'pages/logOut';
 import React from 'react';
@@ -18,7 +18,7 @@ import Socials from './Socials';
 
 const ProfileNav = (): JSX.Element => {
   const { user } = useAuth();
-  const { firstName, lastName, email } = user as User;
+  const { firstName, lastName, email } = user;
   const md5 = crypto.createHash('md5').update(email).digest('hex');
   const image = `https://www.gravatar.com/avatar/${md5}?r=pg`;
 

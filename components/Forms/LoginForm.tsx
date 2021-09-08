@@ -12,6 +12,7 @@ import {
   GoogleLoginButton,
   FacebookLoginButton,
 } from 'react-social-login-buttons';
+import Input from './Input';
 
 const LoginForm = (): JSX.Element => {
   const router = useRouter();
@@ -59,43 +60,22 @@ const LoginForm = (): JSX.Element => {
           <p>{error.message}</p>
         </div>
       )}
-      <div className="relative border-b-2 focus-within:border-blue-500 z-10">
-        <input
-          type="text"
-          name="email"
-          placeholder=" "
-          autoComplete="off"
-          className="block w-full appearance-none focus:outline-none bg-transparent z-30"
-          required
-          // ref={emailRef}
-        />
-        <label
-          htmlFor="email"
-          className="absolute top-0 duration-300 origin-0 z-20"
-        >
-          Email
-        </label>
-      </div>
-      <div className="relative border-b-2 focus-within:border-blue-500 z-10">
-        <input
-          type="password"
-          name="password"
-          placeholder=" "
-          autoComplete="off"
-          className="block w-full appearance-none focus:outline-none bg-transparent z-10"
-          required
-          // ref={passwordRef}
-        />
-        <label
-          htmlFor="password"
-          className="absolute top-0 duration-300 z-20 origin-0"
-        >
-          Password
-        </label>
-        <div className="absolute text-xs mt-2">
-          <Link href="/passwordreset">Forgot Password?</Link>
-        </div>
-      </div>
+      <Input
+        name="email"
+        label="Email"
+        type="email"
+        required
+        autoComplete="off"
+        passwordReset={false}
+      />
+      <Input
+        name="password"
+        label="Password"
+        type="password"
+        required
+        autoComplete="off"
+        passwordReset
+      />
       <button
         aria-label="Log In"
         disabled={loading}

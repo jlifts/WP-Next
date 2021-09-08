@@ -46,7 +46,10 @@ const Drawer: React.FC = () => {
       </div>
       <AnimatePresence>
         {open ? (
-          <motion.div className="grid grid-cols-6 w-screen z-50 h-screen">
+          <motion.div
+            className="grid grid-cols-6 w-screen z-50 h-screen"
+            key="drawer-div"
+          >
             <motion.div
               className="bg-black h-screen cursor-pointer outline-none col-span-5 z-50"
               onClick={handleOpen}
@@ -58,7 +61,6 @@ const Drawer: React.FC = () => {
                 opacity: 0,
               }}
               transition={{ type: 'spring', bounce: 0, duration: 0.2 }}
-              key="drawer-div"
             />
             <div className="bg-primary w-screen h-screen z-50 pt-12">
               <Menu open={handleOpen} />

@@ -8,14 +8,14 @@ import Link from 'next/link';
 import { useQuery, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import React from 'react';
-import useAuth, { User } from 'hooks/useAuth';
+import useAuth from 'hooks/useAuth';
 import { USER_ADDRESS } from 'graphql/Queries';
 import { UPDATE_USER } from 'graphql/Mutations';
 
 const UserCreationForm = (): JSX.Element => {
   // const [checked, setChecked] = useState(false);
   const { user } = useAuth();
-  const { id, firstName, lastName, email, userId } = user as User;
+  const { id, firstName, lastName, email, userId } = user;
   const Data = useQuery(USER_ADDRESS, {
     variables: { customerId: userId },
   });
