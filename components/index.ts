@@ -17,8 +17,7 @@ import AddToCart from './Checkout/AddToCart';
 import QuantityHandler from './Checkout/QuantityHandler';
 import CheckoutForm from './Forms/CheckoutForm';
 import LoginForm from './Forms/LoginForm';
-import DiscountSetUp from './Checkout/DiscountSetUp';
-import PaymentForm from './Forms/PaymentForm';
+import PaymentForm from './Forms/Payments';
 import FPItemReverse from './Cards/FPItemReverse';
 import Authed from './Auth/Authed';
 import ProfilePage from './ProfilePage';
@@ -31,6 +30,7 @@ import ProfileNav from './Nav/ProfileNav';
 import ProfileUpdateForm from './Forms/ProfileUpdateForm';
 import Order from './Cards/Order';
 import DeleteUserBtn from './Auth/DeleteUserBtn';
+import CheckoutCart from './Checkout/CheckoutCart';
 
 export {
   CTA,
@@ -41,7 +41,7 @@ export {
   LoginForm,
   PasswordResetForm,
   UserCreationForm,
-  DiscountSetUp,
+  CheckoutCart,
   Footer,
   SEO,
   Hero,

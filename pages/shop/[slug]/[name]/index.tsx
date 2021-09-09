@@ -74,9 +74,20 @@ const products = ({
                 >
                   {product.name}
                 </Heading>
-                <p className="text-black text-xl tracking-wide pb-10 z-40">
-                  ${product.regularPrice.replace('$', '')}
-                </p>
+                <div className="flex">
+                  <p
+                    className={`${
+                      product.onSale ? 'line-through' : ''
+                    } text-black text-xl tracking-wide pb-10 z-40`}
+                  >
+                    ${product.regularPrice.replace('$', '')}
+                  </p>
+                  {product.onSale && (
+                    <p className="text-xl cursor-default ml-4 font-semibold tracking-wide">
+                      ${product.price?.replace('$', '')}
+                    </p>
+                  )}
+                </div>
                 <div className="flex my-8 justify-between w-5/6">
                   <QuantityHandler
                     className="border justify-around"

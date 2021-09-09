@@ -12,6 +12,7 @@ export const PRODUCTS_QUERY = gql`
             name
             price
             regularPrice
+            onSale
             stockStatus
             slug
             featuredImage {

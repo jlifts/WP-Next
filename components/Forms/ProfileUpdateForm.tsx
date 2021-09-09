@@ -254,7 +254,8 @@ const UserCreationForm = (): JSX.Element => {
             </label>
           </div>
           <p className="flex flex-col pb-4 font-semibold">Shipping Address</p>
-          {/* <input
+          {/* TODO:
+          <input
             type="checkbox"
             name="SandB"
             className=""

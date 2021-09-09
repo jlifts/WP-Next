@@ -191,13 +191,14 @@ export const getFormattedCart = (data: any) => {
   for (let i = 0; i < givenProducts.length; i++) {
     const givenProduct = givenProducts?.[i]?.product?.node;
     const product: any = {};
-    const total: any = getFloat(givenProducts[i].total);
+    const total: any = getFloat(givenProducts[i].subtotal);
 
     product.productId = givenProduct?.productId ?? '';
     product.cartKey = givenProducts?.[i]?.key ?? '';
     product.name = givenProduct?.name ?? '';
     product.qty = givenProducts?.[i]?.quantity;
     product.regularPrice = total / product?.qty;
+    product.subtotalPrice = givenProducts?.[i]?.subtotal ?? '';
     product.totalPrice = givenProducts?.[i]?.total ?? '';
     product.image = {
       sourceUrl: givenProduct?.featuredImage?.node?.sourceUrl ?? '',
@@ -211,8 +212,16 @@ export const getFormattedCart = (data: any) => {
     // Push each item into the products array.
     formattedCart.products.push(product);
   }
+  const coupon = data?.cart?.appliedCoupons;
+  if (coupon) {
+    formattedCart.discountCode = data?.cart?.appliedCoupons[0].code ?? null;
+    formattedCart.discountAmount =
+      data?.cart?.appliedCoupons[0].discountAmount ?? null;
+  }
 
+  formattedCart.shippingRate = data?.cart?.shippingTotal ?? '';
   formattedCart.totalProductsCount = totalProductsCount;
+  formattedCart.subTotalProductsPrice = data?.cart?.subtotal ?? '';
   formattedCart.totalProductsPrice = data?.cart?.total ?? '';
 
   return formattedCart;

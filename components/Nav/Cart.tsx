@@ -27,7 +27,7 @@ const Cart: React.FC = () => {
   const totalPrice =
     cart !== null && Object.keys(cart).length ? cart.totalProductsPrice : '';
   const totalVariants = cart !== null ? cart?.products?.length : 0;
-  // console.log(cart);
+  console.log(cart);
 
   // // TS Functions for PWA syncronous offline handling
 
@@ -137,7 +137,7 @@ const Cart: React.FC = () => {
         {open ? (
           <motion.div
             className="grid grid-cols-6 w-screen z-50 h-screen"
-            key="drawer-div"
+            key="cart-div"
           >
             <motion.div
               className={`${
@@ -175,19 +175,21 @@ const Cart: React.FC = () => {
                       id: string;
                       name: string;
                       totalPrice: number;
+                      subtotalPrice: number;
+                      productId: string;
                       image: any;
                       qty: number;
                     }) => (
                       <div
                         key={item.id}
-                        className={`${totalVariants > 3 ? 'h-1/6' : 'h-48'}`}
+                        className={`${totalVariants > 3 ? 'h-1/6' : 'h-38'}`}
                       >
                         <CartContent
-                          key={item.id}
+                          key={item.productId}
                           item={item}
                           products={cart.products}
                           name={item.name}
-                          price={item?.totalPrice}
+                          price={item?.subtotalPrice}
                           image={item.image.sourceUrl}
                           id={item.id}
                           quantity={item.qty}
@@ -200,8 +202,12 @@ const Cart: React.FC = () => {
                   )
                 ) : (
                   <>
-                    <p className="mt-9 mb-3 mx-2">Nothing In your Cart?</p>
-                    <p className="my-9 mx-2">Better fix that</p>
+                    <p className="mt-9 mb-3 mx-2" key="1">
+                      Nothing In your Cart?
+                    </p>
+                    <p className="my-9 mx-2" key="2">
+                      Better fix that
+                    </p>
                   </>
                 )}
 

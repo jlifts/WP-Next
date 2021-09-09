@@ -1,4 +1,5 @@
 import { CATAGORIES } from './Catagories';
+import { COUPONS } from './Coupon';
 import { FDA_QUERY } from './FDA';
 import { GET_ORDERS } from './GetOrders';
 import { GET_USER } from './GetUser';
@@ -17,4 +18,5 @@ export {
   USER_ADDRESS,
   GET_USER,
   GET_ORDERS,
+  COUPONS,
 };

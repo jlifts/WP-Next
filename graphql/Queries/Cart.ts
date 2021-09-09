@@ -17,12 +17,15 @@ export const GET_CART_QUERY = gql`
         nodes {
           quantity
           total
+          subtotal
           key
           product {
             node {
               ... on SimpleProduct {
                 id
                 name
+                price
+                regularPrice
                 productId: databaseId
                 featuredImage {
                   node {

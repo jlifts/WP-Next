@@ -107,6 +107,7 @@ interface CatagoryQuery {
 }
 
 interface ProductQuery {
+  onSale: boolean;
   name: string;
   id?: string;
   price: string;

@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link';
 import React from 'react';
 
-interface IInput {
+export interface IInput {
   name: string;
-  type: string;
-  label: string;
+  type?: string;
+  label?: string;
   required: boolean;
   autoComplete: string;
-  passwordReset: boolean;
+  passwordReset?: boolean;
+  placeholder?: string;
+  defaultValue?: any;
+  className?: string;
 }
 
 const Input = ({
   name,
-  type,
+  type = 'text',
   label,
   required,
   autoComplete,

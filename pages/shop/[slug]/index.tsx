@@ -14,7 +14,7 @@ import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { PRODUCTS_QUERY, CATAGORIES } from 'graphql/Queries';
-import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
+import { GetStaticPathsContext } from 'next';
 import { getApolloClient } from '@wpengine/headless';
 import { ProductQuery } from 'typings/global';
 import { Client } from '../../../lib/ApolloClient';
@@ -69,9 +69,20 @@ const Products = ({ product }: any): JSX.Element => {
                     </div>
                   </a>
                   <div className="flex items-center justify-between">
-                    <p className="text-xl cursor-default">
-                      ${item?.regularPrice?.replace('$', '')}
-                    </p>
+                    <div className="flex">
+                      <p
+                        className={`${
+                          item?.onSale ? 'line-through' : ''
+                        } text-xl cursor-default`}
+                      >
+                        ${item?.regularPrice?.replace('$', '')}
+                      </p>
+                      {item?.onSale && (
+                        <p className="text-xl cursor-default ml-4 font-semibold">
+                          ${item?.price?.replace('$', '')}
+                        </p>
+                      )}
+                    </div>
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
                       product={item}
@@ -96,10 +107,7 @@ export async function getStaticPaths(context: GetStaticPathsContext) {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps(
-  { params: { slug } }: any,
-  context: GetStaticPropsContext,
-) {
+export async function getStaticProps({ params: { slug } }: any) {
   // const client = getApolloClient(context);
   const { data } = await Client.query({
     query: PRODUCTS_QUERY,

@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { gql, useQuery, useMutation } from '@apollo/client';
-import { successToastConfig } from 'components/ToastConfig';
+import { toastConfig } from 'components/ToastConfig';
 import { CartContext } from 'Context/CartContext';
 import { ADD_TO_CART } from 'graphql/Mutations';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
@@ -100,7 +100,7 @@ const AddToCart = ({
     await addToCart();
     toast.success(
       `🦄 ${product.name || productName} Added To Cart!`,
-      successToastConfig,
+      toastConfig,
     );
   };
 

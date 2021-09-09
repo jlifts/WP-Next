@@ -21,6 +21,8 @@ export const PRODUCT_QUERY = gql`
           }
         }
         regularPrice
+        price
+        onSale
         stockStatus
         slug
         shortDescription

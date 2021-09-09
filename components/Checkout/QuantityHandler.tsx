@@ -13,6 +13,8 @@ import { getUpdatedItems } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
 import { v4 } from 'uuid';
 
+// TODO: Fix
+
 const QuantityHandler = ({
   className,
   quantity,

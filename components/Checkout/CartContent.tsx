@@ -32,7 +32,6 @@ const CartContent = ({
   updateCartProcessing,
   updateCart,
 }: CartItems): JSX.Element => {
-  console.log(item);
   return (
     <div className="flex flex-col h-1/6" key={id}>
       {name && (

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export const successToastConfig = {
+export const toastConfig = {
   position: toast.POSITION.BOTTOM_LEFT,
   autoClose: 5000,
   hideProgressBar: false,
