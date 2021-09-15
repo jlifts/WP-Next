@@ -32,15 +32,15 @@ export default function App({
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>
-          <GoogleAnalyticsTag>
-            <FacebookPixel>
-              <CartProvider>
-                <Head />
-                <Component {...pageProps} />
-                <ToastContainer />
-              </CartProvider>
-            </FacebookPixel>
-          </GoogleAnalyticsTag>
+          <CartProvider>
+            {/* <GoogleAnalyticsTag>
+              <FacebookPixel> */}
+            <Head />
+            <Component {...pageProps} />
+            <ToastContainer />
+            {/* </FacebookPixel>
+            </GoogleAnalyticsTag> */}
+          </CartProvider>
         </HeadlessProvider>
       </AuthProvider>
     </ApolloProvider>

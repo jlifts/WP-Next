@@ -20,7 +20,8 @@ export const middleware = new ApolloLink((operation, forward) => {
   const session = process.browser ? localStorage.getItem('woo-session') : null;
 
   if (session) {
-    operation.setContext(({ headers = {} }) => ({
+    // took out {headers = {}}
+    operation.setContext(() => ({
       headers: {
         'woocommerce-session': `Session ${session}`,
       },

@@ -15,7 +15,7 @@ function SEO(): JSX.Element {
         <title>{/* Title is required here but replaced by WPHead. */}</title>
         {/* Add extra elements to <head> here. */}
         {/* Global Site Code Pixel - Facebook Pixel */}
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
                 !function(f,b,e,v,n,t,s)
@@ -29,9 +29,9 @@ function SEO(): JSX.Element {
                 fbq('init', ${FB_PIXEL_ID});
               `,
           }}
-        />
+        /> */}
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
+        {/* <script
           // strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
         />
@@ -47,7 +47,7 @@ function SEO(): JSX.Element {
             });
           `,
           }}
-        />
+        /> */}
         <Meta>
           <link
             rel="preconnect"

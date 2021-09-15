@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { data, loading, error } = useQuery(GET_USER);
   const user = data?.viewer;
   const loggedIn = Boolean(user);
-  console.log(user?.id);
+  // console.log(user?.id);
 
   const value = {
     loggedIn,

@@ -18,13 +18,13 @@ import { MENU_QUERY } from 'graphql/Queries';
 import useAuth from 'hooks/useAuth';
 import { Client } from 'lib/ApolloClient';
 
-const Menu = ({ open }: MenuProps) => {
+const Menu = ({ open, data }: MenuProps) => {
   const router = useRouter();
   // const id = 'dGVybToyNA==';
   const { loggedIn } = useAuth();
-  const { data } = useQuery(MENU_QUERY);
+  // const { data } = useQuery(MENU_QUERY);
   const menu = data?.menu?.menuItems.nodes;
-  // console.log(data);
+  console.log(data);
   // console.log(router.asPath);
 
   const variants = {
@@ -161,12 +161,12 @@ const Menu = ({ open }: MenuProps) => {
   );
 };
 
-// export async function getStaticProps() {
-//   const client = getApolloClient();
-//   const { data } = await client.query({
-//     query: MENU_QUERY,
-//   });
-//   return getNextStaticProps(data);
-// }
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const client = getApolloClient(context);
+  const { data } = await client.query({
+    query: MENU_QUERY,
+  });
+  return getNextStaticProps(data);
+}
 
 export default Menu;
