@@ -20,7 +20,7 @@ const LegalMenu = ({ open }: MenuProps) => {
   const { data } = useQuery(LEGAL_MENU_QUERY, {
     // variables: { id },
   });
-  const menus = data?.menu.menuItems.nodes;
+  const menus = data?.menu?.menuItems?.nodes;
   // console.log(data);
 
   const variants = {
@@ -95,12 +95,12 @@ const LegalMenu = ({ open }: MenuProps) => {
   );
 };
 
-export async function getStaticProps(context: GetStaticPropsContext) {
-  // const client = getApolloClient(context);
-  const { data } = await Client.query({
-    query: LEGAL_MENU_QUERY,
-  });
-  return getNextStaticProps(context, data);
-}
+// export async function getStaticProps(context: GetStaticPropsContext) {
+//   const client = getApolloClient(context);
+//   const { data } = await Client.query({
+//     query: LEGAL_MENU_QUERY,
+//   });
+//   return getNextStaticProps(context, data);
+// }
 
 export default LegalMenu;

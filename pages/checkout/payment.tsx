@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { CheckoutForm, CheckoutCart } from 'components';
+import { CheckoutCart, Payments } from 'components';
 import Heading from 'components/Heading';
 import { CartContext } from 'Context/CartContext';
 import Link from 'next/link';
@@ -13,8 +13,8 @@ const Checkout = (): JSX.Element => {
 
   return (
     <>
-      <section className="grid grid-cols-2 w-screen">
-        <div className="col-span-1 p-6 h-full">
+      <section className="grid grid-cols-2 w-screen h-screen">
+        <div className="col-span-1 p-6">
           <Heading
             level="h4"
             className="text-5xl font-bold tracking-widest uppercase font-mont"
@@ -32,7 +32,7 @@ const Checkout = (): JSX.Element => {
             <span className="px-6">{'>'}</span>
             <div
               className={
-                router.pathname === '/payment'
+                router.pathname === '/checkout/payment'
                   ? 'text-primary'
                   : 'text-gray-300'
               }
@@ -42,7 +42,7 @@ const Checkout = (): JSX.Element => {
             <span className="px-6">{'>'}</span>
             <div
               className={
-                router.pathname === '/orderdetails'
+                router.pathname === '/checkout/orderdetails'
                   ? 'text-primary'
                   : 'text-gray-300'
               }
@@ -50,8 +50,8 @@ const Checkout = (): JSX.Element => {
               <p>Order Details</p>
             </div>
           </nav>
-          <CheckoutForm />
-          <div className="pt-4 px-6">
+          <Payments />
+          <div className="px-6">
             <nav className="flex text-primary justify-between">
               <Link href="/return-policy">Refund Policy</Link>
               <Link href="/privacy-policy">Privacy Policy</Link>

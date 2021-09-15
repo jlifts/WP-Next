@@ -1,5 +1,6 @@
 import { ADD_TO_CART } from './AddToCart';
 import { APPLY_COUPON } from './ApplyCoupon';
+import CHECKOUT_MUTATION from './Checkout';
 import { CLEAR_CART } from './ClearCart';
 import { REGISTER_USER } from './CreateUser';
 import { DELETE } from './DeleteUser';
@@ -23,4 +24,5 @@ export {
   CLEAR_CART,
   APPLY_COUPON,
   REMOVE_COUPONS,
+  CHECKOUT_MUTATION,
 };

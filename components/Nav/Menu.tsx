@@ -22,10 +22,8 @@ const Menu = ({ open }: MenuProps) => {
   const router = useRouter();
   // const id = 'dGVybToyNA==';
   const { loggedIn } = useAuth();
-  const { data } = useQuery(MENU_QUERY, {
-    // variables: { id },
-  });
-  const menu = data?.menu.menuItems.nodes;
+  const { data } = useQuery(MENU_QUERY);
+  const menu = data?.menu?.menuItems.nodes;
   // console.log(data);
   // console.log(router.asPath);
 
@@ -163,12 +161,12 @@ const Menu = ({ open }: MenuProps) => {
   );
 };
 
-export async function getStaticProps() {
-  // const client = getApolloClient();
-  const { data } = await Client.query({
-    query: MENU_QUERY,
-  });
-  return getNextStaticProps(data);
-}
+// export async function getStaticProps() {
+//   const client = getApolloClient();
+//   const { data } = await client.query({
+//     query: MENU_QUERY,
+//   });
+//   return getNextStaticProps(data);
+// }
 
 export default Menu;

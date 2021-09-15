@@ -17,7 +17,6 @@ import AddToCart from './Checkout/AddToCart';
 import QuantityHandler from './Checkout/QuantityHandler';
 import CheckoutForm from './Forms/CheckoutForm';
 import LoginForm from './Forms/LoginForm';
-import PaymentForm from './Forms/Payments';
 import FPItemReverse from './Cards/FPItemReverse';
 import Authed from './Auth/Authed';
 import ProfilePage from './ProfilePage';
@@ -31,13 +30,15 @@ import ProfileUpdateForm from './Forms/ProfileUpdateForm';
 import Order from './Cards/Order';
 import DeleteUserBtn from './Auth/DeleteUserBtn';
 import CheckoutCart from './Checkout/CheckoutCart';
+import Payments from './Forms/Payments';
+import FacebookPixel from './tags/FacebookPixel';
+import GoogleAnalyticsTag from './tags/GoogleAnalyticsTag';
 
 export {
   CTA,
   AddToCart,
   QuantityHandler,
   CheckoutForm,
-  PaymentForm,
   LoginForm,
   PasswordResetForm,
   UserCreationForm,
@@ -66,4 +67,7 @@ export {
   ProfileUpdateForm,
   Order,
   DeleteUserBtn,
+  Payments,
+  FacebookPixel,
+  GoogleAnalyticsTag,
 };

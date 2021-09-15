@@ -9,6 +9,7 @@ import { AuthProvider } from 'hooks/useAuth';
 import { ToastContainer } from 'react-toastify';
 import Head from 'lib/Head';
 import { CartProvider } from 'Context/CartContext';
+import { FacebookPixel, GoogleAnalyticsTag } from 'components';
 import { Client } from '../lib/ApolloClient';
 import 'normalize.css/normalize.css';
 import 'scss/tailwind.scss';
@@ -22,14 +23,24 @@ export default function App({
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
+    // TODO: Motion Framer, Mobile Responsiveness, Tablet, Desktop, Create Order, Process Payments, Order Review Page, Google/Facebook Login
+    // TODO: Bugs: Logout Function, Added Discount Toast, Front Page add products to cart, query mess up
+    // TODO: DevOps: Domain name for frontend, place wordpress instance on admin.victishealth.com (talk to WPEngine)
+    // TODO: Features: Rewards system, Wholesaler special dashboard, subscription model
+    // TODO: Wordpress Add-ons: Build button for Vercel Redeployment, Tier system custom post type, Giveaway announcement special post type
+
     <ApolloProvider client={Client}>
       <AuthProvider>
         <HeadlessProvider pageProps={pageProps}>
-          <CartProvider>
-            <Head />
-            <Component {...pageProps} />
-            <ToastContainer />
-          </CartProvider>
+          <GoogleAnalyticsTag>
+            <FacebookPixel>
+              <CartProvider>
+                <Head />
+                <Component {...pageProps} />
+                <ToastContainer />
+              </CartProvider>
+            </FacebookPixel>
+          </GoogleAnalyticsTag>
         </HeadlessProvider>
       </AuthProvider>
     </ApolloProvider>

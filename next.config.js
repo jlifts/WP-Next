@@ -5,3 +5,15 @@
 const withWPEHeadless = require('@wpengine/headless/nextConfig');
 
 module.exports = withWPEHeadless();
+
+// Easy way of implementing the square SDK, current v works with react but not NextJS or at least without intefereing with WPEHeadless
+// const withTM = require('next-transpile-modules')([
+//   '@square/web-sdk',
+//   'react-square-web-payments-sdk',
+// ]);
+
+// module.exports = withTM({
+//   experimental: {
+//     esmExternals: 'loose',
+//   },
+// });

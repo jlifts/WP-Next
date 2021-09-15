@@ -13,6 +13,10 @@ export interface IInput {
   placeholder?: string;
   defaultValue?: any;
   className?: string;
+  handleInputChange?: any;
+  isShipping?: boolean;
+  inputValue?: any;
+  errors?: any;
 }
 
 const Input = ({

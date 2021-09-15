@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { toastConfig } from 'components/ToastConfig';
 import { CartContext } from 'Context/CartContext';
 import { ADD_TO_CART } from 'graphql/Mutations';
@@ -34,9 +34,12 @@ const AddToCart = ({
 }: ButtonProps): JSX.Element => {
   const [cart, setCart] = useContext(CartContext);
 
+  // New
+  const { productId } = product;
+
   const productQryInput = {
     clientMutationId: v4(), // Generate a unique id.
-    productId: product.productId,
+    productId,
     quantity: quant || 1,
   };
 

@@ -5,6 +5,12 @@ import { HeadingProps } from '../components/Heading';
 
 declare module '*.svg';
 
+declare global {
+  interface Window {
+    fbq: any;
+  }
+}
+
 interface AthleteProps {
   headingLevel?: HeadingProps['level'];
   bgImage?: UrlObject | string;

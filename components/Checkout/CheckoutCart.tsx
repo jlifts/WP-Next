@@ -3,8 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { faGooglePay, faApplePay } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SquarePayments from 'components/Forms/SquarePaymentForm';
 import React from 'react';
 
 interface IDiscount {
@@ -45,18 +44,18 @@ const CheckoutCart = ({ products }: IDiscount): JSX.Element => {
         <div className="border-b space-y-4 pb-6">
           <div className="flex justify-between">
             <p>SubTotal</p>
-            <p>{products.subTotalProductsPrice}</p>
+            <p>{products?.subTotalProductsPrice}</p>
           </div>
           <div className="flex justify-between">
             <p>Shipping</p>
-            <p>{products.shippingRate}</p>
+            <p>{products?.shippingRate}</p>
           </div>
           {products?.discountAmount && (
             <p className="flex justify-end relative">
               <span className="font-semibold px-4">
-                Code: {products.discountCode}
+                Code: {products?.discountCode}
               </span>
-              <span>-{products.discountAmount}</span>
+              <span>-{products?.discountAmount}</span>
             </p>
           )}
         </div>
@@ -64,26 +63,11 @@ const CheckoutCart = ({ products }: IDiscount): JSX.Element => {
           <p className="font-semibold">Total</p>
           <p className="font-semibold">
             <span className="text-gray-300 px-3 font-normal">USD</span>
-            {products.totalProductsPrice}
+            {products?.totalProductsPrice}
           </p>
         </div>
       </div>
-      <div>
-        <div className="flex justify-between">
-          <button
-            type="submit"
-            className="bg-white shadow-lg w-2/5 rounded-lg border text-4xl mb-6"
-          >
-            <FontAwesomeIcon icon={faGooglePay} />
-          </button>
-          <button
-            type="submit"
-            className="bg-black shadow-lg w-2/5 rounded-lg border text-4xl text-white mb-6"
-          >
-            <FontAwesomeIcon icon={faApplePay} />
-          </button>
-        </div>
-      </div>
+      <SquarePayments />
     </div>
   );
 };

@@ -11,6 +11,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
+import { v4 } from 'uuid';
+// TODO: in the future grab preferred states from woo
+// import GET_STATES from '../queries/get-states';
+
 // TS Functions for PWA syncronous offline handling
 export const getFloat = (string: string | any) => {
   const floatValue = string.match(/[+-]?\d+(\.\d+)?/g)[0];
@@ -256,3 +260,92 @@ export const getUpdatedItems = (
   // Return the updatedItems array with new Qtys.
   return updatedItems;
 };
+
+export const createCheckoutData = (order: {
+  billingDifferentThanShipping: boolean;
+  billing: any;
+  shipping: {
+    firstName: string;
+    lastName: string;
+    address1: string;
+    address2?: string;
+    city: string;
+    country: string;
+    state: string;
+    postcode: string;
+    email: string;
+    phone?: string;
+    company?: string;
+  };
+  paymentMethod: string;
+  createAccount?: boolean;
+  username?: string;
+  password?: string;
+}) => {
+  // Set the billing Data to shipping, if applicable.
+  const billingData = order.billingDifferentThanShipping
+    ? order.billing
+    : order.shipping;
+
+  const email = order?.shipping?.email;
+  const phone = order?.shipping?.phone;
+
+  const checkoutData = {
+    clientMutationId: v4(),
+    shipping: {
+      firstName: order?.shipping?.firstName,
+      lastName: order?.shipping?.lastName,
+      address1: order?.shipping?.address1,
+      address2: order?.shipping?.address2,
+      city: order?.shipping?.city,
+      country: order?.shipping?.country || 'US',
+      state: order?.shipping?.state,
+      postcode: order?.shipping?.postcode,
+      email,
+      phone,
+      company: order?.shipping?.company,
+    },
+    billing: {
+      firstName: billingData?.firstName,
+      lastName: billingData?.lastName,
+      address1: billingData?.address1,
+      address2: billingData?.address2,
+      city: billingData?.city,
+      country: billingData?.country || 'US',
+      state: billingData?.state,
+      postcode: billingData?.postcode,
+      email: order?.shipping?.email,
+      phone: order?.shipping?.email,
+      company: billingData?.company,
+    },
+    shipToDifferentAddress: order.billingDifferentThanShipping,
+    paymentMethod: order.paymentMethod,
+    isPaid: false,
+  };
+
+  // if (order.createAccount) {
+  //   checkoutData.account = {
+  //     username: order.username,
+  //     password: order.password,
+  //   };
+  // }
+
+  return checkoutData;
+};
+
+export const handleBillingDifferentThanShipping = (
+  input: { billingDifferentThanShipping: any },
+  setInput: (arg0: any) => void,
+  target: { name: any },
+) => {
+  const newState = {
+    ...input,
+    [target.name]: !input.billingDifferentThanShipping,
+  };
+  setInput(newState);
+};
+
+// export const handleCreateAccount = (input, setInput, target) => {
+//   const newState = { ...input, [target.name]: !input.createAccount };
+//   setInput(newState);
+// };
