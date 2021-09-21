@@ -11,8 +11,6 @@ import React from 'react';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 // import { SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
 import { useInView } from 'react-intersection-observer';
-import { LEGAL_MENU_QUERY } from 'graphql/Queries';
-import { Client } from 'lib/ApolloClient';
 import axios from './api/axios/deets';
 import {
   CTA,
@@ -27,7 +25,7 @@ import {
 } from '../components';
 
 const FrontPage = ({ deets }: any): JSX.Element => {
-  const { inView, entry, ref } = useInView();
+  const { inView, ref } = useInView();
   const animationControl = useAnimation();
   const animationControlY = useAnimation();
   const title = 'Victis Health';
@@ -153,7 +151,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
           <motion.img
             src="/images/insta-victis-lawncare2.webp"
             alt="Victis Plant"
-            className="invisible md:visible w-4/6 md:w-3/6 md:h-4/6 absolute md:left-36"
+            className="invisible md:visible w-4/6 md:w-2/4 md:h-1/4 md:left-10 lg:w-3/6 lg:h-4/6 lg:left-36 absolute "
             // animate={{ x: 1, opacity: 1 }}
             animate={animationControl}
             transition={{ duration: 1 }}
@@ -162,7 +160,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
           <motion.img
             src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
-            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:left-72 shadow-2xl md:mt-96 z-40"
+            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:mt-132 md:left-112 lg:left-72 shadow-2xl lg:mt-96 z-40"
             // animate={{ y: 1, opacity: 1 }}
             animate={animationControlY}
             transition={{ duration: 1.2 }}
@@ -175,7 +173,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
             transition={{ duration: 1.5 }}
             initial={{ x: 400, opacity: 0 }}
           >
-            <div className="md:w-3/5 h-full" ref={ref}>
+            <div className="md:w-4/5 lg:w-3/5 h-full" ref={ref}>
               <PopOut
                 title={deets?.slug.replace('-', ' ')}
                 subTitle={deets?.title}
@@ -184,7 +182,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
             </div>
           </motion.div>
         </section>
-        <section className="h-full ">
+        <section className="h-full md:-mt-44 lg:mt-0">
           {/* get rid of hardcode */}
           <FPItemReverse
             ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"

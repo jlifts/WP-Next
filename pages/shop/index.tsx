@@ -35,7 +35,7 @@ const index = ({ catagories }: any): JSX.Element => {
           <div className="text-3xl tracking-wide uppercase pb-10 cursor-default">
             Collections
           </div>
-          <div className="flex flex-col md:grid md:grid-cols-3 w-7/8 z-50 h-full pb-16">
+          <div className="flex flex-col md:flex-none md:grid md:grid-cols-2 lg:grid-cols-3 w-7/8 z-50 h-full pb-16">
             {catagories &&
               catagories.map((item: CatagoryQuery) => (
                 <a href={`/shop/${item.slug}`} key={item.id}>

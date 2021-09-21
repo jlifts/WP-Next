@@ -19,19 +19,19 @@ function Hero({
     <section
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...(id && { id })}
-      className="h-4/6 w-full md:w-5/8 flex items-center justify-center mt-8 z-40"
+      className="h-4/6 w-full lg:w-5/8 flex items-center justify-center mt-8 z-40"
     >
       <div
         className={
           bgImage &&
-          ` md:h-4/6 w-full md:w-5/8 absolute z-20 bg-black opacity-30 `
+          ` md:h-4/6 w-full lg:w-5/8 absolute z-20 bg-black opacity-30 `
         }
       />
       <div
         style={{
           backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
         }}
-        className="h-4/6 w-full md:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
+        className="h-4/6 w-full lg:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
       />
       <div className="z-30">
         <motion.div

@@ -19,7 +19,7 @@ export default function Page(): JSX.Element {
         <MainHero title="404" subtitle="Oops! This page cannot be found..." />
         <div className="">
           <div>
-            <div className="underline md:text-xl px-5 md:px-0">
+            <div className="underline md:text-xl px-5 lg:px-0">
               <Link href="/">
                 The page you were looking for does not exist or is no longer
                 available. Please click here to go back to your experience.

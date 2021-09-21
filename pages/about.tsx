@@ -20,6 +20,8 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import axios from './api/axios/deets';
 
+// TODO Responsiveness flash
+
 const about = ({ deets }: any): JSX.Element => {
   const { inView, ref } = useInView();
   const animationControl = useAnimation();
@@ -47,7 +49,7 @@ const about = ({ deets }: any): JSX.Element => {
   }
 
   return (
-    <main className="overflow-hidden">
+    <main className="">
       <div className="sticky top-0 z-70 ml-12" key="drawer">
         <Cart />
         <Drawer />
@@ -55,7 +57,7 @@ const about = ({ deets }: any): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default overflow-hidden">
+      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default ">
         <div className="text-3xl pt-20 md:pt-0 md:text-5xl font-bold md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
@@ -63,11 +65,11 @@ const about = ({ deets }: any): JSX.Element => {
           <Heading level="h4">About</Heading>
         </div>
       </div>
-      <section className="h-screen+ py-20 mt-20">
+      <section className="h-screen+ py-20 lg:mt-20 overflow-hidden">
         <motion.img
           src="/images/richFroning.webp"
           alt="Victis Plant"
-          className="md:w-3/6 md:h-4/6 absolute right-8 top-56 md:top-auto"
+          className="lg:w-3/6 md:h-4/6 absolute right-8 top-56 md:top-auto"
           animate={animationControl}
           transition={{ duration: 1 }}
           initial={{ x: -400, opacity: 0 }}
@@ -75,7 +77,7 @@ const about = ({ deets }: any): JSX.Element => {
         <motion.img
           src="/images/tinandcream.webp"
           alt="Victis Cream"
-          className="invisible md:visible w-1/4 absolute right-60 shadow-2xl mt-96 z-40"
+          className="invisible md:visible w-1/4 absolute right-60 shadow-2xl md:mt-112 lg:mt-96 z-40"
           animate={animationControlY}
           transition={{ duration: 1.2 }}
           initial={{ y: 400, opacity: 0 }}
@@ -120,7 +122,7 @@ const about = ({ deets }: any): JSX.Element => {
           Twitter="https://www.instagram.com/richfroning/"
         />
       </section>
-      <section className="h-full p-2 md:p-12">
+      <section className="h-full p-2 lg:p-12">
         <div className="flex flex-col md:flex-row justify-around">
           <Card
             name="Zeb Portanova"

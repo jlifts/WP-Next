@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  faLevelUpAlt,
+  // faLevelUpAlt,
   faCalendarAlt,
   faCogs,
   faSignOutAlt,
@@ -23,8 +23,8 @@ const ProfileNav = (): JSX.Element => {
   const image = `https://www.gravatar.com/avatar/${md5}?r=pg`;
 
   return (
-    <div className=" md:grid md:grid-cols-5 w-screen h-screen md:sticky md:top-0">
-      <div className="flex flex-col bg-secondary h-screen col-span-1 text-white font-mont tracking-widest uppercase items-center">
+    <div className="md:col-span-2 lg:col-span-1 h-screen md:sticky md:top-0">
+      <div className="flex flex-col bg-secondary h-screen  text-white font-mont tracking-widest uppercase items-center">
         <img
           src={image}
           alt="User Profile"
@@ -66,7 +66,7 @@ const ProfileNav = (): JSX.Element => {
         <Link href="/members/events">
           <p className="border-b w-full py-3 px-3 flex justify-between cursor-pointer">
             <FontAwesomeIcon icon={faCalendarAlt} />
-            Giveaways and Events
+            Giveaways &amp; Events
           </p>
         </Link>
         <Link href="/members/settings">

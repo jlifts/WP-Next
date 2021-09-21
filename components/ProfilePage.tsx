@@ -39,7 +39,7 @@ const ProfilePage = (): JSX.Element => {
       <div className="flex tracking-widest uppercase justify-center h-1/5 w-full items-center pt-10 cursor-default border-b">
         <Heading
           level="h4"
-          className="text-xl md:text-5xl font-bold tracking-widest"
+          className="text-xl md:text-3xl lg:text-5xl font-bold tracking-widest"
         >
           Welcome to Team Victis
         </Heading>
@@ -52,7 +52,7 @@ const ProfilePage = (): JSX.Element => {
         <Heading level="h5" className="text-xl p-6 font-semibold">
           Past Orders
         </Heading>
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-5 mx-6 pb-12 md:pb-0">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 mx-6 pb-12 lg:pb-0">
           {order &&
             order.map((item: OrderQuery) => (
               <div

@@ -9,12 +9,12 @@ const user = (): JSX.Element => {
         <Cart />
         <Drawer />
       </div>
-      <div className="flex flex-col md:grid md:grid-cols-5">
-        <Authed>
+      <Authed>
+        <div className="flex flex-col md:grid md:grid-cols-6 lg:grid-cols-5">
           <ProfileNav />
           <ProfilePage />
-        </Authed>
-      </div>
+        </div>
+      </Authed>
     </main>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CheckoutForm, CheckoutCart } from 'components';
@@ -59,7 +60,7 @@ const Checkout = (): JSX.Element => {
             </nav>
           </div>
         </div>
-        <div className="h-full col-span-1 bg-lightgray p-6">
+        <div className="h-full+ col-span-1 bg-lightgray p-6">
           <CheckoutCart products={cart} />
         </div>
       </section>

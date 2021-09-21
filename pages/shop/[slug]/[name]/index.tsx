@@ -18,14 +18,10 @@ import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import { PRODUCT_QUERY, PRODUCTS_QUERY } from 'graphql/Queries';
+import { PRODUCT_QUERY } from 'graphql/Queries';
 // import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 
-const products = ({
-  producted,
-  gallerys,
-  featuredImages,
-}: any): JSX.Element => {
+const products = (): JSX.Element => {
   const title = 'Victis Health';
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
@@ -62,7 +58,7 @@ const products = ({
           <Heading level="h4">Victis Health</Heading>
         </div>
         {/* <div className="mt-24 bg-midgray w-screen h-full ml-20 pl-8 pt-28 mb-8"> */}
-        <div className="flex flex-col px-6 md:px-0 md:grid md:grid-cols-2 gap-44 w-screen z-50 h-full pt-5 pb-12 md:pl-40 mt-24">
+        <div className="flex flex-col px-6 lg:px-0 md:grid md:grid-cols-2 md:gap-20 lg:gap-44 w-screen z-50 h-full pt-5 pb-12 lg:pl-40 mt-24">
           {product && (
             <>
               <div className="flex flex-col col-span-1" key={product.id}>
@@ -119,7 +115,7 @@ const products = ({
                 <img
                   src={featuredImage}
                   alt={product.name}
-                  className="h-80 md:h-120 z-10"
+                  className="h-80 lg:h-120 z-10"
                 />
                 {gallery &&
                   gallery.map(
@@ -133,7 +129,7 @@ const products = ({
                         key={image.node.id}
                         src={image.node.sourceUrl}
                         alt={product.name}
-                        className="h-80 md:h-120 z-10"
+                        className="h-80 lg:h-120 z-10"
                       />
                     ),
                   )}

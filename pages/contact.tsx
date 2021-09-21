@@ -16,11 +16,11 @@ const contact = ({ deets }: any): JSX.Element => {
   const body = deets?.content;
 
   return (
-    <main className="flex flex-col overflow-hidden">
+    <main className="overflow-y-auto overflow-hidden">
       <div className="sticky top-0 z-70" key="drawer">
         <Cart />
         <Drawer />
-        <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl ml-12">
+        <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl ml-12 overflow-hidden">
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
@@ -37,7 +37,7 @@ const contact = ({ deets }: any): JSX.Element => {
         style={{ height: '40rem' }}
       >
         <Hero bgImage="/images/cbdshelf.webp" />
-        <div className="md:absolute z-10 bg-midgray h-7/10 w-7/8 transform translate-x-32 md:translate-y-28 cursor-default">
+        <div className="md:absolute z-10 bg-midgray h-7/10 w-7/8 transform translate-x-32 md:translate-y-44 lg:translate-y-28 cursor-default">
           <span
             className="flex justify-center items-end h-full p-12 transform translate-y-7 font-mont text-base md:text-lg"
             dangerouslySetInnerHTML={{

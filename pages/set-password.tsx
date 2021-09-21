@@ -1,4 +1,4 @@
-import { Cart, Drawer, SetPasswordForm, ShopNav } from 'components';
+import { Cart, Drawer, Footer, SetPasswordForm, ShopNav } from 'components';
 import { useRouter } from 'next/router';
 
 import React from 'react';
@@ -17,6 +17,7 @@ const SetPassword = (): JSX.Element => {
         </div>
       </div>
       <SetPasswordForm resetKey={resetKey} login={login} />
+      <Footer />
     </div>
   );
 };

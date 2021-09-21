@@ -47,7 +47,7 @@ const Products = ({ product }: any): JSX.Element => {
           <div className="text-3xl tracking-wide uppercase pb-10 cursor-default">
             Products
           </div>
-          <div className="flex flex-col md:grid md:grid-cols-3 gap-10 w-7/8 z-50 h-full py-12">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 w-7/8 z-50 h-full py-12">
             {product &&
               product.map((item: ProductQuery) => (
                 <div className="flex flex-col col-span-1" key={item.id}>

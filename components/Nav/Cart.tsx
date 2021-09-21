@@ -136,11 +136,11 @@ const Cart: React.FC = () => {
       <AnimatePresence>
         {open ? (
           <motion.div
-            className="md:grid md:grid-cols-6 w-screen z-50 h-screen transform translate-x-8 md:translate-x-0"
+            className="md:grid md:grid-cols-6 w-screen z-50 h-screen transform translate-x-8 overflow-hidden"
             key="cart-div"
           >
             <motion.div
-              className="no-mobile col-span-5 bg-black h-screen cursor-pointer outline-none z-50 overflow-hidden"
+              className="no-mobile md:col-span-3 lg:col-span-5 bg-black h-screen cursor-pointer outline-none z-50 overflow-hidden"
               onClick={handleOpen}
               initial={{ opacity: 0 }}
               animate={{
@@ -212,7 +212,7 @@ const Cart: React.FC = () => {
                 <div
                   className={`${
                     totalVariants > 3
-                      ? 'w-full+ md:w-2/6'
+                      ? 'w-full+ md:w-3/4 lg:w-2/6'
                       : 'bottom-16 absolute '
                   } `}
                 >

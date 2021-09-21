@@ -61,12 +61,16 @@ const UserCreationForm = (): JSX.Element => {
   }
 
   return (
-    <div className="flex flex-col col-span-4 w-full justify-center mx-auto">
+    <div className="col-span-4 mx-2 md:mx-10">
       <form
-        className="flex flex-col md:w-2/4 mx-5 justify-center md:mx-auto overflow-hidden z-10 my-10"
+        className="lg:w-full mx-5 lg:mx-auto overflow-hidden z-10 my-5"
         onSubmit={handleSubmit}
       >
-        <fieldset disabled={loading} aria-busy={loading} className="space-y-10">
+        <fieldset
+          disabled={loading}
+          aria-busy={loading}
+          className="space-y-10 flex flex-col justify-center"
+        >
           <div className="flex flex-row justify-evenly text-3xl font-bold">
             <h4 className="cursor-default font-items">Profile Information</h4>
           </div>

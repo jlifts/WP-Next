@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react/no-danger */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -49,14 +50,18 @@ const FPItemReverse = ({
           <AddToCart
             product={ProductId}
             productName={ProductTitle}
-            className="border-white border-2 px-4 py-3 mr-12"
+            className="border-white border-2 px-4 py-3 lg:mr-12"
           />
           <QuantityHandler />
         </div>
       </motion.div>
       <div className="md:col-span-2 flex justify-end">
         <div className="flex justify-end transform md:translate-x-80 md:w-full+">
-          <img src={imageURL} alt={imageName} height={300} width={400} />
+          <img
+            src={imageURL}
+            alt={imageName}
+            /* height={300} width={400} */ className="h-3/4 w-5/6"
+          />
           {/* <img
             src="images/Detailline.svg"
             alt="Detailline"

@@ -47,11 +47,11 @@ const Drawer: React.FC = () => {
       <AnimatePresence>
         {open ? (
           <motion.div
-            className="grid md:grid-cols-6 w-screen z-50 h-screen overflow-hidden"
+            className="grid md:grid-cols-6 w-screen z-50 h-screen overflow-hidden transform translate-x-2 lg:translate-x-0"
             key="drawer-div"
           >
             <motion.div
-              className="no-mobile bg-black h-screen cursor-pointer outline-none md:col-span-5 z-50"
+              className="no-mobile bg-black h-screen cursor-pointer outline-none md:col-span-3 lg:col-span-5 z-50"
               onClick={handleOpen}
               initial={{ opacity: 0 }}
               animate={{
