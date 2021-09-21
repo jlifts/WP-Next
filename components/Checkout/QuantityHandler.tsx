@@ -99,7 +99,7 @@ const QuantityHandler = ({
         onChange={(event) => handleQtyChange(event, item.cartKey)}
         min="1"
         max="100"
-        className="w-8 text-lg bg-transparent px-3 mx-2"
+        className=" w-8 text-lg bg-transparent px-2 mx-2"
       />
 
       <motion.button type="button" whileTap={{ scale: 0.97 }}>

@@ -22,7 +22,7 @@ export default function App({
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
-    // TODO: Tablet, Desktop, Process Payments, Order Review Page
+    // TODO: Desktop, Process Payments, Order Review Page
     // TODO: Bugs: Logout Function, Added Discount Toast, Front Page add products to cart, login function, menu query when logged out, policy static pages,front page items responsiveness
     // TODO: DevOps: Domain name for frontend, place wordpress instance on admin.victishealth.com (talk to WPEngine)
     // TODO: Features: Rewards system, Wholesaler special dashboard, subscription model, Google/Facebook Login, GPay skeleton loader

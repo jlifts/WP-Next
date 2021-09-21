@@ -60,7 +60,7 @@ const FPItemReverse = ({
           <img
             src={imageURL}
             alt={imageName}
-            /* height={300} width={400} */ className="h-3/4 w-5/6"
+            /* height={300} width={400} */ className="h-5/6 lg:w-4/6"
           />
           {/* <img
             src="images/Detailline.svg"

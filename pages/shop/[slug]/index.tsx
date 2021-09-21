@@ -56,7 +56,7 @@ const Products = ({ product }: any): JSX.Element => {
                       <img
                         src={item.featuredImage.node.sourceUrl}
                         alt={item.featuredImage.node.title}
-                        className="h-96 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
+                        className="h-96 xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
                       <Heading
                         level="h5"

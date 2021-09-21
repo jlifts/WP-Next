@@ -160,7 +160,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
           <motion.img
             src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
-            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:mt-132 md:left-112 lg:left-72 shadow-2xl lg:mt-96 z-40"
+            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:mt-132 md:left-112 lg:left-72 xl:left-96 shadow-2xl lg:mt-96 z-40"
             // animate={{ y: 1, opacity: 1 }}
             animate={animationControlY}
             transition={{ duration: 1.2 }}

@@ -212,7 +212,7 @@ const Cart: React.FC = () => {
                 <div
                   className={`${
                     totalVariants > 3
-                      ? 'w-full+ md:w-3/4 lg:w-2/6'
+                      ? 'w-full+ md:w-3/4 lg:w-2/6 xl:w-1/4'
                       : 'bottom-16 absolute '
                   } `}
                 >
