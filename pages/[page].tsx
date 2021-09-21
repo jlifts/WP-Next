@@ -78,10 +78,3 @@ export async function getStaticProps({ params: { slug } }: any) {
     revalidate: 60,
   };
 }
-
-// EI: Q57-6007867 ->
-// Spectrum: return equipment -> 8332 Pineville-Matthews Rd. Charlotte, NC 28226 -> transactionId: 519320833 = spectrumVoice Number?
-// Duke:
-// Penelec: AN: 100147003428
-// FirstEnergyCorps: Account Name: JOSHUA J BURGESS Account Number: 100147003428 Customer Number: 08074058380001536674 Service Address: 5412 CRAY RD ERIE PA 16509 Scheduled Start Service Date: 09/20/2021
-// National Fuel: AN: 880150510
