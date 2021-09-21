@@ -38,7 +38,7 @@ const UserCreationForm = (): JSX.Element => {
 
   return (
     <form
-      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 mb-12  bg-white z-10"
+      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden pt-44 md:pt-0 p-10 mb-12  bg-white z-10"
       onSubmit={handleSubmit}
     >
       <fieldset disabled={loading} aria-busy={loading} className="space-y-10">

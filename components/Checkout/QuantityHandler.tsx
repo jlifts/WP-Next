@@ -12,6 +12,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { getUpdatedItems } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
 import { v4 } from 'uuid';
+import { motion } from 'framer-motion';
 
 // TODO: Fix
 
@@ -88,9 +89,9 @@ const QuantityHandler = ({
 
   return (
     <div className={`${className} flex px-3 items-center`}>
-      <button type="button">
+      <motion.button type="button" whileTap={{ scale: 0.97 }}>
         <FontAwesomeIcon icon={faPlus} className="cursor-pointer" />
-      </button>
+      </motion.button>
 
       <input
         type="text"
@@ -101,9 +102,9 @@ const QuantityHandler = ({
         className="w-8 text-lg bg-transparent px-3 mx-2"
       />
 
-      <button type="button">
+      <motion.button type="button" whileTap={{ scale: 0.97 }}>
         <FontAwesomeIcon icon={faMinus} className="cursor-pointer" />
-      </button>
+      </motion.button>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -5,12 +7,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { useGeneralSettings } from '@wpengine/headless/react';
 // import { GetStaticPropsContext } from 'next';
-// import { getApolloClient, getPosts } from '@wpengine/headless';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 // import { SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
-import axios from '../pages/api/axios/deets';
+import { useInView } from 'react-intersection-observer';
+import { LEGAL_MENU_QUERY } from 'graphql/Queries';
+import { Client } from 'lib/ApolloClient';
+import axios from './api/axios/deets';
 import {
   CTA,
   Footer,
@@ -23,26 +26,49 @@ import {
   FPItemReverse,
 } from '../components';
 
-/**
- * Example of post variables to query the first six posts in a named category.
- * @see https://github.com/wpengine/headless-framework/tree/canary/docs/queries
- */
-
-// const firstSixInCategory = {
-//   variables: {
-//     first: 6,
-//     // where: { categoryName: 'uncategorized' }, // Omit this to get posts from all categories.
-//   },
-// };
-
-// { deets, products }: any
-const FrontPage = (): JSX.Element => {
-  // const posts = usePosts(firstSixInCategory);
-  const settings = useGeneralSettings();
+const FrontPage = ({ deets }: any): JSX.Element => {
+  const { inView, entry, ref } = useInView();
+  const animationControl = useAnimation();
+  const animationControlY = useAnimation();
+  const title = 'Victis Health';
   // const name = products?.product?.name;
   // const image = products?.product?.featuredImage.node.sourceUrl;
   // console.log(deets);
   // console.log(products);
+
+  // async function test() {
+  //   const { data } = await Client.query({
+  //     query: LEGAL_MENU_QUERY,
+  //   });
+  //   const menu = data?.menu?.menuItems;
+  //   const slugs = menu?.nodes?.map((menus: { path: any }) =>
+  //     menus?.path.replaceAll('/', ''),
+  //   );
+  //   const paths = slugs?.map((slug: any) => ({ params: { slug: slug } }));
+  //   console.log(paths);
+  // }
+  // test();
+
+  if (inView) {
+    animationControl.start({
+      x: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.6,
+        duration: 1.2,
+      },
+    });
+  }
+  if (inView) {
+    animationControlY.start({
+      y: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.6,
+        duration: 1,
+      },
+    });
+  }
 
   return (
     <AnimatePresence>
@@ -56,24 +82,48 @@ const FrontPage = (): JSX.Element => {
         key="main"
       >
         <section className="h-screen z-20">
-          <div className="absolute top-3 left-3 text-white font-cochin z-1">
-            <motion.div className="flex items-center justify-center z-10">
+          <div className="absolute top-7 md:top-3 left-3 text-white font-cochin z-1 text-xs md:text-base">
+            <motion.div
+              className="flex items-center justify-center z-10 opacity-0"
+              transition={{ duration: 1 }}
+              animate={{ opacity: 1 }}
+            >
               <p className="uppercase cursor-default">Share</p>
-              <motion.div className="border-b-2 px-8 mx-2" />
+              <motion.div
+                className="border-b-2 px-8 mx-2"
+                initial={{ x: -60, opacity: 0 }}
+                transition={{ duration: 1.4, delay: 0.5 }}
+                animate={{ x: 1, opacity: 1 }}
+              />
               <CTA
                 title=""
                 buttonText="Instagram"
                 buttonURL="https://www.instagram.com/victishealth/?hl=en"
               />
               <div className="mx-2 cursor-default">/</div>
-              <CTA
+              {/* <CTA
                 title=""
                 buttonText="Facebook"
                 buttonURL="https://www.facebook.com/VictisHealth/"
-              />
+              /> */}
+              <div
+                className="fb-share-button"
+                data-href="https://victishealth.com"
+                data-layout="button_count"
+                data-size="small"
+              >
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvictishealth.com%2F&amp;src=sdkpreparse"
+                  className="fb-xfbml-parse-ignore"
+                  rel="noreferrer"
+                >
+                  Facebook
+                </a>
+              </div>
             </motion.div>
           </div>
-          <div className="flex justify-center items-center h-7/8 w-full z-10 text-white">
+          <div className="flex justify-center items-center h-7/8 w-full z-10 text-white ">
             <MainHero
               title="Victis Health"
               bgImage="/images/yoga.webp"
@@ -81,46 +131,60 @@ const FrontPage = (): JSX.Element => {
             />
           </div>
           <div className="flex text-white">
-            <div className="border-b-2 px-16" />
-            <div className="border-b-2 text-xl uppercase font-cochin">
+            <motion.div
+              className="border-b-2"
+              initial={{ x: -150 }}
+              transition={{ duration: 1, delay: 1 }}
+              animate={{ x: 1, width: 200 }}
+            />
+            <motion.div
+              className=" text-xl uppercase font-cochin opacity-0 transform -translate-x-14"
+              transition={{ duration: 1.5, delay: 1.2 }}
+              animate={{ opacity: 1 }}
+            >
               <CTA title="" buttonText="Shop" buttonURL="/shop/all" />
-            </div>
+            </motion.div>
           </div>
           <div className="absolute bottom-0 right-5">
-            <div className="border-l-2 h-48 text-white z-10" />
+            <div className="border-l-2 h-48 text-white z-10 scroll-line" />
           </div>
         </section>
-        <section className="h-screen+">
-          <img
+        <section className="h-screen+ ">
+          <motion.img
             src="/images/insta-victis-lawncare2.webp"
             alt="Victis Plant"
-            className="w-3/6 h-4/6 absolute z-10 left-36"
+            className="invisible md:visible w-4/6 md:w-3/6 md:h-4/6 absolute md:left-36"
+            // animate={{ x: 1, opacity: 1 }}
+            animate={animationControl}
+            transition={{ duration: 1 }}
+            initial={{ x: -400, opacity: 0 }}
           />
-          <img
+          <motion.img
             src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
-            className="w-1/4 absolute left-72 shadow-2xl mt-96 z-40"
+            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:left-72 shadow-2xl md:mt-96 z-40"
+            // animate={{ y: 1, opacity: 1 }}
+            animate={animationControlY}
+            transition={{ duration: 1.2 }}
+            initial={{ y: 400, opacity: 0 }}
           />
-          <div className="flex justify-end pt-20 z-30">
-            <div className="w-3/5 h-full z-30">
-              {/* May Have to hard code */}
-              {/* <PopOut
+          <motion.div
+            className="flex justify-end pt-20 z-30"
+            // animate={{ x: 1, opacity: 1 }}
+            animate={animationControl}
+            transition={{ duration: 1.5 }}
+            initial={{ x: 400, opacity: 0 }}
+          >
+            <div className="md:w-3/5 h-full" ref={ref}>
+              <PopOut
                 title={deets?.slug.replace('-', ' ')}
                 subTitle={deets?.title}
                 body={deets?.content}
-              /> */}
-              <PopOut
-                title="About Victis"
-                subTitle="The Victis Advantage"
-                body="There is real science behind our CBD. In a world where 70% of CBD products are not labeled correctly, our products are made with the highest quality standards and most advanced science for consistent, effective results you can trust."
-                body2="Our formulas have undergone rigorously-controlled testing by expert scientists and are validated by ISO accredited, third-party lab certification."
-                body3="From seed to science, we own our entire supply chain to deliver consistently high quality results that work."
-                body4="Due to its high Active Pharmaceutical Ingredient, our product works quickly to relieve sore joints and muscles."
               />
             </div>
-          </div>
+          </motion.div>
         </section>
-        <section className="h-full">
+        <section className="h-full ">
           {/* get rid of hardcode */}
           <FPItemReverse
             ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
@@ -145,7 +209,7 @@ const FrontPage = (): JSX.Element => {
           />
         </section>
       </main>
-      <Footer copyrightHolder={settings?.title} key="footer" />
+      <Footer copyrightHolder={title} key="footer" />
     </AnimatePresence>
   );
 };

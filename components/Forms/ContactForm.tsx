@@ -50,7 +50,7 @@ const ContactForm = (): JSX.Element => {
 
   return (
     <form
-      className="flex flex-col w-full space-y-10 my-20 mx-2 px-64 text-xl"
+      className="flex flex-col w-full space-y-10 my-20 mx-2 px-6 md:px-64 text-xl"
       onSubmit={onSubmit}
     >
       {error && (

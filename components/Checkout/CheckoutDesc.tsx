@@ -16,6 +16,7 @@ import { APPLY_COUPON, REMOVE_COUPONS } from 'graphql/Mutations';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
 import { getFormattedCart } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
+import { waitForDebugger } from 'inspector';
 
 interface IProps {
   subTotal?: number | any;
@@ -36,6 +37,8 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
       setCart(updatedCart);
     },
   });
+
+  const coupon = cart?.discountCode;
 
   // Apply Coupon
   const [applyCoupon, { data: couponRes, loading, error }] = useMutation(
@@ -85,21 +88,18 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
       },
     });
 
-  const coupon = cart?.discountCode;
-  // console.log(error);
-
   const handleDiscount = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await applyCoupon({ variables: { code: input.value } });
   };
 
+  // toast.success(
+  //   `🦄 ${coupon} applied for ${cart?.discountAmount} off!`,
+  //   toastConfig,
+  // );
+
   if (error) {
     toast.error(error?.graphQLErrors?.[0]?.message ?? '', toastConfig);
-  } else if (coupon) {
-    toast.success(
-      `🦄 ${coupon} applied for ${cart.discountAmount} off!`,
-      toastConfig,
-    );
   }
 
   const handleDelete = async () => {

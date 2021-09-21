@@ -9,7 +9,7 @@ const SetPassword = (): JSX.Element => {
   const login = String(router.query.login || '');
   return (
     <div className="font-mont h-full">
-      <div className="sticky top-0 z-70 text-white" key="drawer">
+      <div className="sticky top-0 z-70 text-black" key="drawer">
         <Cart />
         <Drawer />
         <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl ml-12">

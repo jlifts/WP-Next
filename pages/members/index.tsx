@@ -9,7 +9,7 @@ const user = (): JSX.Element => {
         <Cart />
         <Drawer />
       </div>
-      <div className="grid grid-cols-5">
+      <div className="flex flex-col md:grid md:grid-cols-5">
         <Authed>
           <ProfileNav />
           <ProfilePage />

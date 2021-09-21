@@ -2,18 +2,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { Loading } from 'components';
 import { useRouter } from 'next/router';
 import { Client } from 'lib/ApolloClient';
-import { getApolloClient } from '@wpengine/headless';
 import { LOG_OUT } from 'graphql/Mutations';
 import { GET_USER } from 'graphql/Queries';
 
 export default function LogOut(): JSX.Element {
   const router = useRouter();
-  const apolloClient = getApolloClient();
   const [logOut, { loading, error, data }] = useMutation(LOG_OUT, {
     refetchQueries: [{ query: GET_USER }],
   });
@@ -21,9 +19,8 @@ export default function LogOut(): JSX.Element {
 
   useEffect(() => {
     logOut();
-    apolloClient.clearStore();
     Client.clearStore();
-  }, [apolloClient, logOut]);
+  }, [logOut]);
 
   if (loggedOut) {
     router.push('/');

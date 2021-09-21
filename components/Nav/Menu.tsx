@@ -9,22 +9,20 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getNextStaticProps } from '@wpengine/headless/next';
-import { getApolloClient } from '@wpengine/headless';
-import { GetStaticPropsContext } from 'next';
+// import { GetStaticPropsContext } from 'next';
 import { useQuery } from '@apollo/client';
 import { MenuProps, MenuQuery } from 'typings/global';
 import { MENU_QUERY } from 'graphql/Queries';
 import useAuth from 'hooks/useAuth';
 import { Client } from 'lib/ApolloClient';
 
-const Menu = ({ open, data }: MenuProps) => {
+const Menu = ({ open }: MenuProps) => {
   const router = useRouter();
   // const id = 'dGVybToyNA==';
   const { loggedIn } = useAuth();
-  // const { data } = useQuery(MENU_QUERY);
+  const { data } = useQuery(MENU_QUERY);
   const menu = data?.menu?.menuItems.nodes;
-  console.log(data);
+  // console.log(data);
   // console.log(router.asPath);
 
   const variants = {
@@ -161,12 +159,13 @@ const Menu = ({ open, data }: MenuProps) => {
   );
 };
 
-export async function getStaticProps(context: GetStaticPropsContext) {
-  const client = getApolloClient(context);
-  const { data } = await client.query({
+export async function getStaticProps(/* context: GetStaticPropsContext */) {
+  const { data } = await Client.query({
     query: MENU_QUERY,
   });
-  return getNextStaticProps(data);
+  return {
+    props: { data },
+  };
 }
 
 export default Menu;

@@ -33,7 +33,7 @@ const CartContent = ({
   updateCart,
 }: CartItems): JSX.Element => {
   return (
-    <div className="flex flex-col h-1/6" key={id}>
+    <div className="flex flex-col h-1/6 pl-4 md:pl-0" key={id}>
       {name && (
         <div className="relative flex">
           <button

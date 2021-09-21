@@ -5,7 +5,6 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useGeneralSettings } from '@wpengine/headless/react';
 import { Cart, Drawer, Footer, ShopNav, FAQ } from 'components';
 import Heading from 'components/Heading';
 import React from 'react';
@@ -19,7 +18,7 @@ interface FaqQuery {
 }
 
 const faq = ({ faqs }: any): JSX.Element => {
-  const settings = useGeneralSettings();
+  const title = 'Victis Health';
 
   return (
     <main className="">
@@ -31,14 +30,14 @@ const faq = ({ faqs }: any): JSX.Element => {
         </div>
       </div>
       <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">
-        <div className="text-5xl font-bold tracking-widest">
+        <div className="text-3xl pt-20 md:pt-0 md:text-5xl font-bold md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
         <div className="text-2xl pt-16">
           <Heading level="h4">The FAQs</Heading>
         </div>
       </div>
-      <section className="flex flex-col items-center p-20">
+      <section className="flex flex-col items-center py-12 md:py-0 md:p-20">
         {faqs &&
           faqs.map((item: FaqQuery) => (
             <FAQ
@@ -52,7 +51,7 @@ const faq = ({ faqs }: any): JSX.Element => {
             />
           ))}
       </section>
-      <Footer copyrightHolder={settings?.title} key="footer" />
+      <Footer copyrightHolder={title} key="footer" />
     </main>
   );
 };

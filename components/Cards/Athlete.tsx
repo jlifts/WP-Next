@@ -29,7 +29,7 @@ const Athlete = ({
         style={{
           backgroundImage: bgImage ? `url(${bgImage})` : 'none',
         }}
-        className="h-120 w-full absolute z-10 bg-cover bg-fixed"
+        className="h-120 w-full absolute z-10 md:bg-cover md:bg-fixed bg-center bg-no-repeat"
       />
       <div
         className={bgImage && `h-120 w-full absolute z-20 bg-black opacity-30`}
