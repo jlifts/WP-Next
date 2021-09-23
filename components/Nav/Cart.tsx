@@ -136,11 +136,11 @@ const Cart: React.FC = () => {
       <AnimatePresence>
         {open ? (
           <motion.div
-            className="md:grid md:grid-cols-6 w-screen z-50 h-screen transform translate-x-8 overflow-hidden"
+            className="md:grid md:grid-cols-6 w-screen z-70 h-screen transform translate-x-8 overflow-hidden"
             key="cart-div"
           >
             <motion.div
-              className="no-mobile md:col-span-3 lg:col-span-5 bg-black h-screen cursor-pointer outline-none z-50 overflow-hidden"
+              className="no-mobile md:col-span-3 lg:col-span-5 bg-black h-screen cursor-pointer outline-none z-70 overflow-hidden"
               onClick={handleOpen}
               initial={{ opacity: 0 }}
               animate={{
@@ -151,7 +151,7 @@ const Cart: React.FC = () => {
               }}
               transition={{ type: 'spring', bounce: 0, duration: 0.2 }}
             />
-            <div className="bg-lightgray w-screen h-screen z-50 pt-14 overflow-y-auto">
+            <div className="bg-lightgray w-screen h-screen z-70 pt-14 overflow-y-auto">
               <motion.div
                 className={`${
                   totalVariants > 3
@@ -192,8 +192,6 @@ const Cart: React.FC = () => {
                           id={item.id}
                           quantity={item.qty}
                           handleDelete={handleRemoveProduct}
-                          updateCartProcessing={updateCartProcessing}
-                          updateCart={updateCart}
                         />
                       </div>
                     ),

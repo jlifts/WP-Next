@@ -50,7 +50,7 @@ const LegalMenu = ({ open }: MenuProps) => {
 
   return (
     <motion.div
-      className="z-70 text-white space-y-6"
+      className="z-50 text-white space-y-6"
       initial={{ x: '100%' }}
       animate={{
         x: 0,

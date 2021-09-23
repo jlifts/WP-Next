@@ -9,12 +9,12 @@ import { Client } from 'lib/ApolloClient';
 import React from 'react';
 // import { useGeneralSettings } from '@wpengine/headless/react';
 // import { usePost } from '@wpengine/headless/next';
-import { Footer, MainHero, Cart, Drawer, ShopNav } from '../components';
+import { Footer, MainHero, Cart, Drawer, ShopNav } from '../../components';
 
-export default function Page(param: any): JSX.Element {
+export default function Page(data: any): JSX.Element {
   // const post = usePost();
   const title = 'Victis Health';
-  const post = param;
+  const post = data;
   console.log(post);
 
   return (
@@ -74,7 +74,6 @@ export async function getStaticProps({ params: { slug } }: any) {
   });
 
   return {
-    props: { param: data },
-    revalidate: 60,
+    props: { data },
   };
 }

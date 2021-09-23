@@ -54,7 +54,7 @@ const Menu = ({ open }: MenuProps) => {
 
   return (
     <motion.div
-      className="z-70 text-white space-y-6 font-mont"
+      className="z-50 text-white space-y-6 font-mont"
       initial={{ x: '100%' }}
       animate={{
         x: 0,
@@ -72,8 +72,6 @@ const Menu = ({ open }: MenuProps) => {
       >
         <motion.li
           variants={variant}
-          // whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
           className="px-3 hover:text-secondary w-full flex"
         >
           <div
@@ -90,8 +88,6 @@ const Menu = ({ open }: MenuProps) => {
             <motion.li
               key={item.id}
               variants={variant}
-              //   whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div
@@ -110,8 +106,6 @@ const Menu = ({ open }: MenuProps) => {
         {!loggedIn ? (
           <motion.li
             variants={variant}
-            //   whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.99 }}
             className="px-3 hover:text-secondary w-full flex"
           >
             <div
@@ -127,8 +121,6 @@ const Menu = ({ open }: MenuProps) => {
           <>
             <motion.li
               variants={variant}
-              //   whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div
@@ -143,8 +135,6 @@ const Menu = ({ open }: MenuProps) => {
 
             <motion.li
               variants={variant}
-              //   whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.99 }}
               className="px-3 hover:text-secondary w-full flex"
             >
               <div className="px-4 mb-3 mr-3" />

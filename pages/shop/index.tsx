@@ -68,7 +68,7 @@ export async function getStaticProps(/* context: GetStaticPropsContext */) {
     query: CATAGORIES,
   });
   return {
-    props: { catagories: data?.productCategories?.nodes?.slice(2).reverse() },
+    props: { catagories: data?.productCategories?.nodes },
   };
 }
 

@@ -21,6 +21,37 @@ export const PRODUCTS_QUERY = gql`
                 title
               }
             }
+            attributes {
+              nodes {
+                options
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const FEATURED_PRODUCTS = gql`
+  # catagory dbId: 29
+  query Featured {
+    productCategories(where: { include: 29 }) {
+      nodes {
+        name
+        databaseId
+        products {
+          nodes {
+            ... on SimpleProduct {
+              name
+              databaseId
+              stockStatus
+              shortDescription
+              image {
+                sourceUrl
+                title
+              }
+            }
           }
         }
       }

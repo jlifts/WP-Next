@@ -22,7 +22,7 @@ function Footer({ copyrightHolder }: CopyRightProps): JSX.Element {
   // const fda = data?.post.content.replace('<p>', '').replace('</p>', '');
 
   return (
-    <footer className="flex bg-darkgray w-screen font-rale overflow-hidden">
+    <footer className="flex bg-darkgray w-screen font-rale overflow-hidden z-50">
       <div className="h-full">
         <SignUp />
         <div className="flex flex-col md:flex-row justify-around text-white pt-2">

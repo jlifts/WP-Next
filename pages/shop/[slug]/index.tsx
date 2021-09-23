@@ -23,7 +23,7 @@ const Products = ({ product }: any): JSX.Element => {
   const title = 'Victis Health';
   const page = router.asPath;
   // const prices = product[1].price.replace('$', '');
-  // console.log(parseFloat(prices));
+  // console.log(productOptions);
 
   return (
     <main className="font-cochin">
@@ -56,7 +56,7 @@ const Products = ({ product }: any): JSX.Element => {
                       <img
                         src={item.featuredImage.node.sourceUrl}
                         alt={item.featuredImage.node.title}
-                        className="h-96 xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
+                        className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
                       <Heading
                         level="h5"
@@ -81,6 +81,17 @@ const Products = ({ product }: any): JSX.Element => {
                         </p>
                       )}
                     </div>
+                    {item?.attributes && (
+                      <select>
+                        {item?.attributes?.nodes[0]?.options.map(
+                          (sizes: any) => (
+                            <option value={sizes} key={sizes}>
+                              {sizes}
+                            </option>
+                          ),
+                        )}
+                      </select>
+                    )}
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
                       product={item}
@@ -99,7 +110,7 @@ const Products = ({ product }: any): JSX.Element => {
 export async function getStaticPaths(/* context: GetStaticPathsContext */) {
   // const client = getApolloClient(context);
   const { data } = await Client.query({ query: CATAGORIES });
-  const products = data?.productCategories?.nodes?.slice(2).reverse();
+  const products = data?.productCategories?.nodes;
   const slugs = products?.map((product: { slug: any }) => product?.slug);
   const paths = slugs?.map((slug: any) => ({ params: { slug } }));
   return { paths, fallback: false };

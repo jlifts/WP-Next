@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -12,17 +13,17 @@ import {
   ShopNav,
   Footer,
   AddToCart,
-  QuantityHandler,
+  AddToCartQuantity,
 } from 'components';
 import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import React from 'react';
+import React, { useState } from 'react';
 import { PRODUCT_QUERY } from 'graphql/Queries';
-// import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
 
 const products = (): JSX.Element => {
   const title = 'Victis Health';
+  const [qty, setQty] = useState(1);
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
@@ -31,9 +32,9 @@ const products = (): JSX.Element => {
     variables: { id: item },
   });
   const product = data?.product;
-  // console.log(product?.stockStatus);
   const gallery = product?.galleryImages?.edges;
   const featuredImage = data?.product?.featuredImage.node.sourceUrl;
+  const productOptions = product?.attributes?.nodes[0]?.options;
 
   return (
     <main className="font-cochin flex flex-col">
@@ -83,14 +84,25 @@ const products = (): JSX.Element => {
                   )}
                 </div>
                 <div className="flex my-8 justify-between w-5/6">
-                  <QuantityHandler
+                  <AddToCartQuantity
                     className="border justify-around"
-                    quantity={1}
+                    setQty={setQty}
+                    qty={qty}
                   />
+                  {product.attributes && (
+                    <select>
+                      {productOptions.map((sizes: any) => (
+                        <option value={sizes} key={sizes}>
+                          {sizes}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                   <AddToCart
                     className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black"
                     product={product}
                     productName={product.name}
+                    quant={qty}
                   />
                 </div>
                 <p

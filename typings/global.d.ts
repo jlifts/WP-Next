@@ -113,6 +113,7 @@ interface CatagoryQuery {
 }
 
 interface ProductQuery {
+  attributes: any;
   onSale: boolean;
   name: string;
   id?: string;

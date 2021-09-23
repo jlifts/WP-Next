@@ -26,6 +26,7 @@ module.exports = {
         128: '32rem',
         132: '39rem',
         136: '41rem',
+        140: '43rem',
         144: '46rem',
       },
       height: {
@@ -72,7 +73,7 @@ module.exports = {
       }),
     },
     screens: {
-      sm: '640px',
+      sm: '375px',
       // => @media (min-width: 640px) { ... }
 
       md: '768px',

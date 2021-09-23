@@ -66,6 +66,7 @@ const about = ({ deets }: any): JSX.Element => {
         </div>
       </div>
       <section className="h-screen+ py-20 lg:mt-20 overflow-hidden">
+        <div ref={ref} />
         <motion.img
           src="/images/richFroning.webp"
           alt="Victis Plant"
@@ -88,7 +89,7 @@ const about = ({ deets }: any): JSX.Element => {
           transition={{ duration: 1.5 }}
           initial={{ x: 400, opacity: 0 }}
         >
-          <div className="md:w-3/5 h-full z-30" ref={ref}>
+          <div className="md:w-3/5 h-full z-30">
             <PopOut
               title={deets?.slug.replaceAll('-', ' ')}
               subTitle={deets?.title}

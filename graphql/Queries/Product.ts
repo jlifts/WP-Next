@@ -26,6 +26,11 @@ export const PRODUCT_QUERY = gql`
         stockStatus
         slug
         shortDescription
+        attributes {
+          nodes {
+            options
+          }
+        }
       }
     }
   }

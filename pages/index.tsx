@@ -9,14 +9,14 @@
 import React from 'react';
 // import { GetStaticPropsContext } from 'next';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
-// import { SINGLE_PRODUCT_QUERY } from 'graphql/Queries';
 import { useInView } from 'react-intersection-observer';
+import { Client } from 'lib/ApolloClient';
+import { FEATURED_PRODUCTS, LEGAL_MENU_QUERY } from 'graphql/Queries';
 import axios from './api/axios/deets';
 import {
   CTA,
   Footer,
   MainHero,
-  // Posts,
   Drawer,
   PopOut,
   FPItem,
@@ -24,14 +24,14 @@ import {
   FPItemReverse,
 } from '../components';
 
-const FrontPage = ({ deets }: any): JSX.Element => {
+const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
   const { inView, ref } = useInView();
   const animationControl = useAnimation();
   const animationControlY = useAnimation();
   const title = 'Victis Health';
   // const name = products?.product?.name;
   // const image = products?.product?.featuredImage.node.sourceUrl;
-  // console.log(deets);
+  // const products = cart?.item?.products.map((items: any) => items);
   // console.log(products);
 
   // async function test() {
@@ -42,8 +42,10 @@ const FrontPage = ({ deets }: any): JSX.Element => {
   //   const slugs = menu?.nodes?.map((menus: { path: any }) =>
   //     menus?.path.replaceAll('/', ''),
   //   );
-  //   const paths = slugs?.map((slug: any) => ({ params: { slug: slug } }));
-  //   console.log(paths);
+  //   const paths = slugs?.map((slug: any) => ({
+  //     params: [slug],
+  //   }));
+  //   // console.log(paths);
   // }
   // test();
 
@@ -70,7 +72,6 @@ const FrontPage = ({ deets }: any): JSX.Element => {
 
   return (
     <AnimatePresence>
-      {/* <Header title={settings?.title} description={settings?.description} /> */}
       <div className="sticky top-0 bg-primary z-50 text-white" key="drawer">
         <Cart />
         <Drawer />
@@ -99,11 +100,6 @@ const FrontPage = ({ deets }: any): JSX.Element => {
                 buttonURL="https://www.instagram.com/victishealth/?hl=en"
               />
               <div className="mx-2 cursor-default">/</div>
-              {/* <CTA
-                title=""
-                buttonText="Facebook"
-                buttonURL="https://www.facebook.com/VictisHealth/"
-              /> */}
               <div
                 className="fb-share-button"
                 data-href="https://victishealth.com"
@@ -157,10 +153,11 @@ const FrontPage = ({ deets }: any): JSX.Element => {
             transition={{ duration: 1 }}
             initial={{ x: -400, opacity: 0 }}
           />
+
           <motion.img
             src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
-            className="w-3/4 md:w-1/4 absolute left-20 mt-136 md:mt-132 md:left-112 lg:left-72 xl:left-96 shadow-2xl lg:mt-96 z-40"
+            className="w-3/4 md:w-1/4 absolute left-20 mt-136 sm:mt-136 md:mt-132 md:left-112 lg:left-80 2xl:left-96 shadow-2xl lg:mt-96 z-40"
             // animate={{ y: 1, opacity: 1 }}
             animate={animationControlY}
             transition={{ duration: 1.2 }}
@@ -173,7 +170,7 @@ const FrontPage = ({ deets }: any): JSX.Element => {
             transition={{ duration: 1.5 }}
             initial={{ x: 400, opacity: 0 }}
           >
-            <div className="md:w-4/5 lg:w-3/5 h-full" ref={ref}>
+            <div className="md:w-4/5 lg:w-3/5 h-full">
               <PopOut
                 title={deets?.slug.replace('-', ' ')}
                 subTitle={deets?.title}
@@ -181,29 +178,23 @@ const FrontPage = ({ deets }: any): JSX.Element => {
               />
             </div>
           </motion.div>
+          <div ref={ref} />
         </section>
-        <section className="h-full md:-mt-44 lg:mt-0">
-          {/* get rid of hardcode */}
+        <section className="h-full md:space-y-20 md:-mt-44 lg:mt-0">
           <FPItemReverse
-            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
-            ProductId="cHJvZHVjdDoxOTEy"
-            imageURL="http://localhost:10008/wp-content/uploads/2020/02/Victis-BlueTin-front.jpg"
-            imageName="Therapeutic Cream: 1000MG CBD, 2OZ"
-            ProductTitle="Therapeutic Cream: 1000MG CBD, 2OZ"
+            product={
+              featuredProducts.productCategories.nodes[0].products.nodes[2]
+            }
           />
           <FPItem
-            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
-            ProductId="cHJvZHVjdDoyMDQ0"
-            imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Rest-Melatonin_1.jpg"
-            imageName="Rest + Melatonin: 600 MG CBD"
-            ProductTitle="Rest + Melatonin: 600 MG CBD"
+            product={
+              featuredProducts.productCategories.nodes[0].products.nodes[1]
+            }
           />
           <FPItemReverse
-            ShortDescription="This is the dissolvable pills and cool stuff about them, This is the dissolvable pills and cool stuff about them,"
-            ProductId="cHJvZHVjdDoyMDQ1"
-            imageURL="http://localhost:10008/wp-content/uploads/2021/01/Victis_Tabs_1.jpg"
-            imageName="Dissolvable Tablets: 600MG CBD"
-            ProductTitle="Dissolvable Tablets: 600MG CBD"
+            product={
+              featuredProducts.productCategories.nodes[0].products.nodes[0]
+            }
           />
         </section>
       </main>
@@ -223,16 +214,11 @@ const FrontPage = ({ deets }: any): JSX.Element => {
 
 /** context: GetStaticPropsContext */
 export async function getStaticProps() {
-  // const client = getApolloClient(context);
-  // const id = 'cbd-therapeutic-cream-1000mg-2oz-sc';
-  // const { data } = await client.query({
-  //   query: SINGLE_PRODUCT_QUERY,
-  //   variables: { id },
-  // });
+  const { data } = await Client.query({ query: FEATURED_PRODUCTS });
 
   const { data: DATA } = await axios.get('/about-victis');
   return {
-    props: { deets: DATA },
+    props: { deets: DATA, featuredProducts: data },
   };
 }
 

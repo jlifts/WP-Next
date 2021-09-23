@@ -27,7 +27,7 @@ const PopOut = ({
           {title}
         </Heading>
         <Heading
-          className="uppercase font-cochin text-2xl md:text-3xl cursor-default"
+          className="uppercase font-cochin text-xl sm:text-2xl md:text-3xl cursor-default"
           level={headingLevel}
         >
           {subTitle}

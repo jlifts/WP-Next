@@ -13,6 +13,10 @@ function SEO(): JSX.Element {
       <Head>
         <title>Victis Health</title>
         {/* Add extra elements to <head> here. */}
+        <script
+          type="text/javascript"
+          src="https://sandbox.web.squarecdn.com/v1/square.js"
+        />
         {/* Global Site Code Pixel - Facebook Pixel */}
         {/* <script
           dangerouslySetInnerHTML={{

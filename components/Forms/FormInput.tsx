@@ -25,6 +25,7 @@ const FormInput = ({
         name={name}
         id={inputId}
         onChange={handleInputChange}
+        // May have to remove the default prop
         defaultValue={defaultValue}
         value={inputValue}
         placeholder={placeholder}

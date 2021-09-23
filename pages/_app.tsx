@@ -22,10 +22,10 @@ export default function App({
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
-    // TODO: Desktop, Process Payments, Order Review Page
-    // TODO: Bugs: Logout Function, Added Discount Toast, Front Page add products to cart, login function, menu query when logged out, policy static pages,front page items responsiveness
+    // TODO: Process Payments, Order Review Page, T shirt sizes order
+    // TODO: Bugs: Logout/ Login Function, menu queries when logged out, policy static pages, menu z-index bug
     // TODO: DevOps: Domain name for frontend, place wordpress instance on admin.victishealth.com (talk to WPEngine)
-    // TODO: Features: Rewards system, Wholesaler special dashboard, subscription model, Google/Facebook Login, GPay skeleton loader
+    // TODO: Features: Rewards system, Wholesaler special dashboard, subscription model, Google/Facebook Login, GPay skeleton loader, Related Products
     // TODO: Wordpress Add-ons: Build button for Vercel Redeployment, Tier system custom post type, Giveaway announcement special post type
 
     <ApolloProvider client={Client}>

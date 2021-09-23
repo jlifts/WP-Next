@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SquarePayments from 'components/Forms/SquarePaymentForm';
 import React from 'react';
 
 interface IDiscount {
@@ -67,7 +66,6 @@ const CheckoutCart = ({ products }: IDiscount): JSX.Element => {
           </p>
         </div>
       </div>
-      <SquarePayments />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const ShopNav = ({
       <div className="flex my-3 justify-start">
         <div
           className={`${
-            router.asPath === `${link}` ? 'px-10 border-black ' : 'px-8 '
+            router.asPath === link ? 'px-10 border-black ' : 'px-8 '
           } border-b mr-3 mb-3 `}
         />
         <Link href={link}>{catagory}</Link>
@@ -27,7 +27,7 @@ export const ShopNav = ({
       <div className={`${link2 === '#' ? 'hidden border-black' : 'flex mb-3'}`}>
         <div
           className={`${
-            router.pathname === `${link2}` ? 'px-10 border-black' : 'px-8'
+            router.pathname === link2 ? 'px-10 border-black' : 'px-8'
           } border-b mr-3 mb-3`}
         />
         <Link href={link2}>{catagory2}</Link>
@@ -35,7 +35,7 @@ export const ShopNav = ({
       <div className={`${link3 === '#' ? 'hidden' : 'flex mb-3'}`}>
         <div
           className={`${
-            router.pathname === `${link3}` ? 'px-10 border-black' : 'px-8'
+            router.pathname === link3 ? 'px-10 border-black' : 'px-8'
           } border-b mr-3 mb-3`}
         />
         <Link href={link3}>{catagory3}</Link>
