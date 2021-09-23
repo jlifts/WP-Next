@@ -14,12 +14,13 @@ const settings = (): JSX.Element => {
         <Cart />
         <Drawer />
       </div>
-      <div className="grid grid-cols-5">
-        <Authed>
+
+      <Authed>
+        <div className="flex flex-col md:grid md:grid-cols-6 lg:grid-cols-5">
           <ProfileNav />
           <ProfileUpdateForm />
-        </Authed>
-      </div>
+        </div>
+      </Authed>
     </>
   );
 };

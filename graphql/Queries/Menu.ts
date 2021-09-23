@@ -22,6 +22,7 @@ export const LEGAL_MENU_QUERY = gql`
           url
           label
           id
+          path
         }
       }
     }

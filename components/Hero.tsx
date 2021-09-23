@@ -15,12 +15,12 @@ function Hero({
 }: HeroProps): JSX.Element {
   return (
     <section
-      className="h-4/6 w-5/8 flex items-center justify-center mt-8 z-30"
+      className="h-5/6 w-5/6 md:h-4/6 md:w-5/8 flex items-center justify-center md:mt-8 z-30"
       {...(id && { id })}
     >
       <div
         style={{ backgroundImage: bgImage ? `url(${bgImage})` : 'none' }}
-        className="h-4/6 w-5/8 absolute z-10 bg-cover shadow-2xl"
+        className="h-5/6 w-5/6 md:h-4/6 md:w-5/8 md:absolute z-10 bg-cover shadow-2xl"
       >
         <div>
           <h1 className="cursor-default">{title}</h1>

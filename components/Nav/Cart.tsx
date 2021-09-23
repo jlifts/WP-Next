@@ -136,13 +136,11 @@ const Cart: React.FC = () => {
       <AnimatePresence>
         {open ? (
           <motion.div
-            className="grid grid-cols-6 w-screen z-50 h-screen"
+            className="md:grid md:grid-cols-6 w-screen z-70 h-screen transform translate-x-8 overflow-hidden"
             key="cart-div"
           >
             <motion.div
-              className={`${
-                totalVariants > 3 ? 'col-span-3' : 'col-span-5'
-              } bg-black h-screen cursor-pointer outline-none z-50 overflow-hidden`}
+              className="no-mobile md:col-span-3 lg:col-span-5 bg-black h-screen cursor-pointer outline-none z-70 overflow-hidden"
               onClick={handleOpen}
               initial={{ opacity: 0 }}
               animate={{
@@ -153,11 +151,11 @@ const Cart: React.FC = () => {
               }}
               transition={{ type: 'spring', bounce: 0, duration: 0.2 }}
             />
-            <div className="bg-lightgray w-screen h-screen z-50 pt-14 overflow-hidden">
+            <div className="bg-lightgray w-screen h-screen z-70 pt-14 overflow-y-auto">
               <motion.div
                 className={`${
                   totalVariants > 3
-                    ? 'grid grid-rows-3 grid-cols-3 w-3/6 h-7/8'
+                    ? 'flex flex-col space-y-10 md:space-y-24 md:pb-0 pb-24 w-3/6 md:h-7/8'
                     : 'h-screen'
                 } text-black flex flex-col justify-start pl-4 cursor-default`}
                 initial={{ y: '100%' }}
@@ -181,7 +179,7 @@ const Cart: React.FC = () => {
                       qty: number;
                     }) => (
                       <div
-                        key={item.id}
+                        key={item.name}
                         className={`${totalVariants > 3 ? 'h-1/6' : 'h-38'}`}
                       >
                         <CartContent
@@ -194,8 +192,6 @@ const Cart: React.FC = () => {
                           id={item.id}
                           quantity={item.qty}
                           handleDelete={handleRemoveProduct}
-                          updateCartProcessing={updateCartProcessing}
-                          updateCart={updateCart}
                         />
                       </div>
                     ),
@@ -213,8 +209,10 @@ const Cart: React.FC = () => {
 
                 <div
                   className={`${
-                    totalVariants > 3 ? 'pl-4 -bottom-16' : 'bottom-16'
-                  } absolute `}
+                    totalVariants > 3
+                      ? 'w-full+ md:w-3/4 lg:w-2/6 xl:w-1/4'
+                      : 'bottom-16 absolute '
+                  } `}
                 >
                   <CheckoutDesc subTotal={totalPrice} disabled={!cart} />
                 </div>

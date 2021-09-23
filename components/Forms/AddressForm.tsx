@@ -116,11 +116,10 @@ const Address = ({
         <select
           className="w-1/3 appearance-none p-2 my-1 text-sm"
           name="country"
-          defaultValue="US"
           value={input?.country}
           onChange={handleOnChange}
         >
-          <option value="country" disabled selected>
+          <option value="country" disabled>
             Country
           </option>
           <option value="US">United States</option>
@@ -128,12 +127,11 @@ const Address = ({
         <Error errors={errors} fieldName="country" />
         <select
           className="w-1/3 border rounded-md p-2 my-1 text-sm focus:outline-none"
-          defaultValue="state"
           name="state"
           value={input?.state}
           onChange={handleOnChange}
         >
-          <option value="state" disabled selected>
+          <option value="state" disabled>
             State
           </option>
           <States />

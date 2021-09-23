@@ -29,12 +29,12 @@ const Athlete = ({
         style={{
           backgroundImage: bgImage ? `url(${bgImage})` : 'none',
         }}
-        className="h-120 w-full absolute z-10 bg-cover bg-fixed"
+        className="h-120 w-full absolute z-10 md:bg-cover md:bg-fixed bg-center bg-no-repeat"
       />
       <div
         className={bgImage && `h-120 w-full absolute z-20 bg-black opacity-30`}
       />
-      <div className="flex flex-col items-start h-120 justify-end pl-24">
+      <div className="flex flex-col items-start h-120 justify-end pl-8 md:pl-24">
         <Heading
           className="font-cochin text-lg z-20 cursor-default"
           level={headingLevel}

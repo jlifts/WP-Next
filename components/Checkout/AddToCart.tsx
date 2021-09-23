@@ -8,6 +8,7 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { toastConfig } from 'components/ToastConfig';
 import { CartContext } from 'Context/CartContext';
+import { motion } from 'framer-motion';
 import { ADD_TO_CART } from 'graphql/Mutations';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
 import {
@@ -109,14 +110,15 @@ const AddToCart = ({
 
   return (
     <>
-      <button
+      <motion.button
         className={className}
         type="submit"
         onClick={addToCartHandler}
         disabled={addToCartLoading}
+        whileTap={{ scale: 0.95 }}
       >
         {addToCartLoading ? 'Adding to Cart...' : ' Add To Cart'}
-      </button>
+      </motion.button>
     </>
   );
 };

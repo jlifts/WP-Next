@@ -16,8 +16,6 @@ interface CartItems {
   id: string;
   item: any;
   products: any;
-  updateCartProcessing: any;
-  updateCart: any;
 }
 
 const CartContent = ({
@@ -29,11 +27,9 @@ const CartContent = ({
   handleDelete,
   item,
   products,
-  updateCartProcessing,
-  updateCart,
 }: CartItems): JSX.Element => {
   return (
-    <div className="flex flex-col h-1/6" key={id}>
+    <div className="flex flex-col h-1/6 pl-4 md:pl-0" key={id}>
       {name && (
         <div className="relative flex">
           <button
@@ -51,8 +47,6 @@ const CartContent = ({
         <div className="flex">
           <p>{typeof price !== 'string' ? `$${price.toFixed(2)}` : price}</p>
           <QuantityHandler
-            updateCartProcessing={updateCartProcessing}
-            updateCart={updateCart}
             item={item}
             products={products}
             quantity={quantity}

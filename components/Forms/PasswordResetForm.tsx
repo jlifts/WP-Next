@@ -44,7 +44,7 @@ const PasswordResetForm = (): JSX.Element => {
     <form
       method="post"
       onSubmit={handleSubmit}
-      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 mb-12 space-y-10 bg-white z-10"
+      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 pt-44 md:pt-10 mb-12 space-y-10 bg-white z-10"
     >
       <Heading
         level="h4"

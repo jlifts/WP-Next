@@ -70,9 +70,9 @@ const SetPasswordForm = ({ resetKey: key, login }: Props): JSX.Element => {
     <form
       method="post"
       onSubmit={handleSubmit}
-      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 mt-12 mb-12 space-y-10 bg-white z-10"
+      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 pt-44 md:pt-20 lg:mt-12 mb-12 bg-white z-10"
     >
-      <fieldset disabled={loading} aria-busy={loading}>
+      <fieldset disabled={loading} aria-busy={loading} className="space-y-10">
         <div className="relative border-b-2 focus-within:border-blue-500 z-10">
           <input
             id="new-password"

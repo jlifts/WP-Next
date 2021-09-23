@@ -1,6 +1,5 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
-import { WPHead } from '@wpengine/headless/next';
 import Head from 'next/head';
 // import { HeaderProps } from 'typings/global';
 import Meta from 'lib/Meta';
@@ -12,8 +11,12 @@ function SEO(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{/* Title is required here but replaced by WPHead. */}</title>
+        <title>Victis Health</title>
         {/* Add extra elements to <head> here. */}
+        <script
+          type="text/javascript"
+          src="https://sandbox.web.squarecdn.com/v1/square.js"
+        />
         {/* Global Site Code Pixel - Facebook Pixel */}
         {/* <script
           dangerouslySetInnerHTML={{
@@ -76,7 +79,6 @@ function SEO(): JSX.Element {
           />
         </noscript>
       </Head>
-      <WPHead />
     </>
   );
 }

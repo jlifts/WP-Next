@@ -6,9 +6,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getNextStaticProps } from '@wpengine/headless/next';
-import { getApolloClient } from '@wpengine/headless';
-import { GetStaticPropsContext } from 'next';
+// import { GetStaticPropsContext } from 'next';
 import { useQuery } from '@apollo/client';
 import { LEGAL_MENU_QUERY } from 'graphql/Queries';
 import { MenuProps, MenuQuery } from 'typings/global';
@@ -52,7 +50,7 @@ const LegalMenu = ({ open }: MenuProps) => {
 
   return (
     <motion.div
-      className="z-70 text-white space-y-6"
+      className="z-50 text-white space-y-6"
       initial={{ x: '100%' }}
       animate={{
         x: 0,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
@@ -12,31 +13,79 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { getUpdatedItems } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
 import { v4 } from 'uuid';
+import { motion } from 'framer-motion';
+import { UPDATE_CART } from 'graphql/Mutations';
+import { useMutation } from '@apollo/client';
 
-// TODO: Fix
+// TODO: Fix with UseEffect
+// Make a duplicate that returns a quantity for AddToCart Buttons?
 
 const QuantityHandler = ({
   className,
   quantity,
   item,
-  updateCartProcessing,
-  updateCart,
   products,
 }: any): JSX.Element => {
   // const [cart, setCart] = useContext(CartContext);
   const [qty, setQuantity] = useState(quantity);
   // console.log(item);
+  // console.log(products);
 
-  // const increment = () => {
-  //   setQuantity(qty + 1);
-  // };
+  // Update Cart Mutation.
+  const [
+    updateCart,
+    { data, loading: updateCartProcessing, error: updateCartError },
+  ] = useMutation(UPDATE_CART, {
+    onError: () => {
+      if (updateCartError) {
+        const errorMessage = updateCartError?.graphQLErrors?.[0]?.message
+          ? updateCartError.graphQLErrors[0].message
+          : '';
+        console.error(errorMessage);
+      }
+    },
+  });
 
-  // const decrement = () => {
-  //   if (qty === 1) {
-  //     return;
-  //   }
-  //   setQuantity(qty - 1);
-  // };
+  // Need to use a UseEffect
+
+  const increment = (cartKey: string) => {
+    const newQty = qty + 1;
+    setQuantity(newQty);
+
+    if (item) {
+      const updatedItems = getUpdatedItems(products, newQty, cartKey);
+
+      updateCart({
+        variables: {
+          input: {
+            clientMutationId: v4(),
+            items: updatedItems,
+          },
+        },
+      });
+    }
+  };
+
+  const decrement = (cartKey: string) => {
+    if (qty === 1) {
+      return;
+    }
+    const newQty = qty - 1;
+    setQuantity(newQty);
+
+    if (item) {
+      const updatedItems = getUpdatedItems(products, newQty, cartKey);
+
+      updateCart({
+        variables: {
+          input: {
+            clientMutationId: v4(),
+            items: updatedItems,
+          },
+        },
+      });
+    }
+  };
 
   // // TS Functions for PWA syncronous offline handling
   // const handleQtyChange = (e: { target: { value: any } }) => {
@@ -66,12 +115,12 @@ const QuantityHandler = ({
       }
 
       // If the user tries to delete the count of product, set that to 1 by default ( This will not allow him to reduce it less than zero )
-      const newQty = event.target.value ? parseInt(event.target.value, 10) : 1;
+      const newQty = event.target.value;
 
       // Set the new qty in state.
       setQuantity(newQty);
 
-      if (item.length) {
+      if (item) {
         const updatedItems = getUpdatedItems(products, newQty, cartKey);
 
         updateCart({
@@ -88,9 +137,13 @@ const QuantityHandler = ({
 
   return (
     <div className={`${className} flex px-3 items-center`}>
-      <button type="button">
+      <motion.button
+        type="button"
+        whileTap={{ scale: 0.97 }}
+        onClick={() => increment(item.cartKey)}
+      >
         <FontAwesomeIcon icon={faPlus} className="cursor-pointer" />
-      </button>
+      </motion.button>
 
       <input
         type="text"
@@ -98,12 +151,16 @@ const QuantityHandler = ({
         onChange={(event) => handleQtyChange(event, item.cartKey)}
         min="1"
         max="100"
-        className="w-8 text-lg bg-transparent px-3 mx-2"
+        className=" w-8 text-lg bg-transparent px-2 mx-2"
       />
 
-      <button type="button">
+      <motion.button
+        type="button"
+        whileTap={{ scale: 0.97 }}
+        onClick={() => decrement(item.cartKey)}
+      >
         <FontAwesomeIcon icon={faMinus} className="cursor-pointer" />
-      </button>
+      </motion.button>
     </div>
   );
 };

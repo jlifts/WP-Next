@@ -22,7 +22,7 @@ type OrderQuery = {
 
 const ProfilePage = (): JSX.Element => {
   const { user } = useAuth();
-  const { userId, roles } = user;
+  const { userId } = user;
   const { data } = useQuery(GET_ORDERS, {
     variables: { customerId: userId },
   });
@@ -35,20 +35,24 @@ const ProfilePage = (): JSX.Element => {
   // console.log(order);
 
   return (
-    <div className="flex flex-col font-mont col-span-4 text-white">
+    <div className="flex flex-col font-mont md:col-span-4 text-white">
       <div className="flex tracking-widest uppercase justify-center h-1/5 w-full items-center pt-10 cursor-default border-b">
-        <Heading level="h4" className="text-5xl font-bold tracking-widest">
+        <Heading
+          level="h4"
+          className="text-xl md:text-3xl lg:text-5xl font-bold tracking-widest"
+        >
           Welcome to Team Victis
         </Heading>
       </div>
-      <div className="border-b">
+      {/* For the ranking system */}
+      {/* <div className="border-b">
         <p className="text-xl p-6">Ranking: Guru</p>
-      </div>
+      </div> */}
       <div className="h-full w-full">
         <Heading level="h5" className="text-xl p-6 font-semibold">
           Past Orders
         </Heading>
-        <div className="grid grid-cols-2 gap-5 mx-6">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 mx-6 pb-12 lg:pb-0">
           {order &&
             order.map((item: OrderQuery) => (
               <div

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CheckoutForm, CheckoutCart } from 'components';
@@ -13,11 +14,11 @@ const Checkout = (): JSX.Element => {
 
   return (
     <>
-      <section className="grid grid-cols-2 w-screen">
+      <section className="flex flex-col md:grid md:grid-cols-2 w-screen">
         <div className="col-span-1 p-6 h-full">
           <Heading
             level="h4"
-            className="text-5xl font-bold tracking-widest uppercase font-mont"
+            className="flex font-bold font-mont md:text-5xl uppercase justify-center pt-10 md:pt-0 cursor-default text-3xl  md:tracking-widest"
           >
             Victis Health
           </Heading>
@@ -59,7 +60,7 @@ const Checkout = (): JSX.Element => {
             </nav>
           </div>
         </div>
-        <div className="h-full col-span-1 bg-lightgray p-6">
+        <div className="h-full+ col-span-1 bg-lightgray p-6">
           <CheckoutCart products={cart} />
         </div>
       </section>

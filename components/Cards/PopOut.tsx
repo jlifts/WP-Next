@@ -27,14 +27,14 @@ const PopOut = ({
           {title}
         </Heading>
         <Heading
-          className="uppercase font-cochin text-3xl cursor-default"
+          className="uppercase font-cochin text-xl sm:text-2xl md:text-3xl cursor-default"
           level={headingLevel}
         >
           {subTitle}
         </Heading>
       </div>
-      <div className="space-y-4 px-24 cursor-default">
-        <p
+      <div className="space-y-4 md:px-24 cursor-default">
+        <div
           className="space-y-6 leading-5"
           dangerouslySetInnerHTML={{
             __html: body ?? '',

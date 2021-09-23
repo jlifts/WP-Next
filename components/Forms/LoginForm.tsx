@@ -43,7 +43,7 @@ const LoginForm = (): JSX.Element => {
     <form
       method="post"
       onSubmit={handleSubmit}
-      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden p-10 mb-12 space-y-10 bg-white z-10"
+      className="flex flex-col max-w-md mx-auto w-full rounded-lg shadow-xl overflow-hidden pt-44 md:pt-10 p-10 mb-12 space-y-10 bg-white z-10"
     >
       <div className="flex flex-row justify-evenly text-2xl font-bold">
         <div className="text-gray-500 hover:text-black">

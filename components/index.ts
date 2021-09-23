@@ -33,11 +33,13 @@ import CheckoutCart from './Checkout/CheckoutCart';
 import Payments from './Forms/Payments';
 import FacebookPixel from './tags/FacebookPixel';
 import GoogleAnalyticsTag from './tags/GoogleAnalyticsTag';
+import AddToCartQuantity from './Checkout/AddToCartQuantity';
 
 export {
   CTA,
   AddToCart,
   QuantityHandler,
+  AddToCartQuantity,
   CheckoutForm,
   LoginForm,
   PasswordResetForm,

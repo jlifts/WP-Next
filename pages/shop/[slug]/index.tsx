@@ -8,24 +8,22 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useGeneralSettings } from '@wpengine/headless/react';
 import { Drawer, Cart, ShopNav, Footer, AddToCart } from 'components';
 import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { PRODUCTS_QUERY, CATAGORIES } from 'graphql/Queries';
-import { GetStaticPathsContext } from 'next';
-import { getApolloClient } from '@wpengine/headless';
+// import { GetStaticPathsContext } from 'next';
 import { ProductQuery } from 'typings/global';
 import { Client } from '../../../lib/ApolloClient';
 
 const Products = ({ product }: any): JSX.Element => {
   const router = useRouter();
   const itemPage = router.asPath.split('/').slice(2).toString();
-  const settings = useGeneralSettings();
+  const title = 'Victis Health';
   const page = router.asPath;
   // const prices = product[1].price.replace('$', '');
-  // console.log(parseFloat(prices));
+  // console.log(productOptions);
 
   return (
     <main className="font-cochin">
@@ -41,15 +39,15 @@ const Products = ({ product }: any): JSX.Element => {
           />
         </div>
       </div>
-      <section className="">
-        <div className="flex font-bold font-mont text-5xl tracking-widest uppercase justify-center pt-10 cursor-default">
+      <section className="overflow-hidden">
+        <div className="flex font-bold font-mont md:text-5xl uppercase justify-center md:pt-10 cursor-default text-3xl pt-20 md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
-        <div className="mt-24 bg-midgray w-screen h-full ml-20 pl-8 pt-28 mb-8">
+        <div className="flex flex-col items-center md:items-start mt-24 bg-midgray w-screen h-full md:ml-20 md:pl-8 pt-28 mb-8">
           <div className="text-3xl tracking-wide uppercase pb-10 cursor-default">
             Products
           </div>
-          <div className="grid grid-cols-3 gap-10 w-7/8 z-50 h-full py-12">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 w-7/8 z-50 h-full py-12">
             {product &&
               product.map((item: ProductQuery) => (
                 <div className="flex flex-col col-span-1" key={item.id}>
@@ -58,7 +56,7 @@ const Products = ({ product }: any): JSX.Element => {
                       <img
                         src={item.featuredImage.node.sourceUrl}
                         alt={item.featuredImage.node.title}
-                        className="h-96 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
+                        className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
                       <Heading
                         level="h5"
@@ -83,6 +81,17 @@ const Products = ({ product }: any): JSX.Element => {
                         </p>
                       )}
                     </div>
+                    {item?.attributes && (
+                      <select>
+                        {item?.attributes?.nodes[0]?.options.map(
+                          (sizes: any) => (
+                            <option value={sizes} key={sizes}>
+                              {sizes}
+                            </option>
+                          ),
+                        )}
+                      </select>
+                    )}
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
                       product={item}
@@ -93,15 +102,15 @@ const Products = ({ product }: any): JSX.Element => {
           </div>
         </div>
       </section>
-      <Footer copyrightHolder={settings?.title} key="footer" />
+      <Footer copyrightHolder={title} key="footer" />
     </main>
   );
 };
 
-export async function getStaticPaths(context: GetStaticPathsContext) {
-  const client = getApolloClient(context);
-  const { data } = await client.query({ query: CATAGORIES });
-  const products = data?.productCategories?.nodes?.slice(2).reverse();
+export async function getStaticPaths(/* context: GetStaticPathsContext */) {
+  // const client = getApolloClient(context);
+  const { data } = await Client.query({ query: CATAGORIES });
+  const products = data?.productCategories?.nodes;
   const slugs = products?.map((product: { slug: any }) => product?.slug);
   const paths = slugs?.map((slug: any) => ({ params: { slug } }));
   return { paths, fallback: false };

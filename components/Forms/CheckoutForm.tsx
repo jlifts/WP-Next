@@ -32,6 +32,8 @@ import { EMAIL_REGEX } from '../../helpers/email';
 import FormInput from './FormInput';
 import Address from './AddressForm';
 import Error from './Errors';
+import { SquarePaymentsForm } from 'react-square-web-payments-sdk';
+import SquarePayments from './SquarePaymentForm';
 
 type CustomerData = {
   firstName: string;
@@ -161,7 +163,7 @@ const CheckoutForm = (): JSX.Element => {
      *  When order data is set, checkout mutation will automatically be called,
      *  because 'orderData' is added in useEffect as a dependency.
      */
-    setOrderData(checkOutData);
+    // setOrderData(checkOutData);
   };
 
   const clicked = () => {
@@ -246,6 +248,7 @@ const CheckoutForm = (): JSX.Element => {
       {cart ? (
         <form
           className="flex flex-col w-full font-mont"
+          id="payment-form"
           onSubmit={handleFormSubmit}
         >
           <fieldset disabled={isOrderProcessing} aria-busy={isOrderProcessing}>
@@ -386,22 +389,23 @@ const CheckoutForm = (): JSX.Element => {
                 />
               </>
             ) : null}
-            <div className="flex items-center pt-6">
+            {/* <div className="flex items-center pt-6">
               <button
                 aria-label="Coninue"
                 disabled={isOrderProcessing}
                 type="submit"
                 className="w-1/4 px-2 py-4 text-white bg-primary rounded-xl focus:bg-secondary focus:outline-none text-sm"
               >
-                {isOrderProcessing ? 'Processing...' : 'To Payment'}
+                {isOrderProcessing ? 'Processing...' : 'Pay'}
               </button>
-              <Link href="/shop/all">
-                <p className="text-primary px-6 cursor-pointer text-sm">
-                  Return to Shop
-                </p>
-              </Link>
-            </div>
+            </div> */}
           </fieldset>
+          <SquarePayments />
+          <Link href="/shop/all">
+            <p className="text-primary px-6 cursor-pointer text-sm">
+              Return to Shop
+            </p>
+          </Link>
         </form>
       ) : null}
     </>

@@ -1,10 +1,9 @@
 import React from 'react';
-import { useGeneralSettings } from '@wpengine/headless/react';
 import Link from 'next/link';
 import { Footer, Cart, Drawer, ShopNav, MainHero } from '../components';
 
 export default function Page(): JSX.Element {
-  const settings = useGeneralSettings();
+  const title = 'Victis Health';
 
   return (
     <>
@@ -20,7 +19,7 @@ export default function Page(): JSX.Element {
         <MainHero title="404" subtitle="Oops! This page cannot be found..." />
         <div className="">
           <div>
-            <div className="underline text-xl">
+            <div className="underline md:text-xl px-5 lg:px-0">
               <Link href="/">
                 The page you were looking for does not exist or is no longer
                 available. Please click here to go back to your experience.
@@ -29,7 +28,7 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </main>
-      <Footer copyrightHolder={settings?.title} />
+      <Footer copyrightHolder={title} />
     </>
   );
 }

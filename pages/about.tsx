@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useGeneralSettings } from '@wpengine/headless/react';
 import {
   Athlete,
   Card,
@@ -14,11 +15,39 @@ import {
   ShopNav,
 } from 'components';
 import Heading from 'components/Heading';
+import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import axios from './api/axios/deets';
 
+// TODO Responsiveness flash
+
 const about = ({ deets }: any): JSX.Element => {
-  const settings = useGeneralSettings();
+  const { inView, ref } = useInView();
+  const animationControl = useAnimation();
+  const animationControlY = useAnimation();
+
+  if (inView) {
+    animationControl.start({
+      x: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.6,
+        duration: 1.2,
+      },
+    });
+  }
+  if (inView) {
+    animationControlY.start({
+      y: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.6,
+        duration: 1,
+      },
+    });
+  }
+
   return (
     <main className="">
       <div className="sticky top-0 z-70 ml-12" key="drawer">
@@ -28,34 +57,46 @@ const about = ({ deets }: any): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">
-        <div className="text-5xl font-bold tracking-widest">
+      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default ">
+        <div className="text-3xl pt-20 md:pt-0 md:text-5xl font-bold md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
         <div className="text-2xl pt-16">
           <Heading level="h4">About</Heading>
         </div>
       </div>
-      <section className="h-screen+ py-20">
-        <img
+      <section className="h-screen+ py-20 lg:mt-20 overflow-hidden">
+        <div ref={ref} />
+        <motion.img
           src="/images/richFroning.webp"
           alt="Victis Plant"
-          className="w-3/6 h-4/6 absolute z-10 right-8"
+          className="lg:w-3/6 md:h-4/6 absolute right-8 top-56 md:top-auto"
+          animate={animationControl}
+          transition={{ duration: 1 }}
+          initial={{ x: -400, opacity: 0 }}
         />
-        <img
+        <motion.img
           src="/images/tinandcream.webp"
           alt="Victis Cream"
-          className="w-1/4 absolute right-60 shadow-2xl mt-96 z-40"
+          className="invisible md:visible w-1/4 absolute right-60 shadow-2xl md:mt-112 lg:mt-96 z-40"
+          animate={animationControlY}
+          transition={{ duration: 1.2 }}
+          initial={{ y: 400, opacity: 0 }}
         />
-        <div className="flex justify-start pt-20 z-30">
-          <div className="w-3/5 h-full z-30">
+        <motion.div
+          className="flex justify-start pt-20 z-30"
+          animate={animationControl}
+          transition={{ duration: 1.5 }}
+          initial={{ x: 400, opacity: 0 }}
+        >
+          <div className="md:w-3/5 h-full z-30">
             <PopOut
               title={deets?.slug.replaceAll('-', ' ')}
               subTitle={deets?.title}
               body={deets?.content}
             />
           </div>
-        </div>
+        </motion.div>
       </section>
       <section className="flex flex-col h-full+ text-white py-28">
         <Athlete
@@ -82,8 +123,8 @@ const about = ({ deets }: any): JSX.Element => {
           Twitter="https://www.instagram.com/richfroning/"
         />
       </section>
-      <section className="h-full p-12">
-        <div className="flex justify-around">
+      <section className="h-full p-2 lg:p-12">
+        <div className="flex flex-col md:flex-row justify-around">
           <Card
             name="Zeb Portanova"
             image="/images/zeb.webp"
@@ -96,7 +137,8 @@ const about = ({ deets }: any): JSX.Element => {
           />
         </div>
       </section>
-      <Footer copyrightHolder={settings?.title} key="footer" />
+      {/* Possibly take away hard code */}
+      <Footer copyrightHolder="Victis Health" key="footer" />
     </main>
   );
 };

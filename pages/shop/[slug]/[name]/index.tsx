@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -6,29 +7,23 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useGeneralSettings } from '@wpengine/headless/react';
 import {
   Drawer,
   Cart,
   ShopNav,
   Footer,
   AddToCart,
-  QuantityHandler,
+  AddToCartQuantity,
 } from 'components';
 import Heading from 'components/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import React from 'react';
-import { PRODUCT_QUERY, PRODUCTS_QUERY } from 'graphql/Queries';
-import { getApolloClient } from '@wpengine/headless';
-import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
+import React, { useState } from 'react';
+import { PRODUCT_QUERY } from 'graphql/Queries';
 
-const products = ({
-  producted,
-  gallerys,
-  featuredImages,
-}: any): JSX.Element => {
-  const settings = useGeneralSettings();
+const products = (): JSX.Element => {
+  const title = 'Victis Health';
+  const [qty, setQty] = useState(1);
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
@@ -37,9 +32,9 @@ const products = ({
     variables: { id: item },
   });
   const product = data?.product;
-  // console.log(product?.stockStatus);
   const gallery = product?.galleryImages?.edges;
   const featuredImage = data?.product?.featuredImage.node.sourceUrl;
+  const productOptions = product?.attributes?.nodes[0]?.options;
 
   return (
     <main className="font-cochin flex flex-col">
@@ -59,12 +54,12 @@ const products = ({
           )}
         </div>
       </div>
-      <section className="">
-        <div className="flex font-bold font-mont text-5xl tracking-widest uppercase justify-center pt-10 cursor-default">
+      <section className="overflow-hidden w-screen">
+        <div className="flex font-bold font-mont md:text-5xl uppercase justify-center md:pt-10 cursor-default text-3xl pt-20 md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
         {/* <div className="mt-24 bg-midgray w-screen h-full ml-20 pl-8 pt-28 mb-8"> */}
-        <div className="grid grid-cols-2 gap-44 w-screen z-50 h-full pt-5 pb-12 pl-40 mt-24">
+        <div className="flex flex-col px-6 lg:px-0 md:grid md:grid-cols-2 md:gap-20 lg:gap-44 w-screen z-50 h-full pt-5 pb-12 lg:pl-40 mt-24">
           {product && (
             <>
               <div className="flex flex-col col-span-1" key={product.id}>
@@ -89,14 +84,25 @@ const products = ({
                   )}
                 </div>
                 <div className="flex my-8 justify-between w-5/6">
-                  <QuantityHandler
+                  <AddToCartQuantity
                     className="border justify-around"
-                    quantity={1}
+                    setQty={setQty}
+                    qty={qty}
                   />
+                  {product.attributes && (
+                    <select>
+                      {productOptions.map((sizes: any) => (
+                        <option value={sizes} key={sizes}>
+                          {sizes}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                   <AddToCart
                     className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black"
                     product={product}
                     productName={product.name}
+                    quant={qty}
                   />
                 </div>
                 <p
@@ -117,11 +123,11 @@ const products = ({
                   }}
                 />
               </div>
-              <div className=" z-10 col-span-1">
+              <div className="z-10 col-span-1">
                 <img
                   src={featuredImage}
                   alt={product.name}
-                  className="h-120 z-10"
+                  className="h-80 lg:h-120 z-10"
                 />
                 {gallery &&
                   gallery.map(
@@ -135,7 +141,7 @@ const products = ({
                         key={image.node.id}
                         src={image.node.sourceUrl}
                         alt={product.name}
-                        className="h-120 z-10"
+                        className="h-80 lg:h-120 z-10"
                       />
                     ),
                   )}
@@ -145,7 +151,7 @@ const products = ({
         </div>
         {/* </div> */}
       </section>
-      <Footer copyrightHolder={settings?.title} key="footer" />
+      <Footer copyrightHolder={title} key="footer" />
     </main>
   );
 };

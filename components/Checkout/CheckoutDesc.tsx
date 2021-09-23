@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
@@ -8,7 +9,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { toastConfig } from 'components/ToastConfig';
 import { toast } from 'react-toastify';
@@ -25,6 +26,7 @@ interface IProps {
 const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
   let input: HTMLInputElement;
   const [cart, setCart] = useContext(CartContext);
+  const [added, setAdded] = useState(false);
   const { data, refetch } = useQuery(GET_CART_QUERY, {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
@@ -36,6 +38,8 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
       setCart(updatedCart);
     },
   });
+
+  const coupon = cart?.discountCode;
 
   // Apply Coupon
   const [applyCoupon, { data: couponRes, loading, error }] = useMutation(
@@ -85,21 +89,23 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
       },
     });
 
-  const coupon = cart?.discountCode;
-  // console.log(error);
-
   const handleDiscount = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await applyCoupon({ variables: { code: input.value } });
+    setAdded(true);
   };
+
+  useEffect(() => {
+    if (coupon && added) {
+      toast.success(
+        `🦄 ${coupon} applied for ${cart?.discountAmount} off!`,
+        toastConfig,
+      );
+    }
+  }, [coupon, added, cart?.discountAmount]);
 
   if (error) {
     toast.error(error?.graphQLErrors?.[0]?.message ?? '', toastConfig);
-  } else if (coupon) {
-    toast.success(
-      `🦄 ${coupon} applied for ${cart.discountAmount} off!`,
-      toastConfig,
-    );
   }
 
   const handleDelete = async () => {
@@ -120,7 +126,7 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
             }}
             className={`${
               error ? 'border-red-500 outline-none' : 'outline-none'
-            } px-2`}
+            } px-1 w-4/6`}
           />
           <button
             type="submit"

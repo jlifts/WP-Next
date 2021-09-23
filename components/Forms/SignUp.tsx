@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -45,7 +46,7 @@ const SignUp = (): JSX.Element => {
       };
 
       await axios.post(`/contacts`, json).then((res) => {
-        console.log(res);
+        console.assert(res);
       });
       toast.success(`🦄  Welcome To Team Victis!`, {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -81,7 +82,7 @@ const SignUp = (): JSX.Element => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col w-full space-y-8 mt-20 mx-2 px-64 text-lg items-center text-white"
+      className="flex flex-col lg:w-full w-screen space-y-8 mt-20 lg:mx-2 px-3 md:px-2 pl-14 lg:px-64 text-lg md:items-center text-white"
     >
       <input
         type="name"
@@ -104,7 +105,7 @@ const SignUp = (): JSX.Element => {
       <button
         disabled={loading}
         type="submit"
-        className="text-white boder-2 border-midgray bg-black w-1/6 hover:bg-gray-700"
+        className="text-white boder-2 border-midgray bg-black w-3/6 md:w-1/6 hover:bg-gray-700"
       >
         {button}
       </button>

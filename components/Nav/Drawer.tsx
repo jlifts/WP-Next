@@ -22,7 +22,7 @@ const Drawer: React.FC = () => {
         <button
           type="button"
           aria-label="Nav Menu"
-          className="p-3 pr-8  w-10 h-10 relative focus:outline-none outline-none"
+          className="p-3 pr-8 w-10 h-10 relative focus:outline-none outline-none"
           onClick={handleOpen}
         >
           <div className="block w-5 absolute left-1/2 top-3 transform  -translate-x-1/2 -translate-y-1/2 shadow-xl">
@@ -37,7 +37,7 @@ const Drawer: React.FC = () => {
               }`}
             />
             <motion.span
-              className={`block absolute  mt-4 h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out ${
+              className={`block absolute mt-4 h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
                 rotateReverse ? 'rotateReverse text-white' : ''
               }`}
             />
@@ -47,11 +47,11 @@ const Drawer: React.FC = () => {
       <AnimatePresence>
         {open ? (
           <motion.div
-            className="grid grid-cols-6 w-screen z-50 h-screen"
+            className="grid md:grid-cols-6 w-screen z-50 h-screen overflow-hidden transform translate-x-2 lg:translate-x-0 xl:translate-x-2"
             key="drawer-div"
           >
             <motion.div
-              className="bg-black h-screen cursor-pointer outline-none col-span-5 z-50"
+              className="no-mobile bg-black h-screen cursor-pointer outline-none md:col-span-3 lg:col-span-5 z-50"
               onClick={handleOpen}
               initial={{ opacity: 0 }}
               animate={{

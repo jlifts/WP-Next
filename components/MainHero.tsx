@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { HeroProps } from 'typings/global';
+import { motion } from 'framer-motion';
 
 function Hero({
   title = '',
@@ -18,26 +19,33 @@ function Hero({
     <section
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...(id && { id })}
-      className="h-4/6 w-5/8 flex items-center justify-center mt-8 z-40"
+      className="h-4/6 w-full lg:w-5/8 flex items-center justify-center mt-8 z-40"
     >
       <div
-        className={bgImage && `h-4/6 w-5/8 absolute z-20 bg-black opacity-30 `}
+        className={
+          bgImage &&
+          ` md:h-4/6 w-full lg:w-5/8 absolute z-20 bg-black opacity-30 `
+        }
       />
       <div
         style={{
-          backgroundImage: bgImage ? `url(${bgImage})` : 'none',
+          backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
         }}
-        className="h-4/6 w-5/8 absolute z-10 bg-cover"
+        className="h-4/6 w-full lg:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
       />
-      <div className=" z-30">
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-7xl uppercase font-bold font-mont tracking-widest">
+      <div className="z-30">
+        <motion.div
+          className="flex flex-col items-center justify-center opacity-0"
+          transition={{ duration: 1.6, delay: 0.5 }}
+          animate={{ opacity: 1 }}
+        >
+          <h1 className="text-4xl md:text-7xl uppercase font-bold font-mont md:tracking-widest">
             {title}
           </h1>
-          <h2 className="font-cochin uppercase text-xl tracking-wide">
+          <h2 className="flex font-cochin uppercase text-base items-center px-12 mr-6 md:text-xl md:tracking-wide md:px-0 md:mr-0">
             {subtitle}
           </h2>
-        </div>
+        </motion.div>
         <div>
           <div>{children}</div>
           {buttonText && buttonURL && (
