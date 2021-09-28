@@ -1,3 +1,4 @@
+import { ADD_COMMENT } from './AddComment';
 import { ADD_TO_CART } from './AddToCart';
 import { APPLY_COUPON } from './ApplyCoupon';
 import CHECKOUT_MUTATION from './Checkout';
@@ -25,4 +26,5 @@ export {
   APPLY_COUPON,
   REMOVE_COUPONS,
   CHECKOUT_MUTATION,
+  ADD_COMMENT,
 };

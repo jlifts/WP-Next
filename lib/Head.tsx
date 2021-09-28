@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable react/no-danger */
 import React from 'react';
 import Head from 'next/head';
@@ -13,10 +15,13 @@ function SEO(): JSX.Element {
       <Head>
         <title>Victis Health</title>
         {/* Add extra elements to <head> here. */}
-        <script
+
+        {/* Square Web Payments API */}
+        {/* <script
           type="text/javascript"
           src="https://sandbox.web.squarecdn.com/v1/square.js"
-        />
+        ></script> */}
+
         {/* Global Site Code Pixel - Facebook Pixel */}
         {/* <script
           dangerouslySetInnerHTML={{
@@ -33,6 +38,7 @@ function SEO(): JSX.Element {
               `,
           }}
         /> */}
+
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         {/* <script
           // strategy="afterInteractive"
@@ -51,6 +57,11 @@ function SEO(): JSX.Element {
           `,
           }}
         /> */}
+        {/* Font Awesome for star ratings import */}
+        <script
+          src="https://kit.fontawesome.com/c1562e6535.js"
+          crossOrigin="anonymous"
+        ></script>
         <Meta>
           <link
             rel="preconnect"

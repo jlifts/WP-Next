@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-redeclare */
 import { UrlObject } from 'url';
-import { HeadingProps } from '../components/Heading';
+import { HeadingProps } from '../components/UI/Heading';
 
 declare module '*.svg';
 
@@ -95,6 +95,7 @@ interface NavProps {
 }
 
 interface MenuQuery {
+  path: Url;
   // [node: string]: { label: string; url: string; id: string };
   label: string;
   url: string;
@@ -102,7 +103,7 @@ interface MenuQuery {
 }
 interface MenuProps {
   open: boolean | any;
-  data?: string | any;
+  menus?: string | any;
 }
 
 interface CatagoryQuery {

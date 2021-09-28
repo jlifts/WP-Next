@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { States } from 'components/states';
+import { States } from 'components/UI/states';
 import React from 'react';
 import FormInput from './FormInput';
 import Error from './Errors';

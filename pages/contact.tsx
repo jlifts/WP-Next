@@ -7,7 +7,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-console */
 import React from 'react';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { Cart, ContactForm, Drawer, Footer, Hero, ShopNav } from 'components';
 import axios from './api/axios/deets';
 

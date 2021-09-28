@@ -14,7 +14,7 @@ import {
   PopOut,
   ShopNav,
 } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';

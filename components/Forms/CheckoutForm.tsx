@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -15,8 +16,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useAuth from 'hooks/useAuth';
 import { useMutation, useQuery } from '@apollo/client';
 import { USER_ADDRESS } from 'graphql/Queries';
-import { UPDATE_USER, CLEAR_CART, CHECKOUT_MUTATION } from 'graphql/Mutations';
-import { toast } from 'react-toastify';
+import {
+  /* UPDATE_USER, */ CLEAR_CART,
+  CHECKOUT_MUTATION,
+} from 'graphql/Mutations';
+// import { toast } from 'react-toastify';
 import {
   getFormattedCart,
   createCheckoutData,
@@ -24,16 +28,15 @@ import {
 } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
-import { States } from 'components/states';
-import { toastConfig } from 'components/ToastConfig';
+// import { toastConfig } from 'components/ToastConfig';
 import validateAndSanitizeCheckoutForm from 'helpers/validateAndSanatize';
-import Heading from '../Heading';
-import { EMAIL_REGEX } from '../../helpers/email';
+import { toast } from 'react-toastify';
+import Heading from '../UI/Heading';
 import FormInput from './FormInput';
 import Address from './AddressForm';
 import Error from './Errors';
-import { SquarePaymentsForm } from 'react-square-web-payments-sdk';
 import SquarePayments from './SquarePaymentForm';
+import axios from '../../pages/api/axios/omni';
 
 type CustomerData = {
   firstName: string;
@@ -65,7 +68,6 @@ const defaultCustomerInfo: CustomerData = {
   errors: null,
 };
 
-// TODO: Split forms up to more readable componenets, Create order mutation for woo, hide shipping unless different
 // TODO: Create Account from checkout
 
 const CheckoutForm = (): JSX.Element => {
@@ -125,7 +127,7 @@ const CheckoutForm = (): JSX.Element => {
 
   const [clearCartMutation] = useMutation(CLEAR_CART);
 
-  const handleFormSubmit = (event: any) => {
+  const handleFormSubmit = async (event: any) => {
     event.preventDefault();
     // const formData = new FormData(event.currentTarget);
     // const values = Object.fromEntries(formData);
@@ -157,13 +159,63 @@ const CheckoutForm = (): JSX.Element => {
 
       return;
     }
+    if (click) {
+      try {
+        const today = new Date().toISOString();
+
+        const json = {
+          createdAt: today,
+          firstName: input?.shipping?.firstName,
+          lastName: input?.shipping?.lastName,
+          tags: ['victis_site_signup'],
+          identifiers: [
+            {
+              type: 'email',
+              id: input?.shipping?.email,
+              channels: {
+                email: {
+                  status: 'subscribed',
+                  statusDate: today,
+                },
+              },
+            },
+          ],
+        };
+
+        await axios.post(`/contacts`, json).then((res) => {
+          console.assert(res);
+        });
+        toast.success(`🦄  Welcome To Team Victis!`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } catch {
+        toast.error(
+          `Sign Up failed, you might alreaady be subscribbed! Error: ${error}`,
+          {
+            position: toast.POSITION.BOTTOM_LEFT,
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          },
+        );
+      }
+    }
 
     const checkOutData = createCheckoutData(input);
     /**
      *  When order data is set, checkout mutation will automatically be called,
      *  because 'orderData' is added in useEffect as a dependency.
      */
-    // setOrderData(checkOutData);
+    setOrderData(checkOutData);
   };
 
   const clicked = () => {
@@ -389,7 +441,7 @@ const CheckoutForm = (): JSX.Element => {
                 />
               </>
             ) : null}
-            {/* <div className="flex items-center pt-6">
+            <div className="flex items-center pt-6">
               <button
                 aria-label="Coninue"
                 disabled={isOrderProcessing}
@@ -398,7 +450,7 @@ const CheckoutForm = (): JSX.Element => {
               >
                 {isOrderProcessing ? 'Processing...' : 'Pay'}
               </button>
-            </div> */}
+            </div>
           </fieldset>
           <SquarePayments />
           <Link href="/shop/all">

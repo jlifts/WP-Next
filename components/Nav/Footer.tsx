@@ -54,7 +54,7 @@ function Footer({ copyrightHolder }: CopyRightProps): JSX.Element {
               <p
                 className="pt-5 pl-3 text-sm cursor-default"
                 dangerouslySetInnerHTML={{
-                  __html: data?.post.content ?? '',
+                  __html: data?.post?.content ?? '',
                 }}
               />
             </div>

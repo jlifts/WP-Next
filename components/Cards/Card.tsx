@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import { CardProps } from 'typings/global';
-import Heading from '../Heading';
+import Heading from '../UI/Heading';
 
 function Card({
   name = '',

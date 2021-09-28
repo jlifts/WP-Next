@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -14,12 +15,15 @@ import {
   Footer,
   AddToCart,
   AddToCartQuantity,
+  StarRating,
+  ProductReview,
 } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { PRODUCT_QUERY } from 'graphql/Queries';
+import { getDate } from 'helpers/functions';
 
 const products = (): JSX.Element => {
   const title = 'Victis Health';
@@ -28,13 +32,24 @@ const products = (): JSX.Element => {
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
   const item = router.asPath.split('/').pop();
-  const { data } = useQuery(PRODUCT_QUERY, {
-    variables: { id: item },
+
+  const { data, fetchMore } = useQuery(PRODUCT_QUERY, {
+    variables: { id: item, first: 4, last: null, after: null, before: null },
   });
+  const updateQuery = (previousResult: any, { fetchMoreResult }: any) => {
+    return fetchMoreResult.product.reviews.edges.length
+      ? fetchMoreResult
+      : previousResult;
+  };
+
   const product = data?.product;
   const gallery = product?.galleryImages?.edges;
   const featuredImage = data?.product?.featuredImage.node.sourceUrl;
   const productOptions = product?.attributes?.nodes[0]?.options;
+  const reviews = product?.reviews?.edges;
+  // const reviewPages = Math.round(product?.reviewCount / 4);
+
+  // console.log(product?.reviews);
 
   return (
     <main className="font-cochin flex flex-col">
@@ -58,11 +73,10 @@ const products = (): JSX.Element => {
         <div className="flex font-bold font-mont md:text-5xl uppercase justify-center md:pt-10 cursor-default text-3xl pt-20 md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
-        {/* <div className="mt-24 bg-midgray w-screen h-full ml-20 pl-8 pt-28 mb-8"> */}
         <div className="flex flex-col px-6 lg:px-0 md:grid md:grid-cols-2 md:gap-20 lg:gap-44 w-screen z-50 h-full pt-5 pb-12 lg:pl-40 mt-24">
           {product && (
-            <>
-              <div className="flex flex-col col-span-1" key={product.id}>
+            <React.Fragment key={product.id}>
+              <div className="flex flex-col col-span-1 cursor-default">
                 <Heading
                   level="h5"
                   className="text-black text-3xl tracking-wide uppercase pb-1 z-40 font-mont"
@@ -73,14 +87,24 @@ const products = (): JSX.Element => {
                   <p
                     className={`${
                       product.onSale ? 'line-through' : ''
-                    } text-black text-xl tracking-wide pb-10 z-40`}
+                    } text-black text-xl tracking-wide pb-10 z-40 mr-4`}
                   >
                     ${product.regularPrice.replace('$', '')}
                   </p>
                   {product.onSale && (
-                    <p className="text-xl cursor-default ml-4 font-semibold tracking-wide">
+                    <p className="text-xl cursor-default mx-4 font-semibold tracking-wide">
                       ${product.price?.replace('$', '')}
                     </p>
+                  )}
+                  {product.averageRating === 0 ? null : (
+                    <>
+                      <p className="px-3 text-xl">{product.averageRating}</p>
+                      <StarRating
+                        rating={product.averageRating}
+                        className="mx-0.5"
+                      />
+                      <p className="px-3 text-xl">{product.reviewCount}</p>
+                    </>
                   )}
                 </div>
                 <div className="flex my-8 justify-between w-5/6">
@@ -117,11 +141,92 @@ const products = (): JSX.Element => {
                     : 'Out of Stock'}
                 </p>
                 <p
-                  className="space-y-2 leading-5"
+                  className="space-y-2 leading-5 pb-4"
                   dangerouslySetInnerHTML={{
                     __html: product.shortDescription ?? '',
                   }}
                 />
+                <ProductReview productId={product?.productId} />
+                {product.reviewCount !== 0 && (
+                  <div key={reviews?.node?.databaseId} className="my-5">
+                    {reviews.map((review: any) => (
+                      <div
+                        className="border p-2 my-3 font-mont"
+                        key={reviews?.node?.databaseId}
+                      >
+                        <div className="flex justify-between text-secondary">
+                          <div className="flex">
+                            {review.node.author.node !== null ? (
+                              <p
+                                className="font-semibold"
+                                key={review?.node?.author?.node[0]?.databaseId}
+                              >
+                                {review?.node?.author?.node?.name}
+                              </p>
+                            ) : (
+                              <p className="font-semibold">Anonymous</p>
+                            )}
+                            <StarRating
+                              rating={review?.rating}
+                              className="mx-2"
+                            />
+                          </div>
+                          <p className="text-sm md:text-base md:font-semibold">
+                            {getDate(review.node.date)}
+                          </p>
+                        </div>
+                        <p
+                          className="pt-2 italic"
+                          dangerouslySetInnerHTML={{
+                            __html: review.node.content ?? '',
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <div className="flex justify-between">
+                      {product.reviews.pageInfo.hasPreviousPage ? (
+                        <button
+                          className="bg-secondary text-white px-3 py-2 rounded-full "
+                          type="button"
+                          onClick={() => {
+                            fetchMore({
+                              variables: {
+                                first: null,
+                                after: null,
+                                last: 4,
+                                before:
+                                  product.reviews.pageInfo.startCursor || null,
+                              },
+                              updateQuery,
+                            });
+                          }}
+                        >
+                          Previous
+                        </button>
+                      ) : null}
+                      {product.reviews.pageInfo.hasNextPage ? (
+                        <button
+                          className="bg-secondary text-white px-3 py-2 rounded-full "
+                          type="button"
+                          onClick={() => {
+                            fetchMore({
+                              variables: {
+                                first: 4,
+                                after:
+                                  product.reviews.pageInfo.endCursor || null,
+                                last: null,
+                                before: null,
+                              },
+                              updateQuery,
+                            });
+                          }}
+                        >
+                          Next
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="z-10 col-span-1">
                 <img
@@ -146,10 +251,9 @@ const products = (): JSX.Element => {
                     ),
                   )}
               </div>
-            </>
+            </React.Fragment>
           )}
         </div>
-        {/* </div> */}
       </section>
       <Footer copyrightHolder={title} key="footer" />
     </main>

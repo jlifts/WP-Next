@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -8,7 +9,7 @@ import React from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { IFPProps } from './FPItemReverse';
-import Heading from '../Heading';
+import Heading from '../UI/Heading';
 
 const FPItem = ({ product }: IFPProps): JSX.Element => {
   const { inView, ref } = useInView();
@@ -34,15 +35,15 @@ const FPItem = ({ product }: IFPProps): JSX.Element => {
         <div className="text-white flex transform md:rotate-90 justify-start items-center pb-9 md:pb-0">
           <div className="border-b-2 px-16 mr-3" />
           <Heading level="h4" className="cursor-default w-80">
-            {product.name}
+            {product?.name}
           </Heading>
         </div>
 
         <div className="flex flex-col-reverse md:flex-col md:justify-start relative transform translate-x-10 md:-translate-x-36">
           <img
             ref={ref}
-            src={product.image.sourceUrl}
-            alt={product.image.title}
+            src={product?.image.sourceUrl}
+            alt={product?.image.title}
             className="w-5/6 lg:w-4/6 md:invisible lg:visible"
             // height={450}
             // width={420}
@@ -63,17 +64,17 @@ const FPItem = ({ product }: IFPProps): JSX.Element => {
         <div
           className="pb-7"
           dangerouslySetInnerHTML={{
-            __html: product.shortDescription ?? '',
+            __html: product?.shortDescription ?? '',
           }}
         />
         <p
           className={`${
-            product.stockStatus === 'IN_STOCK'
+            product?.stockStatus === 'IN_STOCK'
               ? 'text-green-300 italic'
               : 'text-red-300'
           }`}
         >
-          {product.stockStatus === 'IN_STOCK' ? 'In Stock' : 'Out of Stock'}
+          {product?.stockStatus === 'IN_STOCK' ? 'In Stock' : 'Out of Stock'}
         </p>
       </motion.div>
     </div>

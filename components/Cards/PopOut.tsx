@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PopProps } from 'typings/global';
-import Heading from '../Heading';
+import Heading from '../UI/Heading';
 
 const PopOut = ({
   title,

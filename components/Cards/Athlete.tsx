@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
@@ -8,7 +9,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { AthleteProps } from 'typings/global';
-import Heading from '../Heading';
+import Heading from '../UI/Heading';
 
 const Athlete = ({
   bgImage,

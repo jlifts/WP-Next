@@ -8,7 +8,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import useAuth from 'hooks/useAuth';
 import Link from 'next/link';
 // import LogOut from 'pages/logOut';

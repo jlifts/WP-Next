@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CheckoutCart, Payments } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { CartContext } from 'Context/CartContext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,7 +9,7 @@ import React, { useContext } from 'react';
 
 const Checkout = (): JSX.Element => {
   const router = useRouter();
-  const [cart, setCart] = useContext(CartContext);
+  const [cart] = useContext(CartContext);
 
   return (
     <>

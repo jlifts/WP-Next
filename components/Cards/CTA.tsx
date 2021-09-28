@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import { CTAProps } from 'typings/global';
-import Heading from '../Heading';
+import Heading from '../UI/Heading';
 
 function CTA({
   title = 'Get in touch',

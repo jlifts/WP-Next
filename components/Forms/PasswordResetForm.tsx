@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useMutation } from '@apollo/client';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { SEND_PASSWORD_RESET_EMAIL } from 'graphql/Mutations';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -69,6 +69,23 @@ const PasswordResetForm = (): JSX.Element => {
         autoComplete="off"
         passwordReset={false}
       />
+      {/* <div className="relative border-b-2 focus-within:border-blue-500 z-10">
+        <input
+          type="email"
+          name="email"
+          placeholder=" "
+          autoComplete="off"
+          className="block w-full appearance-none focus:outline-none bg-transparent z-10"
+          // required={true}
+          // ref={passwordRef}
+        />
+        <label
+          htmlFor="email"
+          className="absolute top-0 duration-300 z-20 origin-0"
+        >
+          Email
+        </label>
+      </div> */}
       <button
         aria-label="Log In"
         disabled={loading}

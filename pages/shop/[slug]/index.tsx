@@ -9,7 +9,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Drawer, Cart, ShopNav, Footer, AddToCart } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { PRODUCTS_QUERY, CATAGORIES } from 'graphql/Queries';
@@ -22,8 +22,6 @@ const Products = ({ product }: any): JSX.Element => {
   const itemPage = router.asPath.split('/').slice(2).toString();
   const title = 'Victis Health';
   const page = router.asPath;
-  // const prices = product[1].price.replace('$', '');
-  // console.log(productOptions);
 
   return (
     <main className="font-cochin">
@@ -58,6 +56,14 @@ const Products = ({ product }: any): JSX.Element => {
                         alt={item.featuredImage.node.title}
                         className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
+                      {/* <div className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out">
+                        <Image
+                          src={item.featuredImage.node.sourceUrl}
+                          alt={item.featuredImage.node.title}
+                          width={400}
+                          height={400}
+                        />
+                      </div> */}
                       <Heading
                         level="h5"
                         className="text-black text-base font-semibold z-40 font-mont py-3"

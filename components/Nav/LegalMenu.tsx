@@ -14,10 +14,7 @@ import { Client } from 'lib/ApolloClient';
 
 const LegalMenu = ({ open }: MenuProps) => {
   const router = useRouter();
-  // const id = 'dGVybToyNQ==';
-  const { data } = useQuery(LEGAL_MENU_QUERY, {
-    // variables: { id },
-  });
+  const { data } = useQuery(LEGAL_MENU_QUERY);
   const menus = data?.menu?.menuItems?.nodes;
   // console.log(data);
 
@@ -83,7 +80,7 @@ const LegalMenu = ({ open }: MenuProps) => {
                     : ''
                 } px-4 mb-3 mr-3`}
               />
-              <Link href={item.url} aria-label={item.label}>
+              <Link href={item.path} aria-label={item.label}>
                 {item.label}
               </Link>
             </motion.li>
@@ -93,12 +90,14 @@ const LegalMenu = ({ open }: MenuProps) => {
   );
 };
 
-// export async function getStaticProps(context: GetStaticPropsContext) {
-//   const client = getApolloClient(context);
-//   const { data } = await Client.query({
-//     query: LEGAL_MENU_QUERY,
-//   });
-//   return getNextStaticProps(context, data);
-// }
+export async function getStaticProps(/* context: GetStaticPropsContext */) {
+  // const client = getApolloClient(context);
+  const { data } = await Client.query({
+    query: LEGAL_MENU_QUERY,
+  });
+  return {
+    props: { data },
+  };
+}
 
 export default LegalMenu;

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CheckoutForm, CheckoutCart } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import { CartContext } from 'Context/CartContext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

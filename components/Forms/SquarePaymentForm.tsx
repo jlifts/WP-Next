@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -12,63 +14,81 @@ import React from 'react';
 //   GooglePay,
 // } from 'react-square-web-payments-sdk';
 
+// Dynamically load the payment script
+export const loadSquareSdk = () => {
+  return new Promise<void>((resolve, reject) => {
+    const sqPaymentScript = document.createElement('script');
+    sqPaymentScript.src = 'https://js.squareup.com/v2/paymentform';
+    sqPaymentScript.crossOrigin = 'anonymous';
+    sqPaymentScript.onload = () => {
+      resolve();
+    };
+    sqPaymentScript.onerror = () => {
+      reject(`Failed to load ${sqPaymentScript.src}`);
+    };
+    document.getElementsByTagName('head')[0].appendChild(sqPaymentScript);
+  });
+};
+
 const SquarePayments = (): any => {
   const LID = process.env.NEXT_PUBLIC_SQUARE_SANDBOX_LID;
   const APP_ID = process.env.NEXT_PUBLIC_SQUARE_SANDBOX_ID;
 
-  async function initializeCard(payments: any) {
-    const card = await payments.card();
-    await card.attach('#card-container');
+  // SQUARE DOCS
 
-    return card;
-  }
+  // async function initializeCard(payments: any) {
+  //   const card = await payments.card();
+  //   await card.attach('#card-container');
 
-  async function createPayment(token: any) {
-    const body = JSON.stringify({
-      LID,
-      sourceId: token,
-    });
+  //   return card;
+  // }
 
-    const paymentResponse = await fetch('/payment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
-    });
+  // async function createPayment(token: any) {
+  //   const body = JSON.stringify({
+  //     LID,
+  //     sourceId: token,
+  //   });
 
-    if (paymentResponse.ok) {
-      return paymentResponse.json();
-    }
+  //   const paymentResponse = await fetch('/payment', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body,
+  //   });
 
-    const errorBody = await paymentResponse.text();
-    throw new Error(errorBody);
-  }
+  //   if (paymentResponse.ok) {
+  //     return paymentResponse.json();
+  //   }
 
-  async function tokenize(paymentMethod: any) {
-    const tokenResult = await paymentMethod.tokenize();
-    if (tokenResult.status === 'OK') {
-      return tokenResult.token;
-    }
-    let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
-    if (tokenResult.errors) {
-      errorMessage += ` and errors: ${JSON.stringify(tokenResult.errors)}`;
-    }
-    throw new Error(errorMessage);
-  }
+  //   const errorBody = await paymentResponse.text();
+  //   throw new Error(errorBody);
+  // }
 
-  // Status is either Success or Failure
-  function displayPaymentResults(status: any) {
-    const statusContainer = document.getElementById('paymetn-status-container');
-    if (status === 'SUCCESSS') {
-      statusContainer.classList.remove('is-failure');
-      statusContainer.classList.add('is-success');
-    } else {
-      statusContainer.classList.remove('is-success');
-      statusContainer.classList.add('is-failure');
-    }
-    statusContainer.style.visibility = 'visible';
-  }
+  // async function tokenize(paymentMethod: any) {
+  //   const tokenResult = await paymentMethod.tokenize();
+  //   if (tokenResult.status === 'OK') {
+  //     return tokenResult.token;
+  //   }
+  //   let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
+  //   if (tokenResult.errors) {
+  //     errorMessage += ` and errors: ${JSON.stringify(tokenResult.errors)}`;
+  //   }
+  //   throw new Error(errorMessage);
+  // }
+
+  // // Status is either Success or Failure
+  // function displayPaymentResults(status: any) {
+  //   const statusContainer = document.getElementById('paymetn-status-container');
+  //   if (status === 'SUCCESSS') {
+  //     statusContainer.classList.remove('is-failure');
+  //     statusContainer.classList.add('is-success');
+  //   } else {
+  //     statusContainer.classList.remove('is-success');
+  //     statusContainer.classList.add('is-failure');
+  //   }
+  //   statusContainer.style.visibility = 'visible';
+  // }
 
   // document.addEventListener('DOMContentLoaded', async function () {
   //   if (!window.Square) {
@@ -116,6 +136,10 @@ const SquarePayments = (): any => {
   //   });
   // });
 
+  // SQUARE DOCS END
+
+  // GATSBY DOCS
+
   return (
     <>
       <div className="flex justify-center items-center">
@@ -129,7 +153,9 @@ const SquarePayments = (): any => {
       </button>
       <div id="payment-status-container" />
     </>
-    // Notice Next Config for details of below
+
+    // SQUARE PAYMENT FORM SDK, DID NOT WORK WITH NEXT, IS BETA
+
     // <SquarePaymentsForm
     //   /**
     //    * Identifies the calling form with a verified application ID
@@ -176,6 +202,8 @@ const SquarePayments = (): any => {
     //   </div>
     //   <GooglePay />
     // </SquarePaymentsForm>
+
+    // SQUARE PAYMENT FORM SDK END
   );
 };
 

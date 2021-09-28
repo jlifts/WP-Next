@@ -11,7 +11,7 @@ import React from 'react';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Client } from 'lib/ApolloClient';
-import { FEATURED_PRODUCTS, LEGAL_MENU_QUERY } from 'graphql/Queries';
+import { FEATURED_PRODUCTS } from 'graphql/Queries';
 import axios from './api/axios/deets';
 import {
   CTA,
@@ -33,21 +33,6 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
   // const image = products?.product?.featuredImage.node.sourceUrl;
   // const products = cart?.item?.products.map((items: any) => items);
   // console.log(products);
-
-  // async function test() {
-  //   const { data } = await Client.query({
-  //     query: LEGAL_MENU_QUERY,
-  //   });
-  //   const menu = data?.menu?.menuItems;
-  //   const slugs = menu?.nodes?.map((menus: { path: any }) =>
-  //     menus?.path.replaceAll('/', ''),
-  //   );
-  //   const paths = slugs?.map((slug: any) => ({
-  //     params: [slug],
-  //   }));
-  //   // console.log(paths);
-  // }
-  // test();
 
   if (inView) {
     animationControl.start({
@@ -129,10 +114,10 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
               className="border-b-2"
               initial={{ x: -150 }}
               transition={{ duration: 1, delay: 1 }}
-              animate={{ x: 1, width: 200 }}
+              animate={{ x: 1, width: 260 }}
             />
             <motion.div
-              className=" text-xl uppercase font-cochin opacity-0 transform -translate-x-14"
+              className="text-xl md:text-4xl uppercase font-cochin opacity-0 transform -translate-x-24"
               transition={{ duration: 1.5, delay: 1.2 }}
               animate={{ opacity: 1 }}
             >
@@ -172,7 +157,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
           >
             <div className="md:w-4/5 lg:w-3/5 h-full">
               <PopOut
-                title={deets?.slug.replace('-', ' ')}
+                title={deets?.slug?.replace('-', ' ')}
                 subTitle={deets?.title}
                 body={deets?.content}
               />
@@ -183,17 +168,17 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
         <section className="h-full md:space-y-20 md:-mt-44 lg:mt-0">
           <FPItemReverse
             product={
-              featuredProducts.productCategories.nodes[0].products.nodes[2]
+              featuredProducts.productCategories.nodes[0]?.products.nodes[2]
             }
           />
           <FPItem
             product={
-              featuredProducts.productCategories.nodes[0].products.nodes[1]
+              featuredProducts.productCategories.nodes[0]?.products.nodes[1]
             }
           />
           <FPItemReverse
             product={
-              featuredProducts.productCategories.nodes[0].products.nodes[0]
+              featuredProducts.productCategories.nodes[0]?.products.nodes[0]
             }
           />
         </section>

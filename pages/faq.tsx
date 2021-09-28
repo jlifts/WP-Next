@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Cart, Drawer, Footer, ShopNav, FAQ } from 'components';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import React from 'react';
 import axios from './api/axios/faq';
 
@@ -59,7 +59,7 @@ const faq = ({ faqs }: any): JSX.Element => {
 export async function getStaticProps() {
   const { data } = await axios.get('/posts');
   return {
-    props: { faqs: data?.reverse() },
+    props: { faqs: data },
   };
 }
 

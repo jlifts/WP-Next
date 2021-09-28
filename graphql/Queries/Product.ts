@@ -1,7 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const PRODUCT_QUERY = gql`
-  query Product($id: ID!) {
+  query Product(
+    $id: ID!
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+  ) {
     product(id: $id, idType: SLUG) {
       ... on SimpleProduct {
         id
@@ -28,7 +34,33 @@ export const PRODUCT_QUERY = gql`
         shortDescription
         attributes {
           nodes {
+            name
             options
+            attributeId
+          }
+        }
+        averageRating
+        reviewCount
+        reviews(first: $first, last: $last, after: $after, before: $before) {
+          edges {
+            node {
+              content
+              databaseId
+              date
+              author {
+                node {
+                  name
+                  databaseId
+                }
+              }
+            }
+            rating
+          }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
           }
         }
       }

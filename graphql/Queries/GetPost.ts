@@ -10,3 +10,14 @@ export const GET_POST = gql`
     }
   }
 `;
+
+export const GET_NEWS_POST = gql`
+  query getPost($id: ID!) {
+    page(id: $id, idType: URI) {
+      databaseId
+      content
+      link
+      title
+    }
+  }
+`;

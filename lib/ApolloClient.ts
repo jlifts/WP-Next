@@ -69,7 +69,8 @@ export const afterware = new ApolloLink((operation, forward) => {
 // GraphQl Client
 
 const http = createHttpLink({
-  uri: process.env.NEXT_PUBLIC_WPGRAPH_QL,
+  // uri: process.env.NEXT_PUBLIC_WPGRAPH_QL,
+  uri: process.env.NEXT_PUBLIC_WPGRAPH_QL_STAGING,
   credentials: 'include',
 });
 

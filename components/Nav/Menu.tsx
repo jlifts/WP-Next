@@ -21,8 +21,9 @@ const Menu = ({ open }: MenuProps) => {
   // const id = 'dGVybToyNA==';
   const { loggedIn } = useAuth();
   const { data } = useQuery(MENU_QUERY);
-  const menu = data?.menu?.menuItems.nodes;
-  // console.log(data);
+  const menu = data?.menu?.menuItems?.nodes;
+  // const menu = menus?.menus?.nodes[0]?.menuItems?.nodes;
+  // console.log(menus);
   // console.log(router.asPath);
 
   const variants = {
@@ -152,9 +153,11 @@ const Menu = ({ open }: MenuProps) => {
 export async function getStaticProps(/* context: GetStaticPropsContext */) {
   const { data } = await Client.query({
     query: MENU_QUERY,
+    variables: { id: 24 },
   });
   return {
-    props: { data },
+    props: { menus: data },
+    revalidate: 60,
   };
 }
 

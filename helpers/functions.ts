@@ -349,3 +349,24 @@ export const handleBillingDifferentThanShipping = (
 //   const newState = { ...input, [target.name]: !input.createAccount };
 //   setInput(newState);
 // };
+
+export const getDate = (date: any) => {
+  const newDate = new Date(date);
+  const year: number | string = newDate.getFullYear();
+  let month: number | string = newDate.getMonth() + 1;
+  let day: number | string = newDate.getDate();
+
+  if (day < 10) {
+    day.toString();
+    day = `0${day}`;
+  }
+
+  if (month < 10) {
+    month.toString();
+    month = `0${month}`;
+  }
+
+  const readableDate = `${month} - ${day} - ${year}`;
+
+  return readableDate;
+};

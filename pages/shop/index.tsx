@@ -9,7 +9,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Drawer, Cart, ShopNav, Footer } from 'components';
 // import { GetStaticPropsContext } from 'next';
-import Heading from 'components/Heading';
+import Heading from 'components/UI/Heading';
 import React from 'react';
 import { CATAGORIES } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';

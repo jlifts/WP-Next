@@ -23,6 +23,7 @@ export const PRODUCTS_QUERY = gql`
             }
             attributes {
               nodes {
+                name
                 options
               }
             }
@@ -34,9 +35,10 @@ export const PRODUCTS_QUERY = gql`
 `;
 
 export const FEATURED_PRODUCTS = gql`
-  # catagory dbId: 29
+  # catagory dbId for Dev: 29
+  # catagory dbId for Dev: 51
   query Featured {
-    productCategories(where: { include: 29 }) {
+    productCategories(where: { include: 51 }) {
       nodes {
         name
         databaseId

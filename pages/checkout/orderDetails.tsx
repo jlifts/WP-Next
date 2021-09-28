@@ -1,5 +1,5 @@
-import { PaymentForm } from 'components';
-import Heading from 'components/Heading';
+// import { PaymentForm } from 'components';
+import Heading from 'components/UI/Heading';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -44,7 +44,7 @@ const Checkout = (): JSX.Element => {
           </div>
         </nav>
 
-        <PaymentForm />
+        {/* <PaymentForm /> */}
         <div className="absolute bottom-2 pr-12 w-1/2">
           <nav className="flex text-primary justify-between">
             <Link href="/checkout">Refund Policy</Link>

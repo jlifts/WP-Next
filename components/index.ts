@@ -1,10 +1,10 @@
 import CTA from './Cards/CTA';
 import Footer from './Nav/Footer';
 import SEO from '../lib/Head';
-import Hero from './Hero';
-import Posts from './Posts';
+import Hero from './UI/Hero';
+import Posts from './UI/Posts';
 import Drawer from './Nav/Drawer';
-import MainHero from './MainHero';
+import MainHero from './UI/MainHero';
 import PopOut from './Cards/PopOut';
 import FPItem from './Cards/FPItem';
 import { ShopNav } from './Nav/ShopNav';
@@ -19,7 +19,7 @@ import CheckoutForm from './Forms/CheckoutForm';
 import LoginForm from './Forms/LoginForm';
 import FPItemReverse from './Cards/FPItemReverse';
 import Authed from './Auth/Authed';
-import ProfilePage from './ProfilePage';
+import ProfilePage from './UI/ProfilePage';
 import UnAuth from './Auth/UnAuth';
 import PasswordResetForm from './Forms/PasswordResetForm';
 import UserCreationForm from './Forms/UserCreationForm';
@@ -34,6 +34,8 @@ import Payments from './Forms/Payments';
 import FacebookPixel from './tags/FacebookPixel';
 import GoogleAnalyticsTag from './tags/GoogleAnalyticsTag';
 import AddToCartQuantity from './Checkout/AddToCartQuantity';
+import StarRating from './UI/StarRating';
+import ProductReview from './Forms/ProductReview';
 
 export {
   CTA,
@@ -72,4 +74,6 @@ export {
   Payments,
   FacebookPixel,
   GoogleAnalyticsTag,
+  StarRating,
+  ProductReview,
 };
