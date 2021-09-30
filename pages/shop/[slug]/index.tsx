@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -156,7 +157,7 @@ export async function getStaticProps({ params: { slug } }: any) {
 
   return {
     props: { product: data?.productCategory?.products?.nodes },
-    revalidate: 60,
+    revalidate: 1,
   };
 }
 

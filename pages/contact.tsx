@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/no-danger */
@@ -13,7 +14,12 @@ import axios from './api/axios/deets';
 
 const contact = ({ deets }: any): JSX.Element => {
   const settings = 'Victis Health';
-  const body = deets?.content;
+  const body = deets?.content
+    .replace('<!-- wp:paragraph -->', '')
+    .replace('<!-- /wp:paragraph -->', '')
+    .replace('<p>', '')
+    .replace('</p>', '');
+  // console.log(body);
 
   return (
     <main className="">
@@ -56,8 +62,12 @@ const contact = ({ deets }: any): JSX.Element => {
 
 export async function getStaticProps() {
   const { data } = await axios.get('/contact-page');
+
   return {
-    props: { deets: data },
+    props: {
+      deets: data,
+    },
+    revalidate: 600,
   };
 }
 

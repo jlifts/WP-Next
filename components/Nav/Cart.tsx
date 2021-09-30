@@ -27,7 +27,7 @@ const Cart: React.FC = () => {
   const totalPrice =
     cart !== null && Object.keys(cart).length ? cart.totalProductsPrice : '';
   const totalVariants = cart !== null ? cart?.products?.length : 0;
-  console.log(cart);
+  // console.log(cart);
 
   // // TS Functions for PWA syncronous offline handling
 
@@ -191,6 +191,7 @@ const Cart: React.FC = () => {
                           image={item?.image?.sourceUrl}
                           id={item?.id}
                           quantity={item?.qty}
+                          loading={updateCartProcessing}
                           handleDelete={handleRemoveProduct}
                         />
                       </div>

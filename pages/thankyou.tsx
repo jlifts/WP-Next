@@ -1,7 +1,7 @@
 import React from 'react';
 
-const thankyou = (): JSX.Element => {
+const Thankyou = (): JSX.Element => {
   return <div>Thanks Page</div>;
 };
 
-export default thankyou;
+export default Thankyou;

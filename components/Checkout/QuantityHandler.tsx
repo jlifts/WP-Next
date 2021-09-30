@@ -146,7 +146,7 @@ const QuantityHandler = ({
 
       <input
         type="text"
-        value={qty}
+        value={updateCartProcessing ? '...' : qty}
         onChange={(event) => handleQtyChange(event, item.cartKey)}
         min="1"
         max="100"

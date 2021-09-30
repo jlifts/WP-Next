@@ -157,7 +157,7 @@ export async function getStaticProps(/* context: GetStaticPropsContext */) {
   });
   return {
     props: { menus: data },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

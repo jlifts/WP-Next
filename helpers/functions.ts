@@ -30,7 +30,7 @@ export const createNewProduct = (
   qty: number,
 ) => {
   return {
-    productId: product.productId,
+    productId: product?.productId,
     id: product.id,
     image: product.image.sourceUrl,
     name: product.name,
@@ -84,7 +84,7 @@ export const getUpdatedProducts = (
 ) => {
   const productExistsIndex = isProductInCart(
     existingProductsInCart,
-    product.productId,
+    product?.productId,
   );
   // If the product exists, update product qty and total price
   if (productExistsIndex > -1) {
@@ -199,9 +199,9 @@ export const getFormattedCart = (data: any) => {
     const total: any = getFloat(givenProducts[i].subtotal);
 
     product.productId =
-      (givenProductVariety.productId || givenProduct?.productId) ?? '';
+      (givenProductVariety?.productId || givenProduct?.productId) ?? '';
     product.cartKey = givenProducts?.[i]?.key ?? '';
-    product.name = (givenProductVariety.name || givenProduct?.name) ?? '';
+    product.name = (givenProductVariety?.name || givenProduct?.name) ?? '';
     product.qty = givenProducts?.[i]?.quantity;
     product.regularPrice = total / product?.qty;
     product.subtotalPrice = givenProducts?.[i]?.subtotal ?? '';

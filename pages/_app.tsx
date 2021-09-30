@@ -24,10 +24,10 @@ export default function App({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
     // TODO: Process Payments, Order Review Page, News Page
-    // TODO: Bugs: Logout/ Login Function, menu z-index bug
+    // TODO: Bugs: Logout/ Login Function, menu z-index bug, build testing edge cases
     // TODO: DevOps: Domain name for frontend, place wordpress instance on admin.victishealth.com (talk to WPEngine)
     // TODO: Features: Square Rewards system, Wholesaler special dashboard, Square subscription model, Google/Facebook Login, Square GPay, skeleton loader, Related Products, create account from checkout, fill in user info at checkout if logged in, enable banner, Utilize Yoast SEO, Typescript Typings, Refactoring and optimizing speed
-    // TODO: Wordpress Add-ons: Build button for Vercel Redeployment, Tier system custom post type, Giveaway announcement special post type
+    // TODO: Wordpress Add-ons: Build button for Vercel Redeployment, Tier system custom post type, Giveaway announcement special post type, social media links manager, athlete post type manager
 
     <ApolloProvider client={Client}>
       <AuthProvider>

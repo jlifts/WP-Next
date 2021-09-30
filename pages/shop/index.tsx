@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -14,9 +15,11 @@ import React from 'react';
 import { CATAGORIES } from 'graphql/Queries';
 import { CatagoryQuery } from 'typings/global';
 import { Client } from 'lib/ApolloClient';
+import { GetStaticPropsContext } from 'next';
 
 const index = ({ catagories }: any): JSX.Element => {
   const title = 'Victis Health';
+  // console.log(catagories);
 
   return (
     <main className="font-cochin">
@@ -69,6 +72,7 @@ export async function getStaticProps(/* context: GetStaticPropsContext */) {
   });
   return {
     props: { catagories: data?.productCategories?.nodes },
+    revalidate: 600,
   };
 }
 

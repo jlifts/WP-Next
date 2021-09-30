@@ -17,11 +17,14 @@ import { APPLY_COUPON, REMOVE_COUPONS } from 'graphql/Mutations';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
 import { getFormattedCart } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
+import { Loading } from 'components';
 
 interface IProps {
   subTotal?: number | any;
   disabled?: boolean;
 }
+
+// Loading signal
 
 const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
   let input: HTMLInputElement;
@@ -64,30 +67,36 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
   );
 
   // Remove Coupon
-  const [removeCoupon, { data: couponRemoved, error: couponRemovalError }] =
-    useMutation(REMOVE_COUPONS, {
-      variables: {
-        code: cart?.discountCode,
-      },
-      onCompleted: () => {
-        // On Success:
-        // Make the GET_CART query to update the cart with new values in React context.
-        refetch();
-        const updatedCart = getFormattedCart(data);
-        localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
+  const [
+    removeCoupon,
+    {
+      data: couponRemoved,
+      error: couponRemovalError,
+      loading: couponRemovalLoading,
+    },
+  ] = useMutation(REMOVE_COUPONS, {
+    variables: {
+      code: cart?.discountCode,
+    },
+    onCompleted: () => {
+      // On Success:
+      // Make the GET_CART query to update the cart with new values in React context.
+      refetch();
+      const updatedCart = getFormattedCart(data);
+      localStorage.setItem('woo-cart', JSON.stringify(updatedCart));
 
-        // Update cart data in React Context.
-        setCart(updatedCart);
-      },
-      onError: () => {
-        if (couponRemovalError) {
-          toast.error(
-            couponRemovalError?.graphQLErrors?.[0]?.message ?? '',
-            toastConfig,
-          );
-        }
-      },
-    });
+      // Update cart data in React Context.
+      setCart(updatedCart);
+    },
+    onError: () => {
+      if (couponRemovalError) {
+        toast.error(
+          couponRemovalError?.graphQLErrors?.[0]?.message ?? '',
+          toastConfig,
+        );
+      }
+    },
+  });
 
   const handleDiscount = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -117,30 +126,54 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
     <div className="flex flex-col justify-start">
       {!coupon ? (
         <form onSubmit={(event) => handleDiscount(event)} className="my-2">
-          <input
-            placeholder="Discount Code"
-            name="discount"
-            defaultValue=""
-            ref={(node) => {
-              input = node;
-            }}
-            className={`${
-              error ? 'border-red-500 outline-none' : 'outline-none'
-            } px-1 w-4/6`}
-          />
-          <button
-            type="submit"
-            className="bg-gray-400 px-2 rounded-r-lg"
-            disabled={loading}
-          >
-            <FontAwesomeIcon icon={faCheck} />
-          </button>
+          {loading || couponRemovalLoading ? (
+            <div className="flex ">
+              <p className="pl-3 pr-6 py-1 w-4/6 bg-white text-gray-300 text-base">
+                Applying...
+              </p>
+              <button
+                type="submit"
+                className="bg-gray-400 px-2 rounded-r-lg"
+                disabled={loading}
+              >
+                <FontAwesomeIcon icon={faCheck} />
+              </button>
+            </div>
+          ) : (
+            <>
+              <input
+                placeholder="Discount Code"
+                name="discount"
+                defaultValue=""
+                ref={(node) => {
+                  input = node;
+                }}
+                className={`${
+                  error ? 'border-red-500 outline-none' : 'outline-none'
+                } px-1 w-4/6`}
+              />
+              <button
+                type="submit"
+                className="bg-gray-400 px-2 rounded-r-lg"
+                disabled={loading}
+              >
+                <FontAwesomeIcon icon={faCheck} />
+              </button>
+            </>
+          )}
         </form>
       ) : (
         <p className="bg-gray-400 rounded px-2 ml-2 w-full my-2 flex justify-center relative">
-          <span className="font-semibold px-4">{cart.discountCode}</span>
-          <span>-{cart.discountAmount}</span>
+          {couponRemovalLoading ? (
+            <>Removing...</>
+          ) : (
+            <>
+              <span className="font-semibold px-4">{cart.discountCode}</span>
+              <span>-{cart.discountAmount}</span>
+            </>
+          )}
           <button
+            disabled={couponRemovalLoading}
             type="button"
             className="rounded-l-xl bg-black text-white cursor-pointer absolute -left-2 px-1.5"
             onClick={() => handleDelete()}
@@ -160,7 +193,7 @@ const CheckoutDesc = ({ subTotal, disabled = true }: IProps): JSX.Element => {
       )}
       <button
         type="button"
-        disabled={disabled}
+        disabled={disabled || loading}
         className={`${
           disabled && 'hidden'
         } text-white font-mont text-xl bg-black border-white border-2 px-10 py-1 hover:bg-white hover:border-black hover:text-black cursor-pointer`}

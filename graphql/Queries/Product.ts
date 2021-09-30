@@ -61,7 +61,7 @@ export const PRODUCT_QUERY = gql`
       ... on VariableProduct {
         id
         # name
-        # productId: databaseId
+        productId: databaseId
         galleryImages {
           edges {
             node {

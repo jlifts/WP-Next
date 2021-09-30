@@ -1,7 +1,7 @@
 import { Cart, Drawer, Footer, PasswordResetForm, ShopNav } from 'components';
 import React from 'react';
 
-const passwordreset = (): JSX.Element => {
+const Passwordreset = (): JSX.Element => {
   return (
     <div className="bg-primary font-mont h-full">
       <div className="sticky top-0 z-70 md:text-white text-black" key="drawer">
@@ -17,4 +17,4 @@ const passwordreset = (): JSX.Element => {
   );
 };
 
-export default passwordreset;
+export default Passwordreset;

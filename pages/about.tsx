@@ -20,12 +20,15 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import axios from './api/axios/deets';
 
-// TODO Responsiveness flash
-
 const about = ({ deets }: any): JSX.Element => {
   const { inView, ref } = useInView();
   const animationControl = useAnimation();
   const animationControlY = useAnimation();
+  const content = deets?.content
+    .replace('<!-- wp:paragraph -->', '')
+    .replace('<!-- /wp:paragraph -->', '')
+    .replace('<p>', '')
+    .replace('</p>', '');
 
   if (inView) {
     animationControl.start({
@@ -93,7 +96,7 @@ const about = ({ deets }: any): JSX.Element => {
             <PopOut
               title={deets?.slug.replaceAll('-', ' ')}
               subTitle={deets?.title}
-              body={deets?.content}
+              body={content}
             />
           </div>
         </motion.div>
@@ -104,23 +107,24 @@ const about = ({ deets }: any): JSX.Element => {
           name="Rich Froning"
           subTitle="CrossFit Champion"
           Insta="https://www.instagram.com/richfroning/"
-          Facebook="https://www.instagram.com/richfroning/"
+          Facebook="https://www.facebook.com/RichFroning"
+          Twitter="https://twitter.com/richfroning"
         />
         <Athlete
           bgImage="images/Square_AZ_Background.webp"
           name="Arizona Rattlers"
           subTitle="Indoor FootBall"
-          Insta="https://www.instagram.com/richfroning/"
-          Facebook="https://www.instagram.com/richfroning/"
-          Twitter="https://www.instagram.com/richfroning/"
+          Insta="https://www.instagram.com/arizonarattlers/?hl=en"
+          Facebook="https://www.facebook.com/azrattlers/"
+          Twitter="https://twitter.com/arizonarattlers?lang=en"
         />
         <Athlete
           bgImage="images/Square_TUC_Background.webp"
           name="Tuscon Sugar Skulls"
           subTitle="Indoor FootBall"
-          Insta="https://www.instagram.com/richfroning/"
-          Facebook="https://www.instagram.com/richfroning/"
-          Twitter="https://www.instagram.com/richfroning/"
+          Insta="https://www.instagram.com/sugarskullsfootball/?hl=en"
+          Facebook="https://www.facebook.com/sugarskullsfootball/"
+          Twitter="https://twitter.com/sugarskullsfb?lang=en"
         />
       </section>
       <section className="h-full p-2 lg:p-12">
@@ -146,7 +150,10 @@ const about = ({ deets }: any): JSX.Element => {
 export async function getStaticProps() {
   const { data } = await axios.get('/this-is-victis');
   return {
-    props: { deets: data },
+    props: {
+      deets: data,
+    },
+    revalidate: 600,
   };
 }
 

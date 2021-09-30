@@ -97,6 +97,7 @@ export async function getStaticProps(/* context: GetStaticPropsContext */) {
   });
   return {
     props: { data },
+    revalidate: 600,
   };
 }
 

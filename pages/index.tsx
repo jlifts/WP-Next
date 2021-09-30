@@ -29,6 +29,11 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
   const animationControl = useAnimation();
   const animationControlY = useAnimation();
   const title = 'Victis Health';
+  const content = deets?.content
+    .replace('<!-- wp:paragraph -->', '')
+    .replace('<!-- /wp:paragraph -->', '')
+    .replace('<p>', '')
+    .replace('</p>', '');
   // const name = products?.product?.name;
   // const image = products?.product?.featuredImage.node.sourceUrl;
   // const products = cart?.item?.products.map((items: any) => items);
@@ -159,7 +164,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
               <PopOut
                 title={deets?.slug?.replace('-', ' ')}
                 subTitle={deets?.title}
-                body={deets?.content}
+                body={content}
               />
             </div>
           </motion.div>
@@ -202,8 +207,13 @@ export async function getStaticProps() {
   const { data } = await Client.query({ query: FEATURED_PRODUCTS });
 
   const { data: DATA } = await axios.get('/about-victis');
+
   return {
-    props: { deets: DATA, featuredProducts: data },
+    props: {
+      deets: DATA,
+      featuredProducts: data,
+    },
+    revalidate: 600,
   };
 }
 

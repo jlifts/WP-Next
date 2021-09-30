@@ -16,6 +16,7 @@ interface CartItems {
   id: string;
   item: any;
   products: any;
+  loading: any;
 }
 
 const CartContent = ({
@@ -27,6 +28,7 @@ const CartContent = ({
   handleDelete,
   item,
   products,
+  loading,
 }: CartItems): JSX.Element => {
   return (
     <div className="flex flex-col h-1/6 pl-4 md:pl-0" key={id}>
@@ -43,7 +45,7 @@ const CartContent = ({
         </div>
       )}
       <div className="text-black text-sm space-y-1 ">
-        <p className="w-52">{name}</p>
+        <p className="w-52">{loading ? 'Updating Product...' : name}</p>
         <div className="flex">
           <p>{typeof price !== 'string' ? `$${price.toFixed(2)}` : price}</p>
           <QuantityHandler

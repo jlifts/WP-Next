@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -23,8 +24,13 @@ import Heading from 'components/UI/Heading';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
-import { PRODUCT_QUERY } from 'graphql/Queries';
+import { PRODUCT_QUERY, PRODUCTS_QUERY } from 'graphql/Queries';
 import { getDate } from 'helpers/functions';
+import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
+import { Client } from 'lib/ApolloClient';
+import Skeleton from 'react-loading-skeleton';
+
+// Loading or skeleton
 
 const products = (): JSX.Element => {
   const title = 'Victis Health';
@@ -35,7 +41,7 @@ const products = (): JSX.Element => {
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
   const item = router.asPath.split('/').pop();
 
-  const { data, fetchMore } = useQuery(PRODUCT_QUERY, {
+  const { data, loading, fetchMore } = useQuery(PRODUCT_QUERY, {
     variables: { id: item, first: 4, last: null, after: null, before: null },
   });
   const updateQuery = (previousResult: any, { fetchMoreResult }: any) => {
@@ -84,6 +90,19 @@ const products = (): JSX.Element => {
           <Heading level="h4">Victis Health</Heading>
         </div>
         <div className="flex flex-col px-6 lg:px-0 md:grid md:grid-cols-2 md:gap-20 lg:gap-44 w-screen z-50 h-full pt-5 pb-12 lg:pl-40 mt-24">
+          {loading && (
+            <>
+              <div className="flex flex-col col-span-1 cursor-default transform md:-translate-x-16 pt-20">
+                <Skeleton duration={3} count={2} height={100} />
+                <Skeleton duration={3} height={40} />
+                <Skeleton duration={3} className="mt-28" />
+                <Skeleton duration={3} count={5} className="mt-28" />
+              </div>
+              <div className="z-10 col-span-1 transform -translate-x-16 pt-20">
+                <Skeleton height={400} count={2} />
+              </div>
+            </>
+          )}
           {product && (
             <React.Fragment key={product.id}>
               <div className="flex flex-col col-span-1 cursor-default">
@@ -93,29 +112,35 @@ const products = (): JSX.Element => {
                 >
                   {product.name}
                 </Heading>
-                <div className="flex">
-                  <p
-                    className={`${
-                      product.onSale ? 'line-through' : ''
-                    } text-black text-xl tracking-wide pb-10 z-40 mr-4`}
-                  >
-                    ${product.regularPrice.replace('$', '')}
-                  </p>
-                  {product.onSale && (
-                    <p className="text-xl cursor-default mx-4 font-semibold tracking-wide">
-                      ${product.price?.replace('$', '')}
+                <div className="flex flex-col md:flex-row">
+                  <div className="flex">
+                    <p
+                      className={`${
+                        product.onSale ? 'line-through' : ''
+                      } text-black text-xl tracking-wide md:pb-10 z-40 mr-4`}
+                    >
+                      ${product.regularPrice.replace('$', '')}
                     </p>
-                  )}
-                  {product.averageRating === 0 ? null : (
-                    <>
-                      <p className="px-3 text-xl">{product.averageRating}</p>
-                      <StarRating
-                        rating={product.averageRating}
-                        className="mx-0.5"
-                      />
-                      <p className="px-3 text-xl">{product.reviewCount}</p>
-                    </>
-                  )}
+                    {product.onSale && (
+                      <p className="text-xl cursor-default mx-4 font-semibold tracking-wide">
+                        ${product.price?.replace('$', '')}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex">
+                    {product.averageRating === 0 ? null : (
+                      <>
+                        <p className="pr-3 md:px-3 text-xl">
+                          {product.averageRating}
+                        </p>
+                        <StarRating
+                          rating={product.averageRating}
+                          className="mx-0.5"
+                        />
+                        <p className="px-3 text-xl">{product.reviewCount}</p>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <div className="flex my-8 justify-between w-5/6">
                   <AddToCartQuantity
@@ -290,27 +315,30 @@ const products = (): JSX.Element => {
   );
 };
 
+// TODO: furture nextjs static paths
+
 // export async function getStaticPaths(context: GetStaticPathsContext) {
-//   const client = getApolloClient(context);
-//   const { data } = await client.query({
-//     query: SINGLE_PRODUCT_QUERY,
+//   // const client = getApolloClient(context);
+//   const { data } = await Client.query({
+//     query: PRODUCTS_QUERY,
 //     variables: { id: slug },
 //   });
 //   console.log(data);
-//   const singleProducts = data?.productCategory?.products?.nodes;
-//   const slugs = singleProducts?.map((product: { slug: any }) => product?.slug);
-//   const paths = slugs?.map((slug: any) => ({ params: { slug } }));
-//   return { paths, fallback: true };
+//   // const singleProducts = data?.productCategory?.products?.nodes;
+//   // const slugs = singleProducts?.map((product: { slug: any }) => product?.slug);
+//   // const paths = slugs?.map((path: any) => ({ params: { id: path } }));
+
+//   return { paths, fallback: false };
 // }
 
 // export async function getStaticProps(
-//   { params: { slug } }: any,
+//   { params: { name } }: any,
 //   context: GetStaticPropsContext,
 // ) {
-//   const client = getApolloClient(context);
-//   const { data } = await client.query({
-//     query: INDIVIDUAL_QUERY,
-//     variables: { id: slug },
+//   // const client = getApolloClient(context);
+//   const { data } = await Client.query({
+//     query: PRODUCT_QUERY,
+//     variables: { id: name },
 //   });
 
 //   return {
@@ -319,7 +347,7 @@ const products = (): JSX.Element => {
 //       featuredImage: data?.product?.featuredImage.node.sourceUrl,
 //       gallery: data?.product?.galleryImages?.edges,
 //     },
-//     revalidate: 60,
+//     revalidate: 1,
 //   };
 // }
 

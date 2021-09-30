@@ -25,7 +25,7 @@ export const ADD_TO_CART = gql`
             }
             ... on VariableProduct {
               id
-              # productId: databaseId
+              productId: databaseId
               # name
               slug
               regularPrice

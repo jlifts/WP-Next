@@ -14,7 +14,6 @@ import React from 'react';
 import { Footer, MainHero, Cart, Drawer, ShopNav } from '../components';
 
 export default function Page(data: any): JSX.Element {
-  // const post = usePost();
   const title = 'Victis Health';
   const post = data?.data?.page;
   // console.log(post);
@@ -78,12 +77,12 @@ export async function getStaticPaths() {
   const { data } = await Client.query({
     query: LEGAL_MENU_QUERY,
   });
-  // const menu = data?.menu?.menuItems?.nodes;
-  // const slugs = menu?.map((menus: { path: string }) =>
-  //   menus?.path.slice(0, -1),
-  // );
+  const menu = data?.menu?.menuItems?.nodes;
+  const slugs = menu?.map((menus: { path: string }) =>
+    menus?.path.slice(0, -1),
+  );
   // const paths = slugs?.map((slug: any) => slug);
-  // const paths = slugs?.map((slug: string) => ({ params: { slug } }));
+  const paths = slugs?.map((slug: string) => ({ params: { slug } }));
   return {
     paths: ['/coa', '/privacy-policy', '/tc', '/return-policy'],
     fallback: false,
@@ -99,5 +98,6 @@ export async function getStaticProps({ params }: any) {
 
   return {
     props: { data },
+    revalidate: 600,
   };
 }

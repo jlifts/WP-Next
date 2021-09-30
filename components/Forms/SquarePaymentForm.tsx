@@ -16,20 +16,20 @@ import React from 'react';
 // } from 'react-square-web-payments-sdk';
 
 // Dynamically load the payment script
-export const loadSquareSdk = () => {
-  return new Promise<void>((resolve, reject) => {
-    const sqPaymentScript = document.createElement('script');
-    sqPaymentScript.src = 'https://js.squareup.com/v2/paymentform';
-    sqPaymentScript.crossOrigin = 'anonymous';
-    sqPaymentScript.onload = () => {
-      resolve();
-    };
-    sqPaymentScript.onerror = () => {
-      reject(`Failed to load ${sqPaymentScript.src}`);
-    };
-    document.getElementsByTagName('head')[0].appendChild(sqPaymentScript);
-  });
-};
+// export const loadSquareSdk = () => {
+//   return new Promise<void>((resolve, reject) => {
+//     const sqPaymentScript = document.createElement('script');
+//     sqPaymentScript.src = 'https://js.squareup.com/v2/paymentform';
+//     sqPaymentScript.crossOrigin = 'anonymous';
+//     sqPaymentScript.onload = () => {
+//       resolve();
+//     };
+//     sqPaymentScript.onerror = () => {
+//       reject(`Failed to load ${sqPaymentScript.src}`);
+//     };
+//     document.getElementsByTagName('head')[0].appendChild(sqPaymentScript);
+//   });
+// };
 
 const SquarePayments = (): any => {
   const LID = process.env.NEXT_PUBLIC_SQUARE_SANDBOX_LID;

@@ -19,6 +19,7 @@ interface FaqQuery {
 
 const faq = ({ faqs }: any): JSX.Element => {
   const title = 'Victis Health';
+  // console.log(faqs);
 
   return (
     <main className="">
@@ -60,6 +61,7 @@ export async function getStaticProps() {
   const { data } = await axios.get('/posts');
   return {
     props: { faqs: data },
+    revalidate: 1,
   };
 }
 
