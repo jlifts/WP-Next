@@ -30,13 +30,76 @@ export const PRODUCT_QUERY = gql`
         price
         onSale
         stockStatus
+        backorders
+        slug
+        shortDescription
+        averageRating
+        reviewCount
+        reviews(first: $first, last: $last, after: $after, before: $before) {
+          edges {
+            node {
+              content
+              databaseId
+              date
+              author {
+                node {
+                  name
+                  databaseId
+                }
+              }
+            }
+            rating
+          }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
+          }
+        }
+      }
+      ... on VariableProduct {
+        id
+        # name
+        # productId: databaseId
+        galleryImages {
+          edges {
+            node {
+              sourceUrl
+              id
+            }
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        regularPrice
+        price
+        onSale
+        stockStatus
+        backorders
         slug
         shortDescription
         attributes {
           nodes {
-            name
             options
-            attributeId
+          }
+        }
+        variations {
+          nodes {
+            productId: databaseId
+            name
+            regularPrice
+            stockStatus
+            backorders
+            price
+            attributes {
+              nodes {
+                value
+              }
+            }
           }
         }
         averageRating

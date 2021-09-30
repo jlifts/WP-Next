@@ -114,6 +114,9 @@ interface CatagoryQuery {
 }
 
 interface ProductQuery {
+  product: any;
+  backorders: string;
+  variations: any;
   attributes: any;
   onSale: boolean;
   name: string;

@@ -13,11 +13,26 @@ export const UPDATE_CART = gql`
               productId: databaseId
               slug
               regularPrice
-              featuredImage {
-                node {
-                  id
-                  sourceUrl
-                }
+              image {
+                id
+                sourceUrl
+                altText
+                title
+                srcSet
+              }
+            }
+            ... on VariableProduct {
+              id
+              name
+              productId: databaseId
+              slug
+              regularPrice
+              image {
+                id
+                sourceUrl
+                altText
+                title
+                srcSet
               }
             }
           }

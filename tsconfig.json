@@ -18,5 +18,5 @@
   },
   "include": ["next-env.d.ts", "typings/*.d.ts", "**/*.ts", "**/*.tsx",
     "tailwind.config.js", ".eslintrc.js", "postcss.config.js", "next.config.js"],
-  "exclude": ["node_modules" ]
+  "exclude": ["node_modules", "cypress" ]
 }

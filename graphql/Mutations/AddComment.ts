@@ -1,20 +1,24 @@
 import { gql } from '@apollo/client';
 
 export const ADD_COMMENT = gql`
-  mutation writeReview($input: WriteReview!) {
+  mutation writeReview($input: WriteReviewInput!) {
     writeReview(input: $input) {
+      rating
+      clientMutationId
       review {
-        databaseId
         content
+        date
         author {
           node {
             name
+          }
+        }
+        commentedOn {
+          node {
             databaseId
           }
         }
       }
-      rating
-      clientMutationId
     }
   }
 `;

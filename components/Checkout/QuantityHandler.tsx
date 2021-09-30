@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -7,18 +8,16 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { getUpdatedItems } from 'helpers/functions';
-import { CartContext } from 'Context/CartContext';
 import { v4 } from 'uuid';
 import { motion } from 'framer-motion';
 import { UPDATE_CART } from 'graphql/Mutations';
 import { useMutation } from '@apollo/client';
 
 // TODO: Fix with UseEffect
-// Make a duplicate that returns a quantity for AddToCart Buttons?
 
 const QuantityHandler = ({
   className,

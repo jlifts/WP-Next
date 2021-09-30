@@ -19,6 +19,21 @@ export const GET_CART_QUERY = gql`
           total
           subtotal
           key
+          variation {
+            node {
+              productId: databaseId
+              name
+              backorders
+              regularPrice
+              image {
+                altText
+                id
+                sourceUrl
+                srcSet
+                title
+              }
+            }
+          }
           product {
             node {
               ... on SimpleProduct {
@@ -27,11 +42,26 @@ export const GET_CART_QUERY = gql`
                 price
                 regularPrice
                 productId: databaseId
-                featuredImage {
-                  node {
-                    sourceUrl
-                    slug
-                  }
+                image {
+                  sourceUrl
+                  slug
+                  altText
+                  title
+                  srcSet
+                }
+              }
+              ... on VariableProduct {
+                id
+                name
+                price
+                regularPrice
+                productId: databaseId
+                image {
+                  sourceUrl
+                  slug
+                  altText
+                  title
+                  srcSet
                 }
               }
             }

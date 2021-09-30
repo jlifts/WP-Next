@@ -2,7 +2,6 @@ import CTA from './Cards/CTA';
 import Footer from './Nav/Footer';
 import SEO from '../lib/Head';
 import Hero from './UI/Hero';
-import Posts from './UI/Posts';
 import Drawer from './Nav/Drawer';
 import MainHero from './UI/MainHero';
 import PopOut from './Cards/PopOut';
@@ -30,7 +29,6 @@ import ProfileUpdateForm from './Forms/ProfileUpdateForm';
 import Order from './Cards/Order';
 import DeleteUserBtn from './Auth/DeleteUserBtn';
 import CheckoutCart from './Checkout/CheckoutCart';
-import Payments from './Forms/Payments';
 import FacebookPixel from './tags/FacebookPixel';
 import GoogleAnalyticsTag from './tags/GoogleAnalyticsTag';
 import AddToCartQuantity from './Checkout/AddToCartQuantity';
@@ -51,7 +49,6 @@ export {
   SEO,
   Hero,
   MainHero,
-  Posts,
   Drawer,
   Cart,
   FAQ,
@@ -71,7 +68,6 @@ export {
   ProfileUpdateForm,
   Order,
   DeleteUserBtn,
-  Payments,
   FacebookPixel,
   GoogleAnalyticsTag,
   StarRating,

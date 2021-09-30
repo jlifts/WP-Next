@@ -318,14 +318,16 @@ const CheckoutForm = (): JSX.Element => {
               <Heading level="h5" className="text-xl">
                 Contact Information
               </Heading>
-              {!user ? (
+              {/* {!user ? (
                 <p className="text-sm">
                   Already Have an Account?
                   <span className="text-primary">Log In</span>
                 </p>
               ) : (
                 <p className="text-sm">Hi, {user?.firstName}!</p>
-              )}
+              )} */}
+              {/* User login modal */}
+              {user && <p className="text-sm">Hi, {user?.firstName}!</p>}
             </div>
             <FormInput
               type="email"

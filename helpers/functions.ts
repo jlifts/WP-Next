@@ -32,7 +32,7 @@ export const createNewProduct = (
   return {
     productId: product.productId,
     id: product.id,
-    image: product.featuredImage.node.sourceUrl,
+    image: product.image.sourceUrl,
     name: product.name,
     price: productPrice,
     qty,
@@ -84,7 +84,7 @@ export const getUpdatedProducts = (
 ) => {
   const productExistsIndex = isProductInCart(
     existingProductsInCart,
-    product.id,
+    product.productId,
   );
   // If the product exists, update product qty and total price
   if (productExistsIndex > -1) {
@@ -194,21 +194,23 @@ export const getFormattedCart = (data: any) => {
 
   for (let i = 0; i < givenProducts.length; i++) {
     const givenProduct = givenProducts?.[i]?.product?.node;
+    const givenProductVariety = givenProducts?.[i]?.variation?.node;
     const product: any = {};
     const total: any = getFloat(givenProducts[i].subtotal);
 
-    product.productId = givenProduct?.productId ?? '';
+    product.productId =
+      (givenProductVariety.productId || givenProduct?.productId) ?? '';
     product.cartKey = givenProducts?.[i]?.key ?? '';
-    product.name = givenProduct?.name ?? '';
+    product.name = (givenProductVariety.name || givenProduct?.name) ?? '';
     product.qty = givenProducts?.[i]?.quantity;
     product.regularPrice = total / product?.qty;
     product.subtotalPrice = givenProducts?.[i]?.subtotal ?? '';
     product.totalPrice = givenProducts?.[i]?.total ?? '';
     product.image = {
-      sourceUrl: givenProduct?.featuredImage?.node?.sourceUrl ?? '',
-      srcSet: givenProduct?.featuredImage?.node?.srcSet ?? '',
-      title: givenProduct?.featuredImage?.node?.title ?? '',
-      altText: givenProduct?.featuredImage?.node?.altText ?? '',
+      sourceUrl: givenProduct?.image?.sourceUrl ?? '',
+      srcSet: givenProduct?.image?.srcSet ?? '',
+      title: givenProduct?.image?.title ?? '',
+      altText: givenProduct?.image?.altText ?? '',
     };
 
     totalProductsCount += givenProducts?.[i]?.quantity;

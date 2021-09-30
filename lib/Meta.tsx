@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import React, { FunctionComponent } from 'react';
-import Head from 'next/head';
 
 // TODO add Yoast Query
 

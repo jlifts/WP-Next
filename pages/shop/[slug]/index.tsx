@@ -11,7 +11,7 @@
 import { Drawer, Cart, ShopNav, Footer, AddToCart } from 'components';
 import Heading from 'components/UI/Heading';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { PRODUCTS_QUERY, CATAGORIES } from 'graphql/Queries';
 // import { GetStaticPathsContext } from 'next';
 import { ProductQuery } from 'typings/global';
@@ -22,6 +22,13 @@ const Products = ({ product }: any): JSX.Element => {
   const itemPage = router.asPath.split('/').slice(2).toString();
   const title = 'Victis Health';
   const page = router.asPath;
+  const [productVariant, setProductVariant] = useState(null);
+
+  const handleChange = (e: any) => {
+    const obj = JSON.parse(e.target.value);
+    setProductVariant(obj);
+  };
+  // console.log(product);
 
   return (
     <main className="font-cochin">
@@ -52,8 +59,8 @@ const Products = ({ product }: any): JSX.Element => {
                   <a href={`${page}/${item.slug}`} className="h-full">
                     <div className="flex flex-col col-span-1 cursor-pointer">
                       <img
-                        src={item.featuredImage.node.sourceUrl}
-                        alt={item.featuredImage.node.title}
+                        src={item?.featuredImage?.node?.sourceUrl}
+                        alt={item?.featuredImage?.node?.title}
                         className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out"
                       />
                       {/* <div className="h-96 2xl:h-112 z-10 shadow-2xl transform hover:scale-105 ease-in-out">
@@ -68,7 +75,7 @@ const Products = ({ product }: any): JSX.Element => {
                         level="h5"
                         className="text-black text-base font-semibold z-40 font-mont py-3"
                       >
-                        {item.name}
+                        {item?.name}
                       </Heading>
                     </div>
                   </a>
@@ -87,20 +94,38 @@ const Products = ({ product }: any): JSX.Element => {
                         </p>
                       )}
                     </div>
-                    {item?.attributes && (
-                      <select>
-                        {item?.attributes?.nodes[0]?.options.map(
-                          (sizes: any) => (
-                            <option value={sizes} key={sizes}>
-                              {sizes}
-                            </option>
-                          ),
-                        )}
+                    {item?.variations && (
+                      <select
+                        onChange={handleChange}
+                        defaultValue="Size"
+                        className="border-black border"
+                      >
+                        <option disabled value="Size">
+                          Size
+                        </option>
+                        {item?.variations?.nodes.map((sizes: any) => (
+                          <option
+                            value={JSON.stringify(sizes)}
+                            key={sizes?.attributes?.nodes[0]?.value}
+                            disabled={
+                              sizes?.stockStatus === 'OUT_OF_STOCK' &&
+                              sizes?.backorders === 'NO'
+                            }
+                          >
+                            {sizes?.attributes?.nodes[0]?.value}
+                          </option>
+                        ))}
                       </select>
                     )}
+                    {/* Change to the selected variation ID */}
                     <AddToCart
                       className="text-white bg-black border-2 border-black py-2 px-4 mx-2 font-mont hover:bg-white hover:border-black hover:text-black"
-                      product={item}
+                      product={productVariant || item}
+                      disabled={
+                        (item.stockStatus === 'OUT_OF_STOCK' &&
+                          item.backorders === 'NO') ||
+                        (productVariant === null && item.variations)
+                      }
                     />
                   </div>
                 </div>

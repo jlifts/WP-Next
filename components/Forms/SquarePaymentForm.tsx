@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */

@@ -4,7 +4,7 @@ export const PRODUCTS_QUERY = gql`
   query Collection($id: ID!) {
     productCategory(id: $id, idType: SLUG) {
       name
-      products(first: 20) {
+      products(first: 20, where: { orderby: { field: PRICE } }) {
         nodes {
           ... on SimpleProduct {
             id
@@ -14,6 +14,7 @@ export const PRODUCTS_QUERY = gql`
             regularPrice
             onSale
             stockStatus
+            backorders
             slug
             featuredImage {
               node {
@@ -21,10 +22,42 @@ export const PRODUCTS_QUERY = gql`
                 title
               }
             }
-            attributes {
+            # attributes {
+            #   nodes {
+            #     name
+            #     options
+            #   }
+            # }
+          }
+          ... on VariableProduct {
+            id
+            name
+            productId: databaseId
+            price
+            regularPrice
+            onSale
+            stockStatus
+            backorders
+            slug
+            featuredImage {
+              node {
+                sourceUrl
+                title
+              }
+            }
+            variations {
               nodes {
+                productId: databaseId
                 name
-                options
+                regularPrice
+                stockStatus
+                backorders
+                price
+                attributes {
+                  nodes {
+                    value
+                  }
+                }
               }
             }
           }
@@ -36,7 +69,7 @@ export const PRODUCTS_QUERY = gql`
 
 export const FEATURED_PRODUCTS = gql`
   # catagory dbId for Dev: 29
-  # catagory dbId for Dev: 51
+  # catagory dbId for Staging: 51
   query Featured {
     productCategories(where: { include: 51 }) {
       nodes {

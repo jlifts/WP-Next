@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
@@ -22,10 +23,10 @@ export default function App({
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
-    // TODO: Process Payments, Order Review Page, T shirt sizes order, review POST
+    // TODO: Process Payments, Order Review Page, News Page
     // TODO: Bugs: Logout/ Login Function, menu z-index bug
     // TODO: DevOps: Domain name for frontend, place wordpress instance on admin.victishealth.com (talk to WPEngine)
-    // TODO: Features: Rewards system, Wholesaler special dashboard, subscription model, Google/Facebook Login, GPay, skeleton loader, Related Products, create account from checkout, fill in user info at checkout if logged in, enable banner, Utilize Yoast SEO
+    // TODO: Features: Square Rewards system, Wholesaler special dashboard, Square subscription model, Google/Facebook Login, Square GPay, skeleton loader, Related Products, create account from checkout, fill in user info at checkout if logged in, enable banner, Utilize Yoast SEO, Typescript Typings, Refactoring and optimizing speed
     // TODO: Wordpress Add-ons: Build button for Vercel Redeployment, Tier system custom post type, Giveaway announcement special post type
 
     <ApolloProvider client={Client}>

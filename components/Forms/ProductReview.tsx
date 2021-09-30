@@ -37,23 +37,24 @@ const ProductReview = (productId: any): JSX.Element => {
 
   const [addReview, { data: CommentData, loading, error }] = useMutation(
     ADD_COMMENT,
-    { variables: inputData },
+    { variables: { input: inputData } },
   );
 
   const onSubmit = handleSubmit(async (data: any) => {
     setButton('Writing...');
     try {
       inputData = {
-        author: data.name,
+        author: data.name || 'Anonymous',
         content: data.message,
         rating,
         clientMutationId: v4(),
         date,
-        commentOn: productId,
+        commentOn: productId.productId,
       };
-      await addReview({ variables: inputData });
+      await addReview({ variables: { input: inputData } });
+      toast.success('Thank you, your review is under review', toastConfig);
     } catch {
-      toast.error(`Error: ${error}`, toastConfig);
+      toast.error(`Error: ${error.message}`, toastConfig);
     }
     setButton('Submit');
     reset();

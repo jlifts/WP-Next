@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -25,6 +24,7 @@ interface ButtonProps {
   product?: any;
   productName?: string;
   quant?: number;
+  disabled?: any;
 }
 
 const AddToCart = ({
@@ -32,6 +32,7 @@ const AddToCart = ({
   product,
   productName,
   quant,
+  disabled,
 }: ButtonProps): JSX.Element => {
   const [cart, setCart] = useContext(CartContext);
 
@@ -111,10 +112,13 @@ const AddToCart = ({
   return (
     <>
       <motion.button
-        className={className}
+        className={`${className} ${
+          disabled &&
+          'bg-gray-300 text-gray-500 cursor-default hover:bg-gray-300 hover:text-gray-500'
+        }`}
         type="submit"
         onClick={addToCartHandler}
-        disabled={addToCartLoading}
+        disabled={addToCartLoading || disabled}
         whileTap={{ scale: 0.95 }}
       >
         {addToCartLoading ? 'Adding to Cart...' : ' Add To Cart'}

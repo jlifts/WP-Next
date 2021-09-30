@@ -31,6 +31,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     '@typescript-eslint/unbound-method': 0,
     'no-void': 0,
+    'no-console': 0,
     'import/named': 0,
     'import/prefer-default-export': 0,
     'react/jsx-closing-bracket-location': 0,

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable react/jsx-one-expression-per-line */
@@ -28,6 +29,7 @@ import { getDate } from 'helpers/functions';
 const products = (): JSX.Element => {
   const title = 'Victis Health';
   const [qty, setQty] = useState(1);
+
   const router = useRouter();
   const lastPage = router.asPath.split('/').slice(0, -1).join('/');
   const itemPage = router.asPath.split('/').slice(2, -1).toString();
@@ -43,11 +45,19 @@ const products = (): JSX.Element => {
   };
 
   const product = data?.product;
+  const productStatus = product?.stockStatus;
+  const [productVariant, setProductVariant] = useState(null);
   const gallery = product?.galleryImages?.edges;
   const featuredImage = data?.product?.featuredImage.node.sourceUrl;
-  const productOptions = product?.attributes?.nodes[0]?.options;
+  const productOptions = product?.variations?.nodes;
   const reviews = product?.reviews?.edges;
-  // const reviewPages = Math.round(product?.reviewCount / 4);
+
+  const handleChange = (e: any) => {
+    const obj = JSON.parse(e.target.value);
+    setProductVariant(obj);
+  };
+  // console.log(productVariant);
+  // console.log(product);
 
   // console.log(product?.reviews);
 
@@ -113,31 +123,51 @@ const products = (): JSX.Element => {
                     setQty={setQty}
                     qty={qty}
                   />
-                  {product.attributes && (
-                    <select>
+                  {product.variations && (
+                    <select
+                      defaultValue="Size"
+                      onChange={handleChange}
+                      className="border-black border"
+                    >
+                      <option disabled value="Size">
+                        Size
+                      </option>
                       {productOptions.map((sizes: any) => (
-                        <option value={sizes} key={sizes}>
-                          {sizes}
+                        <option
+                          value={JSON.stringify(sizes)}
+                          key={sizes.attributes.nodes[0].value}
+                        >
+                          {sizes.attributes.nodes[0].value}
                         </option>
                       ))}
                     </select>
                   )}
+                  {/* Change to the selected variation ID: disabled when Sizes */}
                   <AddToCart
+                    disabled={
+                      (product.stockStatus === 'OUT_OF_STOCK' &&
+                        product.backorders === 'NO') ||
+                      (productVariant === null && product.variations)
+                    }
                     className="text-white bg-black border-2 border-black py-2 px-4 font-mont hover:bg-white hover:border-black hover:text-black"
-                    product={product}
-                    productName={product.name}
+                    product={productVariant || product}
                     quant={qty}
                   />
                 </div>
+                {/* Change to the selected variation ID */}
                 <p
                   className={`${
-                    product.stockStatus === 'IN_STOCK'
+                    productStatus === 'IN_STOCK'
                       ? 'text-green-300 italic'
+                      : productStatus === 'ON_BACKORDER'
+                      ? 'text-yellow-300 italic'
                       : 'text-red-300'
                   } py-3`}
                 >
-                  {product.stockStatus === 'IN_STOCK'
+                  {productStatus === 'IN_STOCK'
                     ? 'In Stock'
+                    : productStatus === 'ON_BACKORDER'
+                    ? 'On Backorder'
                     : 'Out of Stock'}
                 </p>
                 <p

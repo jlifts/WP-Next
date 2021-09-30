@@ -41,8 +41,8 @@ const index = ({ catagories }: any): JSX.Element => {
                 <a href={`/shop/${item.slug}`} key={item.id}>
                   <div className="relative col-span-1 cursor-pointer">
                     <img
-                      src={item.image.sourceUrl}
-                      alt={item.name}
+                      src={item?.image?.sourceUrl}
+                      alt={item?.name}
                       className="h-96 z-30 w-full item"
                     />
                     <div className="h-96 w-full bg-black absolute opacity-50 z-10 top-0 hover:opacity-70 hover:grow" />
@@ -50,7 +50,7 @@ const index = ({ catagories }: any): JSX.Element => {
                       level="h5"
                       className="top-1/2 right-40 absolute font-bold text-white text-xl z-40"
                     >
-                      {item.name}
+                      {item?.name}
                     </Heading>
                   </div>
                 </a>

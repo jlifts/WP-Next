@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -77,12 +78,12 @@ export async function getStaticPaths() {
   const { data } = await Client.query({
     query: LEGAL_MENU_QUERY,
   });
-  const menu = data?.menu?.menuItems?.nodes;
-  const slugs = menu?.map((menus: { path: string }) =>
-    menus?.path.slice(0, -1),
-  );
+  // const menu = data?.menu?.menuItems?.nodes;
+  // const slugs = menu?.map((menus: { path: string }) =>
+  //   menus?.path.slice(0, -1),
+  // );
   // const paths = slugs?.map((slug: any) => slug);
-  const paths = slugs?.map((slug: string) => ({ params: { slug } }));
+  // const paths = slugs?.map((slug: string) => ({ params: { slug } }));
   return {
     paths: ['/coa', '/privacy-policy', '/tc', '/return-policy'],
     fallback: false,

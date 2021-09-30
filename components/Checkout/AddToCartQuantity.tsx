@@ -13,7 +13,6 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
 // TODO: Fix with UseEffect
-// Make a duplicate that returns a quantity for AddToCart Buttons?
 
 const AddToCartQuantity = ({ className, qty, setQty }: any): JSX.Element => {
   const increment = () => {
