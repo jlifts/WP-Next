@@ -29,6 +29,7 @@ const about = ({ deets }: any): JSX.Element => {
     .replace('<!-- /wp:paragraph -->', '')
     .replace('<p>', '')
     .replace('</p>', '');
+  const title = deets?.slug?.replaceAll('-', ' ');
 
   if (inView) {
     animationControl.start({
@@ -93,11 +94,7 @@ const about = ({ deets }: any): JSX.Element => {
           initial={{ x: 400, opacity: 0 }}
         >
           <div className="md:w-3/5 h-full z-30">
-            <PopOut
-              title={deets?.slug?.replaceAll('-', ' ')}
-              subTitle={deets?.title}
-              body={content}
-            />
+            <PopOut title={title} subTitle={deets?.title} body={content} />
           </div>
         </motion.div>
       </section>
