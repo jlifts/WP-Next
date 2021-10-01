@@ -29,7 +29,8 @@ const about = ({ deets }: any): JSX.Element => {
     .replace('<!-- /wp:paragraph -->', '')
     .replace('<p>', '')
     .replace('</p>', '');
-  const title = deets?.slug?.replaceAll('-', ' ');
+  const title = deets?.slug?.replace(/-/g, ' ');
+  console.log(title);
 
   if (inView) {
     animationControl.start({
