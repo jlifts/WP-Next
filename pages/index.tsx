@@ -71,7 +71,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
         key="main"
       >
         <section className="h-screen z-20">
-          <div className="absolute top-7 md:top-3 left-3 text-white font-cochin z-1 text-xs md:text-base">
+          <div className="absolute top-7 md:top-3 left-3 text-white font-cochin z-1 text-sm md:text-base">
             <motion.div
               className="flex items-center justify-center z-10 opacity-0"
               transition={{ duration: 1 }}
@@ -79,7 +79,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
             >
               <p className="uppercase cursor-default">Share</p>
               <motion.div
-                className="border-b-2 px-8 mx-2"
+                className="border-b-2 px-5 md:px-8 mx-2"
                 initial={{ x: -60, opacity: 0 }}
                 transition={{ duration: 1.4, delay: 0.5 }}
                 animate={{ x: 1, opacity: 1 }}

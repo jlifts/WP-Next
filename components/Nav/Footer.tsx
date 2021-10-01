@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { FDA_QUERY } from 'graphql/Queries';
 // import { GetStaticPropsContext } from 'next';
 import React from 'react';
@@ -16,9 +16,10 @@ import Menu from './Menu';
 import SignUp from '../Forms/SignUp';
 import Socials from './Socials';
 
-function Footer({ copyrightHolder, data }: CopyRightProps): JSX.Element {
+function Footer({ copyrightHolder }: CopyRightProps): JSX.Element {
   const year = new Date().getFullYear();
-  // const { data } = useQuery(FDA_QUERY);
+  const { data } = useQuery(FDA_QUERY);
+  // console.log(data);
   // const fda = data?.post.content.replace('<p>', '').replace('</p>', '');
 
   return (
@@ -28,9 +29,9 @@ function Footer({ copyrightHolder, data }: CopyRightProps): JSX.Element {
         <div className="flex flex-col md:flex-row justify-around text-white pt-2">
           <div className="flex flex-col">
             <div className="flex flex-col h-80">
-              <h6 className="font-bold -mb-4 ml-3 pt-16 px-11 cursor-default">
+              <h4 className="font-bold -mb-4 ml-3 pt-16 px-11 cursor-default">
                 Navigation
-              </h6>
+              </h4>
               <Menu open="true" />
             </div>
             <div className="flex flex-col w-80 h-80">
@@ -69,11 +70,10 @@ function Footer({ copyrightHolder, data }: CopyRightProps): JSX.Element {
 }
 
 export async function getStaticProps(/* context: GetStaticPropsContext */) {
-  const { data } = await Client.query({
-    query: FDA_QUERY,
-  });
+  const { data } = await Client.query({ query: FDA_QUERY });
   return {
     props: { data },
+    revalidate: 600,
   };
 }
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 // const form = process.env.NEXT_PUBLIC_FORM;
 
 // Staging
-const base = process.env.NEXT_PUBLIC_WORDPRESS_URL_STAGING;
+const base = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 const form = process.env.NEXT_PUBLIC_FORM_STAGING;
 
 // Prod

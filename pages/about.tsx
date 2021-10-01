@@ -30,7 +30,7 @@ const about = ({ deets }: any): JSX.Element => {
     .replace('<p>', '')
     .replace('</p>', '');
   const title = deets?.slug?.replace(/-/g, ' ');
-  console.log(title);
+  // console.log(title);
 
   if (inView) {
     animationControl.start({

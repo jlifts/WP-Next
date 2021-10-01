@@ -4,7 +4,7 @@ import axios from 'axios';
 // Dev
 // const base = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 // Staging
-const base = process.env.NEXT_PUBLIC_WORDPRESS_URL_STAGING;
+const base = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 
 export default axios.create({
   baseURL: `${base}/wp-json/faqs/v1`,
