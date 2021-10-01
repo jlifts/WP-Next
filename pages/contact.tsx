@@ -14,8 +14,9 @@ import axios from './api/axios/deets';
 
 const contact = ({ deets }: any): JSX.Element => {
   const settings = 'Victis Health';
+  // eslint-disable-next-line prettier/prettier
   const body = deets?.content
-    .replace('<!-- wp:paragraph -->', '')
+    ?.replace('<!-- wp:paragraph -->', '')
     .replace('<!-- /wp:paragraph -->', '')
     .replace('<p>', '')
     .replace('</p>', '');

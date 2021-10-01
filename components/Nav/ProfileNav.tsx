@@ -14,6 +14,7 @@ import Link from 'next/link';
 // import LogOut from 'pages/logOut';
 import React from 'react';
 import crypto from 'crypto';
+import LogOut from 'components/Auth/LogOut';
 import Socials from './Socials';
 
 const ProfileNav = (): JSX.Element => {
@@ -63,7 +64,7 @@ const ProfileNav = (): JSX.Element => {
                   />
                   Victis Test
                 </p> */}
-        <Link href="/members/events">
+        <Link href="/events">
           <p className="border-b w-full py-3 px-3 flex justify-between cursor-pointer">
             <FontAwesomeIcon icon={faCalendarAlt} />
             Giveaways &amp; Events
@@ -77,8 +78,7 @@ const ProfileNav = (): JSX.Element => {
         </Link>
         <p className="border-b w-full py-3 px-3 flex justify-between">
           <FontAwesomeIcon icon={faSignOutAlt} />
-          {/* <LogOut /> */}
-          Logout
+          <LogOut />
         </p>
         <div className="absolute bottom-2 left-4">
           <Socials />

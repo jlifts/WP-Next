@@ -24,7 +24,7 @@ function SEO(): JSX.Element {
         ></script> */}
 
         {/* Global Site Code Pixel - Facebook Pixel */}
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
                 !function(f,b,e,v,n,t,s)
@@ -38,10 +38,10 @@ function SEO(): JSX.Element {
                 fbq('init', ${FB_PIXEL_ID});
               `,
           }}
-        /> */}
+        />
 
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        {/* <script
+        <script
           // strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
         />
@@ -57,7 +57,7 @@ function SEO(): JSX.Element {
             });
           `,
           }}
-        /> */}
+        />
         {/* Font Awesome for star ratings import */}
         <script
           src="https://kit.fontawesome.com/c1562e6535.js"

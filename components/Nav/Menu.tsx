@@ -15,6 +15,7 @@ import { MenuProps, MenuQuery } from 'typings/global';
 import { MENU_QUERY } from 'graphql/Queries';
 import useAuth from 'hooks/useAuth';
 import { Client } from 'lib/ApolloClient';
+import LogOut from 'components/Auth/LogOut';
 
 const Menu = ({ open }: MenuProps) => {
   const router = useRouter();
@@ -139,9 +140,10 @@ const Menu = ({ open }: MenuProps) => {
               className="px-3 hover:text-secondary w-full flex"
             >
               <div className="px-4 mb-3 mr-3" />
-              <Link href="/logout" aria-label="Home">
+              {/* <Link href="/logout" aria-label="Home">
                 LogOut
-              </Link>
+              </Link> */}
+              <LogOut />
             </motion.li>
           </>
         )}

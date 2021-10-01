@@ -17,7 +17,6 @@ interface IClassName {
 const LogOut = ({ className }: IClassName): JSX.Element => {
   const router = useRouter();
   const [log, setLog] = useState('LogOut');
-  // const [loading, setLoading] = useState(false);
   const [logOut, { loading, error, data }] = useMutation(LOG_OUT, {
     refetchQueries: [{ query: GET_USER }],
   });
@@ -27,7 +26,6 @@ const LogOut = ({ className }: IClassName): JSX.Element => {
 
   const handleClick = async () => {
     setLog('Logging Out...');
-    // setLoading(true);
     await logOut();
     await router.push('/');
   };
@@ -39,8 +37,7 @@ const LogOut = ({ className }: IClassName): JSX.Element => {
       disabled={loading}
       onChange={handleClick}
     >
-      {log}
-      {error && <p>{error.message}</p>}
+      {!error ? log : <p>{error.message}</p>}
       {/* {!loggedOut && (
         <p>Unable to log out. Please refresh the page and try again</p>
       )} */}

@@ -13,15 +13,15 @@ const handleRouteChange = () => {
 const FacebookPixel = ({ children }: any): JSX.Element => {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // This pageview only trigger first time (it is important for Pixel to have real information)
-  //   fbq.pageview();
+  useEffect(() => {
+    // This pageview only trigger first time (it is important for Pixel to have real information)
+    fbq.pageview();
 
-  //   router.events.on('routeChangeComplete', handleRouteChange);
-  //   return () => {
-  //     router.events.off('routeChangeComplete', handleRouteChange);
-  //   };
-  // }, [router.events]);
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return children;
 };

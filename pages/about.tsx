@@ -24,13 +24,14 @@ const about = ({ deets }: any): JSX.Element => {
   const { inView, ref } = useInView();
   const animationControl = useAnimation();
   const animationControlY = useAnimation();
+  // eslint-disable-next-line prettier/prettier
   const content = deets?.content
-    .replace('<!-- wp:paragraph -->', '')
+    ?.replace('<!-- wp:paragraph -->', '')
     .replace('<!-- /wp:paragraph -->', '')
     .replace('<p>', '')
     .replace('</p>', '');
   const title = deets?.slug?.replace(/-/g, ' ');
-  // console.log(title);
+  // console.log(deets);
 
   if (inView) {
     animationControl.start({
