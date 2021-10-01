@@ -94,7 +94,7 @@ const about = ({ deets }: any): JSX.Element => {
         >
           <div className="md:w-3/5 h-full z-30">
             <PopOut
-              title={deets?.slug.replaceAll('-', ' ')}
+              title={deets?.slug?.replaceAll('-', ' ')}
               subTitle={deets?.title}
               body={content}
             />

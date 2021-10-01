@@ -40,6 +40,7 @@ interface CTAProps {
 
 interface CopyRightProps {
   copyrightHolder?: string;
+  data?: any;
 }
 
 interface HeaderProps {

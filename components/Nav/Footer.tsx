@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 import { FDA_QUERY } from 'graphql/Queries';
 // import { GetStaticPropsContext } from 'next';
 import React from 'react';
@@ -16,9 +16,9 @@ import Menu from './Menu';
 import SignUp from '../Forms/SignUp';
 import Socials from './Socials';
 
-function Footer({ copyrightHolder }: CopyRightProps): JSX.Element {
+function Footer({ copyrightHolder, data }: CopyRightProps): JSX.Element {
   const year = new Date().getFullYear();
-  const { data } = useQuery(FDA_QUERY);
+  // const { data } = useQuery(FDA_QUERY);
   // const fda = data?.post.content.replace('<p>', '').replace('</p>', '');
 
   return (

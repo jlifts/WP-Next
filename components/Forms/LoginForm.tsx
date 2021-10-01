@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
@@ -84,7 +85,8 @@ const LoginForm = (): JSX.Element => {
       >
         {button}
       </button>
-      <div className="flex justify-center or">or</div>
+      {/* Future OAuth feature */}
+      {/* <div className="flex justify-center or">or</div>
       <div>
         <GoogleLoginButton
           className="google font-items"
@@ -100,7 +102,7 @@ const LoginForm = (): JSX.Element => {
         >
           <span className="text-sm sm:text-xl">Log In with Facebook</span>
         </FacebookLoginButton>
-      </div>
+      </div> */}
       <div className="or text-xs">
         <Link href="/signup">Need to Make an Account? Sign Up</Link>
       </div>
