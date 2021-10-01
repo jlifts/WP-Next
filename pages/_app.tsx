@@ -32,13 +32,13 @@ export default function App({
     <ApolloProvider client={Client}>
       <AuthProvider>
         <CartProvider>
-          {/* <GoogleAnalyticsTag>
-              <FacebookPixel> */}
-          <Head />
-          <Component {...pageProps} />
-          <ToastContainer />
-          {/* </FacebookPixel>
-            </GoogleAnalyticsTag> */}
+          <GoogleAnalyticsTag>
+            <FacebookPixel>
+              <Head />
+              <Component {...pageProps} />
+              <ToastContainer />
+            </FacebookPixel>
+          </GoogleAnalyticsTag>
         </CartProvider>
       </AuthProvider>
     </ApolloProvider>
