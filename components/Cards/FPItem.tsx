@@ -8,6 +8,7 @@
 import React from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 import { IFPProps } from './FPItemReverse';
 import Heading from '../UI/Heading';
 
@@ -15,7 +16,6 @@ const FPItem = ({ product }: IFPProps): JSX.Element => {
   const { inView, ref } = useInView();
   const animationControl = useAnimation();
 
-  // const products = item?.products.map((items: any) => items);
   // console.log(product);
 
   if (inView) {
@@ -39,21 +39,25 @@ const FPItem = ({ product }: IFPProps): JSX.Element => {
           </Heading>
         </div>
 
-        <div className="flex flex-col-reverse md:flex-col md:justify-start relative transform translate-x-10 md:-translate-x-36">
-          <img
-            ref={ref}
+        <div
+          ref={ref}
+          className="flex flex-col-reverse md:flex-col md:justify-start relative transform translate-x-10 md:-translate-x-36 w-4/6 lg:h-6/6 lg:w-5/6"
+        >
+          <Image
             src={product?.image.sourceUrl}
             alt={product?.image.title}
-            className="w-5/6 lg:w-4/6 md:invisible lg:visible"
-            // height={450}
-            // width={420}
+            placeholder="blur"
+            blurDataURL={product?.image.sourceUrl}
+            layout="fill"
+            objectFit="contain"
+            className="md:invisible lg:visible"
           />
-          {/* <img
+        </div>
+        {/* <img
             src="images/Detailline.svg"
             alt="Detailline"
             className="absolute -bottom-10 -right-48"
           /> */}
-        </div>
       </div>
       <motion.div
         className="md:col-span-1 transform translate-x-16 lg:translate-x-0 flex flex-col-reverse md:flex-col justify-center px-10 md:px-0 lg:pl-44 md:w-80 lg:w-132"

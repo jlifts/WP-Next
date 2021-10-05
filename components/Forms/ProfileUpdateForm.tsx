@@ -11,6 +11,7 @@ import React from 'react';
 import useAuth from 'hooks/useAuth';
 import { USER_ADDRESS } from 'graphql/Queries';
 import { UPDATE_USER } from 'graphql/Mutations';
+import { DeleteUserBtn } from 'components';
 
 const UserCreationForm = (): JSX.Element => {
   // const [checked, setChecked] = useState(false);
@@ -392,6 +393,7 @@ const UserCreationForm = (): JSX.Element => {
           </button>
         </fieldset>
       </form>
+      <DeleteUserBtn />
     </div>
   );
 };

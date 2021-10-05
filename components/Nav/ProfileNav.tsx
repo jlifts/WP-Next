@@ -76,7 +76,7 @@ const ProfileNav = (): JSX.Element => {
           </p>
         </Link>
         <Link href="/logout">
-          <p className="border-b w-full py-3 px-3 flex justify-between">
+          <p className="border-b w-full py-3 px-3 flex justify-between cursor-pointer">
             <FontAwesomeIcon icon={faSignOutAlt} />
             {/* <LogOut /> */}
             Logout

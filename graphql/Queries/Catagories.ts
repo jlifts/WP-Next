@@ -13,6 +13,11 @@ export const CATAGORIES = gql`
         }
         slug
         count
+        products {
+          nodes {
+            slug
+          }
+        }
       }
     }
   }

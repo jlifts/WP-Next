@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { HeroProps } from 'typings/global';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 function Hero({
   title = '',
@@ -28,11 +29,20 @@ function Hero({
         }
       />
       <div
-        style={{
-          backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
-        }}
+        // style={{
+        //   backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
+        // }}
         className="h-4/6 w-full lg:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
-      />
+      >
+        <Image
+          src={bgImage}
+          alt="Hero background"
+          layout="fill"
+          priority
+          placeholder="blur"
+          blurDataURL={bgImage}
+        />
+      </div>
       <div className="z-30">
         <motion.div
           className="flex flex-col items-center justify-center opacity-0"

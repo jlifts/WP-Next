@@ -102,7 +102,7 @@ const about = ({ deets }: any): JSX.Element => {
       </section>
       <section className="flex flex-col h-full+ text-white py-28">
         <Athlete
-          bgImage="images/Froning1.webp"
+          bgImage="/images/Froning1.webp"
           name="Rich Froning"
           subTitle="CrossFit Champion"
           Insta="https://www.instagram.com/richfroning/"
@@ -110,7 +110,7 @@ const about = ({ deets }: any): JSX.Element => {
           Twitter="https://twitter.com/richfroning"
         />
         <Athlete
-          bgImage="images/Square_AZ_Background.webp"
+          bgImage="/images/Square_AZ_Background.webp"
           name="Arizona Rattlers"
           subTitle="Indoor FootBall"
           Insta="https://www.instagram.com/arizonarattlers/?hl=en"
@@ -118,7 +118,7 @@ const about = ({ deets }: any): JSX.Element => {
           Twitter="https://twitter.com/arizonarattlers?lang=en"
         />
         <Athlete
-          bgImage="images/Square_TUC_Background.webp"
+          bgImage="/images/Square_TUC_Background.webp"
           name="Tuscon Sugar Skulls"
           subTitle="Indoor FootBall"
           Insta="https://www.instagram.com/sugarskullsfootball/?hl=en"

@@ -138,7 +138,7 @@ const Menu = ({ open }: MenuProps) => {
             >
               <div className="px-4 mb-3 mr-3" />
               <Link href="/logout" aria-label="Home">
-                LogOut
+                <p className="cursor-pointer">LogOut</p>
               </Link>
               {/* <LogOut /> */}
             </motion.li>

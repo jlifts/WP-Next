@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Cart, Drawer, Footer, SetPasswordForm, ShopNav } from 'components';
 import { useRouter } from 'next/router';
 

@@ -12,6 +12,7 @@ import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Client } from 'lib/ApolloClient';
 import { FEATURED_PRODUCTS } from 'graphql/Queries';
+import Image from 'next/image';
 import axios from './api/axios/deets';
 import {
   CTA,
@@ -34,10 +35,6 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
     .replace('<!-- /wp:paragraph -->', '')
     .replace('<p>', '')
     .replace('</p>', '');
-  // const name = products?.product?.name;
-  // const image = products?.product?.featuredImage.node.sourceUrl;
-  // const products = cart?.item?.products.map((items: any) => items);
-  // console.log(products);
 
   if (inView) {
     animationControl.start({
@@ -134,16 +131,20 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
           </div>
         </section>
         <section className="h-screen+ ">
-          <motion.img
-            src="/images/insta-victis-lawncare2.webp"
-            alt="Victis Plant"
+          <motion.div
             className="invisible md:visible w-4/6 md:w-2/4 md:h-1/4 md:left-10 lg:w-3/6 lg:h-4/6 lg:left-36 absolute "
             // animate={{ x: 1, opacity: 1 }}
             animate={animationControl}
             transition={{ duration: 1 }}
             initial={{ x: -400, opacity: 0 }}
-          />
-
+          >
+            <Image
+              src="/images/insta-victis-lawncare2.webp"
+              alt="Victis Plant"
+              layout="fill"
+            />
+          </motion.div>
+          {/* Make next image  */}
           <motion.img
             src="/images/Victis-BlueTin-front_noCBD-1.webp"
             alt="Victis Cream"
@@ -166,9 +167,9 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
                 subTitle={deets?.title}
                 body={content}
               />
+              <div ref={ref} className="transform -translate-y-44" />
             </div>
           </motion.div>
-          <div ref={ref} />
         </section>
         <section className="h-full md:space-y-20 md:-mt-44 lg:mt-0">
           <FPItemReverse

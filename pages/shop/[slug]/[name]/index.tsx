@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-floating-promises */

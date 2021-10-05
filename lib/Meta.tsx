@@ -23,19 +23,19 @@ export const siteUrl = 'https://victishealth.com';
 
 const Meta: FunctionComponent<MetaProps> = ({
   canonicalUrl = siteUrl,
-  keywords = 'webdevelopement, webdev, ts, js, solidity, mobile, blockchain, React, portfolio, coding, josh',
+  keywords = 'victis, victis health, health, wellness, cbd, therapuetic cream, cream, crossfit',
   icon = '/favicon.ico',
-  description = "Josh Burgess's Web Portfolio. Experience something more than just another website, and if you like what you see, let's work together and make something creative for you!",
-  ogTitle = "Josh's Portfolio",
+  description = 'Our natural, pharmaceutical-grade CBD products are developed with the highest quality standards and advanced science for 0% THC and effective pain relief.',
+  ogTitle = 'Victis Health',
   ogType = 'website',
   ogLocale = 'en_US',
-  ogDescription = "Josh Burgess's Web Portfolio. Experience something more than just another website, and if you like what you see, let's work together and make something creative for you!",
+  ogDescription = 'Our natural, pharmaceutical-grade CBD products are developed with the highest quality standards and advanced science for 0% THC and effective pain relief.',
   ogUrl = siteUrl,
-  ogSiteName = "Josh Burgess's Portfolio",
+  ogSiteName = 'Victis Health',
   ogImage = '/favicon.ico',
   children,
 }) => {
-  ogImage = ogImage != null ? ogImage : '/assets/Icon.svg';
+  ogImage = ogImage != null ? ogImage : '/images/Victis_White_clr.png';
   return (
     <>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -71,8 +71,12 @@ const Meta: FunctionComponent<MetaProps> = ({
         content="summary_large_image"
         key="twittercard"
       />
-      <meta name="twitter:site" content="@tumee" key="twittersite" />
-      <meta name="twitter:creator" content="@tumee" key="twittercreator" />
+      <meta name="twitter:site" content="@victis_health" key="twittersite" />
+      <meta
+        name="twitter:creator"
+        content="@victis_health"
+        key="twittercreator"
+      />
 
       {children}
     </>

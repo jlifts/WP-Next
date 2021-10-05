@@ -18,11 +18,12 @@ export default function LogOut(): JSX.Element {
   const loggedOut = Boolean(data?.logout?.status);
 
   useEffect(() => {
-    logOut();
     Client.clearStore();
+    logOut();
   }, [logOut]);
 
   if (loggedOut) {
+    router.reload();
     router.push('/');
   }
 

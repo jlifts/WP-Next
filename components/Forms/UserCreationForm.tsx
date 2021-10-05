@@ -6,7 +6,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link';
 import { useMutation } from '@apollo/client';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -16,9 +16,11 @@ import { REGISTER_USER } from 'graphql/Mutations';
 const UserCreationForm = (): JSX.Element => {
   const [register, { data, loading, error }] = useMutation(REGISTER_USER);
   const wasSignUpSuccessful = Boolean(data?.registerUser?.user?.databaseId);
+  const [button, setButton] = useState('Sign Up');
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setButton('Signing Up...');
     const formData = new FormData(event.currentTarget);
     const values = Object.fromEntries(formData);
     register({
@@ -128,7 +130,7 @@ const UserCreationForm = (): JSX.Element => {
           type="submit"
           className="w-full px-3 py-4 text-white bg-secondary rounded-md hover:bg-secondaryAccent focus:bg-secondaryAccent focus:outline-none font-items"
         >
-          Sign Up
+          {button}
         </button>
         {/* Future OAuth feature */}
         {/* <div className="flex justify-center or">or</div>

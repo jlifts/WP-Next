@@ -13,7 +13,7 @@ declare global {
 
 interface AthleteProps {
   headingLevel?: HeadingProps['level'];
-  bgImage?: UrlObject | string;
+  bgImage?: UrlObject | string | StaticImport;
   name?: string;
   subTitle?: string;
   Insta?: string;

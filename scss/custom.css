@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@font-face {
+  font-family: Cochin;
+  font-weight: 400;
+  src: url("../assets/fonts/Cochin-LT-Font.ttf") format("ttf");
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input:focus-within ~ label,
+input:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-6;
+}
+
+input:focus-within ~ label {
+  @apply text-secondary;
+}
+
+textarea:focus-within ~ label,
+textarea:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-6;
+}
+
+textarea:focus-within ~ label {
+  @apply text-secondary;
+}
+
+.rotate {
+  -webkit-transform: rotate(45deg) translateY(11px);
+          transform: rotate(45deg) translateY(11px);
+}
+
+.rotateReverse {
+  -webkit-transform: rotate(-45deg) translateY(-11px);
+          transform: rotate(-45deg) translateY(-11px);
+}
+
+.disapear {
+  opacity: 0;
+}
+
+.active {
+  border-bottom: 1px solid white;
+}
+
+#signup-check:checked ~ .check {
+  @apply opacity-100;
+  -webkit-animation: check-anime 0.5s 1;
+          animation: check-anime 0.5s 1;
+}
+
+@-webkit-keyframes check-anime {
+  0% {
+    @apply transform scale-100;
+  }
+  50% {
+    @apply transform scale-150 opacity-0;
+  }
+  100% {
+    @apply transform scale-100;
+  }
+}
+
+@keyframes check-anime {
+  0% {
+    @apply transform scale-100;
+  }
+  50% {
+    @apply transform scale-150 opacity-0;
+  }
+  100% {
+    @apply transform scale-100;
+  }
+}
+
+.scroll-line {
+  -webkit-animation: line 5s linear infinite;
+          animation: line 5s linear infinite;
+}
+
+@-webkit-keyframes line {
+  0% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+  25% {
+    -webkit-transform: translateY(0.6rem);
+            transform: translateY(0.6rem);
+  }
+  50% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+  75% {
+    -webkit-transform: translateY(0.6rem);
+            transform: translateY(0.6rem);
+  }
+  100% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+}
+
+@keyframes line {
+  0% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+  25% {
+    -webkit-transform: translateY(0.6rem);
+            transform: translateY(0.6rem);
+  }
+  50% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+  75% {
+    -webkit-transform: translateY(0.6rem);
+            transform: translateY(0.6rem);
+  }
+  100% {
+    -webkit-transform: translateY(-0.6rem);
+            transform: translateY(-0.6rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .no-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .no-mobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-outer::before {
+  content: '\f005 \f005 \f005 \f005 \f005';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  @apply text-gray-500;
+}
+
+.stars-inner::before {
+  content: '\f005 \f005 \f005 \f005 \f005';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  @apply text-primary;
+}
+/*# sourceMappingURL=custom.css.map */

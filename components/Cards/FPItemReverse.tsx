@@ -9,6 +9,7 @@
 import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 import Heading from '../UI/Heading';
 
 export interface IFPProps {
@@ -68,14 +69,21 @@ const FPItemReverse = ({ product }: IFPProps): JSX.Element => {
       </motion.div>
       <div className="md:col-span-2 flex flex-col-reverse md:flex-row md:justify-end">
         <div className="flex justify-end transform md:translate-x-80 md:w-full+">
-          <img
+          <div
             ref={ref}
-            src={product?.image.sourceUrl}
-            alt={product?.image.title}
             // height={300}
             // width={400}
-            className="w-5/6 lg:h-5/6 lg:w-4/6  md:invisible lg:visible"
-          />
+            className="w-5/6 lg:h-7/8 lg:w-4/6  md:invisible lg:visible relative"
+          >
+            <Image
+              src={product?.image.sourceUrl}
+              alt={product?.image.title}
+              placeholder="blur"
+              blurDataURL={product?.image.sourceUrl}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
           {/* <img
             src="images/Detailline.svg"
             alt="Detailline"

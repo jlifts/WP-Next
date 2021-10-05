@@ -18,7 +18,7 @@ const PasswordResetForm = (): JSX.Element => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setButton('Sending...');
+    setButton('Sending...Check for an Email');
     const Data = new FormData(e.currentTarget);
     const { email } = Object.fromEntries(Data);
     sendPasswordResetEmail({
