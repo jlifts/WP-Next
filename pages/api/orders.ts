@@ -37,15 +37,15 @@ export const handler = async (
   const lineItems: OrderLineItem[] = [];
   const discounts: OrderLineItemDiscount[] = [];
   const products = req.body.lineItem;
-  req.body.lineItem.map((item: { name: any }) => ({ name: item.name }));
-  req.body.lineItem.map(
-    (item: { amount: string | number | bigint | boolean }) => ({
-      amount: item.amount,
-    }),
-  );
-  req.body.lineItem.map((item: { quantity: any }) => ({
-    quantity: item.quantity,
-  }));
+  // req.body.lineItem.map((item: { name: any }) => ({ name: item.name }));
+  // req.body.lineItem.map(
+  //   (item: { amount: string | number | bigint | boolean }) => ({
+  //     amount: item.amount,
+  //   }),
+  // );
+  // req.body.lineItem.map((item: { quantity: any }) => ({
+  //   quantity: item.quantity,
+  // }));
   const { discountName } = req.body;
   const { discount } = req.body;
 
@@ -99,7 +99,8 @@ export const handler = async (
 
   try {
     const { result } = await ordersApi.createOrder(body);
-    res.json(JSONBig.parse(JSONBig.stringify(result)));
+    const json = JSONBig.parse(JSONBig.stringify(result));
+    res.json(json);
     // console.log(result);
   } catch (error) {
     if (error instanceof ApiError) {
@@ -110,7 +111,7 @@ export const handler = async (
     }
     res.status(error).json({});
   }
-  res.status(200).end();
+  // res.status(200).end();
 };
 
 export default handler;
