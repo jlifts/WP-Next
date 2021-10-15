@@ -75,7 +75,7 @@ const defaultCustomerInfo: CustomerData = {
 // TODO: Create Account from checkout
 
 const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
-  const [orderId, setOrderId] = useState('');
+  const [orderId, setOrderId] = useState();
   const [wooId, setWooId] = useState();
   const initialState = {
     billing: {
@@ -181,7 +181,7 @@ const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
     if (orderResponse.ok) {
       setShowModal(true);
       const res = orderResponse.json();
-      res.then((value) => setOrderId(value?.order?.id));
+      res.then((value) => setOrderId(value.order.id));
       return res;
     }
 

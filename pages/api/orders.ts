@@ -100,8 +100,7 @@ export const handler = async (
 
   try {
     const { result } = await ordersApi.createOrder(body);
-    const json = JSONBig.parse(JSONBig.stringify(result));
-    res.json(json);
+    res.json(JSONBig.parse(JSONBig.stringify(result)));
     // console.log(result);
     // res.status(200);
   } catch (error) {
