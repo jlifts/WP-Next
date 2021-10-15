@@ -127,7 +127,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
           // setTimeout(() => {
           //   router.push(`/checkout/orderDetails/${wooId}`);
           // }, 5000);
-          setTimeout(() => {
+          void setTimeout(() => {
             router.push(`/checkout/thankyou`);
             setLoadingRedirect(true);
           }, 5000);
