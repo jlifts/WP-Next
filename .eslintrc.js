@@ -30,6 +30,7 @@ module.exports = {
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     'import/no-extraneous-dependencies': 0,
     '@typescript-eslint/unbound-method': 0,
+    '@typescript-eslint/no-floating-promises': 0,
     'no-void': 0,
     'no-console': 0,
     'import/named': 0,
