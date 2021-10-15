@@ -48,7 +48,7 @@ export const handler = async (
     // Refrence the orderID created in square
     orderId,
     referenceId,
-    locationId: 'L1MBBAVEE0STC', // 3R5GR5D9RKG4Z
+    locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC
   };
   // If we save cards on file with create customer API
   // body.customerId = '';

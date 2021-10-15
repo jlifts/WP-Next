@@ -87,7 +87,7 @@ export const handler = async (
     idempotencyKey,
     order: {
       state: 'OPEN',
-      locationId: 'L1MBBAVEE0STC', // 3R5GR5D9RKG4Z
+      locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC
       lineItems,
       discounts,
     },

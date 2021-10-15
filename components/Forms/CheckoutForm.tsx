@@ -361,7 +361,7 @@ const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
     // return new Promise<void>((resolve, reject) => {
     function loadSDK() {
       const sqPaymentScript = document.createElement('script');
-      sqPaymentScript.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
+      sqPaymentScript.src = 'https://web.squarecdn.com/v1/square.js';
       sqPaymentScript.crossOrigin = 'anonymous';
       sqPaymentScript.type = 'text/javascript';
       sqPaymentScript.onload = () => {
