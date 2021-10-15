@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable react/jsx-one-expression-per-line */
