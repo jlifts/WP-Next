@@ -453,25 +453,23 @@ const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
 {errors.email && (
   <span className="text-red-500 text-base">This field is required</span>
 )} */}
-              {!user && (
-                <div>
-                  <label htmlFor="signup-check" className="flex text-xs">
-                    <input
-                      type="checkbox"
-                      id="signup-check"
-                      className="relative mb-3 appearance-none rounded-md border-2 h-4 w-4 mr-2 cursor-pointer"
-                      onClick={clicked}
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className={`h-4 text-primary absolute cursor-pointer ${
-                        click ? 'visible' : 'invisible'
-                      }`}
-                    />
-                    Keep me up to date on news and offers
-                  </label>
-                </div>
-              )}
+              <div>
+                <label htmlFor="signup-check" className="flex text-xs">
+                  <input
+                    type="checkbox"
+                    id="signup-check"
+                    className="relative mb-3 appearance-none rounded-md border-2 h-4 w-4 mr-2 cursor-pointer"
+                    onClick={clicked}
+                  />
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={`h-4 text-primary absolute cursor-pointer ${
+                      click ? 'visible' : 'invisible'
+                    }`}
+                  />
+                  Keep me up to date on news and offers
+                </label>
+              </div>
               <Heading level="h5" className="text-xl mt-1">
                 Shipping Address
               </Heading>

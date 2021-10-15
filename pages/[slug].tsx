@@ -70,16 +70,20 @@ export default function Page(data: any): JSX.Element {
   );
 }
 
-export async function getStaticPaths() {
-  // Fix this
+export function getStaticPaths() {
+  // Fix this ? Good in prod?
+  //
   /* context: GetStaticPathsContext */
   // const client = getApolloClient(context);
-  const paths: any[] = [];
-  const { data } = await Client.query({
-    query: LEGAL_MENU_QUERY,
-  });
-  const menu = data?.menu?.menuItems?.nodes;
-  menu?.map((menus: { path: string }) => paths.push(menus?.path.slice(0, -1)));
+  // const paths: any[] = [];
+  // const { data } = await Client.query({
+  //   query: LEGAL_MENU_QUERY,
+  // });
+  // const menu = data?.menu?.menuItems?.nodes;
+  // menu?.map((menus: { path: string }) => paths.push(menus?.path.slice(0, -1)));
+
+  // Fall Back
+  const paths = ['/coa', '/privacy-policy', '/tc', '/return-policy'];
 
   return {
     paths,

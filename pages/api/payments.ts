@@ -62,7 +62,6 @@ export const handler = async (
     } = await paymentsApi.createPayment(body);
 
     res.json(JSONBig.parse(JSONBig.stringify(payment)));
-    res.status(200).end();
     // console.log(payment);
   } catch (error) {
     if (error instanceof ApiError) {
@@ -73,6 +72,7 @@ export const handler = async (
     }
     res.status(error).json({});
   }
+  res.status(200).end();
 };
 
 export default handler;
