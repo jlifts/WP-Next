@@ -40,16 +40,16 @@ const CheckoutDetails = (): JSX.Element => {
           <div className="text-3xl pt-20 md:pt-0 md:text-5xl font-bold md:tracking-widest">
             <Heading level="h3">Victis Health</Heading>
           </div>
-          <div className="text-2xl pt-16">
+          <div className="text-xl md:text-2xl pt-16">
             <Heading level="h4">Thank You For Your Order</Heading>
           </div>
-          <p className="text-base mx-6 md:mx-0">
+          <p className="pt-10 md:pt-0 pl-2 md:ml-0 text-base mx-6 md:mx-0">
             Thank you for ordering with Victis, please reach out to us if you
             have any questions or concerns!
           </p>
         </div>
-        <div className="bg-lightgray h-120 w-3/4 absolute z-10 font-mont tracking-widest uppercase ">
-          <p className="flex text-base px-44 md:mx-0 justify-center items-center h-full">
+        <div className="bg-lightgray h-60 sm:h-80 md:h-120 w-3/4 absolute z-10 font-mont tracking-widest uppercase ">
+          <p className="flex text-base px-8 sm:px-12 md:px-44 md:mx-0 justify-center items-center h-full">
             An email will be sent to the email you provided us with during the
             checkout process with your reciept shortly.
           </p>

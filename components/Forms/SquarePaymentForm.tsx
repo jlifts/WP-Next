@@ -152,7 +152,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
       // }
     }
     void main();
-  }, [APP_ID, LID]);
+  }, [APP_ID, LID, orderId]); // TEST THIS
 
   // SQUARE DOCS END
 
