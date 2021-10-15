@@ -32,6 +32,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
   const [loading, setLoading] = useState(false);
   const [loadingRedirect, setLoadingRedirect] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [fail, setFail] = useState(false);
   // const [updateOrder] = useMutation(UPDATE_ORDER, {
   //   variables: { orderId: wooId },
   // });
@@ -101,6 +102,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
         } else {
           statusContainer.classList.remove('is-success');
           statusContainer.classList.add('is-failure');
+          setFail(true);
         }
 
         statusContainer.style.visibility = 'visible';
@@ -152,7 +154,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
       // }
     }
     void main();
-  }, [orderId !== undefined]); // TEST THIS
+  }, [APP_ID, LID]); // TEST THIS
 
   // SQUARE DOCS END
 
@@ -213,6 +215,7 @@ const SquarePayments = ({ orderId, wooId }: any) => {
       </form>
       <div id="payment-status-container" />
       {loadingRedirect && <p>Redirecting...</p>}
+      {fail && <p>If status failed try pressing again!</p>}
     </>
   );
 };
