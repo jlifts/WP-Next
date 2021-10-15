@@ -150,7 +150,7 @@ const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
       },
     );
     const discountName =
-      cart.discountCode === undefined || null ? '' : cart.discountCode;
+      cart.discountCode === undefined || null ? 'none' : cart.discountCode;
     const discount =
       cart.dicountAmount === undefined || null
         ? 0

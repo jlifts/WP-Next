@@ -63,6 +63,7 @@ export const handler = async (
     const json = JSONBig.parse(JSONBig.stringify(payment));
     res.json(json);
     // console.log(payment);
+    // res.status(200).end();
   } catch (error) {
     if (error instanceof ApiError) {
       const errors = error.result;
@@ -72,7 +73,6 @@ export const handler = async (
     }
     res.status(error).json({});
   }
-  // res.status(200).end();
 };
 
 export default handler;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -102,8 +103,10 @@ export const handler = async (
     const json = JSONBig.parse(JSONBig.stringify(result));
     res.json(json);
     // console.log(result);
+    // res.status(200);
   } catch (error) {
     if (error instanceof ApiError) {
+      // console.error(error);
       const errors = error.result;
       res.json(errors);
       const { statusCode } = error;
@@ -111,7 +114,6 @@ export const handler = async (
     }
     res.status(error).json({});
   }
-  // res.status(200).end();
 };
 
 export default handler;
