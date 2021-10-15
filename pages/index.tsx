@@ -64,7 +64,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
         <Drawer />
       </div>
       <main
-        className="bg-primary w-screen overflow-hidden static z-10"
+        className="bg-primary w-screen h-full overflow-hidden static z-10"
         key="main"
       >
         <section className="h-screen z-20">
@@ -167,7 +167,10 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
                 subTitle={deets?.title}
                 body={content}
               />
-              <div ref={ref} className="transform -translate-y-44" />
+              <div
+                ref={ref}
+                className="transform -translate-x-16 -translate-y-44"
+              />
             </div>
           </motion.div>
         </section>

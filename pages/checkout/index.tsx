@@ -6,15 +6,22 @@ import Heading from 'components/UI/Heading';
 import { CartContext } from 'Context/CartContext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 const Checkout = (): JSX.Element => {
   const router = useRouter();
-  const [cart, setCart] = useContext(CartContext);
+  const [cart] = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <section className="flex flex-col md:grid md:grid-cols-2 w-screen">
+      <section
+        className={
+          showModal
+            ? 'h-screen overflow-hidden flex flex-col md:grid md:grid-cols-2 w-screen'
+            : 'flex flex-col md:grid md:grid-cols-2 w-screen overflow-hidden'
+        }
+      >
         <div className="col-span-1 p-6 h-full">
           <Heading
             level="h4"
@@ -51,7 +58,7 @@ const Checkout = (): JSX.Element => {
               <p>Order Details</p>
             </div>
           </nav>
-          <CheckoutForm />
+          <CheckoutForm showModal={showModal} setShowModal={setShowModal} />
           <div className="pt-4 px-6">
             <nav className="flex text-primary justify-between">
               <Link href="/return-policy">Refund Policy</Link>
@@ -61,7 +68,7 @@ const Checkout = (): JSX.Element => {
           </div>
         </div>
         <div className="h-full+ col-span-1 bg-lightgray p-6">
-          <CheckoutCart products={cart} />
+          <CheckoutCart products={cart} postCheckout={false} />
         </div>
       </section>
     </>

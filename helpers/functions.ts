@@ -265,7 +265,20 @@ export const getUpdatedItems = (
 
 export const createCheckoutData = (order: {
   billingDifferentThanShipping: boolean;
-  billing: any;
+  // status: string;
+  billing: {
+    firstName: string;
+    lastName: string;
+    address1: string;
+    address2?: string;
+    city: string;
+    country: string;
+    state: string;
+    postcode: string;
+    email: string;
+    phone?: string;
+    company?: string;
+  };
   shipping: {
     firstName: string;
     lastName: string;
@@ -316,11 +329,12 @@ export const createCheckoutData = (order: {
       country: billingData?.country || 'US',
       state: billingData?.state,
       postcode: billingData?.postcode,
-      email: order?.shipping?.email,
-      phone: order?.shipping?.email,
+      email: billingData?.email,
+      phone: billingData?.phone,
       company: billingData?.company,
     },
     shipToDifferentAddress: order.billingDifferentThanShipping,
+    // status: order.status,
     paymentMethod: order.paymentMethod,
     isPaid: false,
   };

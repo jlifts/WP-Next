@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useMutation } from '@apollo/client';
+import Heading from 'components/UI/Heading';
 import { DELETE } from 'graphql/Mutations';
 import useAuth from 'hooks/useAuth';
 import { useRouter } from 'next/router';
@@ -18,10 +19,34 @@ const DeleteUserBtn = (): JSX.Element => {
 
   async function handleDelete() {
     await deleted();
+    router.reload();
   }
 
   if (deletedUser) {
     router.push('/');
+  }
+
+  function handlePopUp() {
+    return (
+      <>
+        <div>
+          <div>
+            <span>X</span>
+            <Heading level="h4">Warning!!!</Heading>
+          </div>
+          <p>
+            Are you sure? This will delete all your data, including your order
+            history.
+          </p>
+          <button type="button" disabled={loading} onClick={handleDelete}>
+            Delete
+          </button>
+          <button type="button" disabled={loading}>
+            Stay with the Team
+          </button>
+        </div>
+      </>
+    );
   }
 
   return (
@@ -35,7 +60,7 @@ const DeleteUserBtn = (): JSX.Element => {
         type="button"
         disabled={loading}
         className="text-black text-sm bg-red-500 px-3 py-4"
-        onClick={handleDelete}
+        onClick={handlePopUp}
       >
         X Delete User
       </button>

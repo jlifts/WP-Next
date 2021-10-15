@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -19,11 +20,11 @@ export default function LogOut(): JSX.Element {
 
   useEffect(() => {
     Client.clearStore();
+    localStorage.removeItem('woo-session');
     logOut();
-  }, [logOut]);
+  }, [logOut, router]);
 
   if (loggedOut) {
-    router.reload();
     router.push('/');
   }
 

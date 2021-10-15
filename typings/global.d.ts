@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-redeclare */
 import { UrlObject } from 'url';
@@ -8,7 +9,15 @@ declare module '*.svg';
 declare global {
   interface Window {
     fbq: any;
+    gtag: any;
+    Square: any;
   }
+}
+
+interface Window {
+  fbq: any;
+  gtag: any;
+  Square: any;
 }
 
 interface AthleteProps {

@@ -11,15 +11,15 @@ interface IAddress {
   input: any;
   handleOnChange: any;
   isShipping: boolean;
-  defaultValue: any;
+  // defaultValue?: any;
 }
 
 const Address = ({
   input,
   handleOnChange,
   isShipping,
-  defaultValue,
-}: IAddress) => {
+}: // defaultValue,
+IAddress) => {
   //   console.log(defaultValue);
 
   const { errors } = input || {};
@@ -29,7 +29,7 @@ const Address = ({
       <div className="flex">
         <FormInput
           name="firstName"
-          defaultValue={defaultValue?.firstName || ''}
+          // defaultValue={defaultValue?.firstName || ''}
           inputValue={input?.firstName}
           handleInputChange={handleOnChange}
           placeholder="First Name"
@@ -41,7 +41,7 @@ const Address = ({
         />
         <FormInput
           name="lastName"
-          defaultValue={defaultValue?.lastName || ''}
+          // defaultValue={defaultValue?.lastName || ''}
           inputValue={input?.lastName}
           handleInputChange={handleOnChange}
           placeholder="Last Name"
@@ -56,11 +56,11 @@ const Address = ({
         name="company"
         placeholder="Company (optional)"
         inputValue={input?.company}
-        defaultValue={
-          isShipping
-            ? defaultValue?.shipping?.company || ''
-            : defaultValue?.billing?.company || ''
-        }
+        // defaultValue={
+        //   isShipping
+        //     ? defaultValue?.shipping?.company || ''
+        //     : defaultValue?.billing?.company || ''
+        // }
         handleInputChange={handleOnChange}
         autoComplete="off"
         isShipping={isShipping}
@@ -71,11 +71,11 @@ const Address = ({
         name="address1"
         placeholder="Address"
         inputValue={input?.address1}
-        defaultValue={
-          isShipping
-            ? defaultValue?.shipping?.address1 || ''
-            : defaultValue?.billing?.address1 || ''
-        }
+        // defaultValue={
+        //   isShipping
+        //     ? defaultValue?.shipping?.address1 || ''
+        //     : defaultValue?.billing?.address1 || ''
+        // }
         handleInputChange={handleOnChange}
         autoComplete="off"
         isShipping={isShipping}
@@ -86,11 +86,11 @@ const Address = ({
         name="address2"
         placeholder="Apartment, Suite, etc. (optional)"
         inputValue={input?.address2}
-        defaultValue={
-          isShipping
-            ? defaultValue?.shipping?.address2 || ''
-            : defaultValue?.billing?.address2 || ''
-        }
+        // defaultValue={
+        //   isShipping
+        //     ? defaultValue?.shipping?.address2 || ''
+        //     : defaultValue?.billing?.address2 || ''
+        // }
         handleInputChange={handleOnChange}
         autoComplete="off"
         isShipping={isShipping}
@@ -101,11 +101,11 @@ const Address = ({
         name="city"
         placeholder="City"
         inputValue={input?.city}
-        defaultValue={
-          isShipping
-            ? defaultValue?.shipping?.city || ''
-            : defaultValue?.billing?.city || ''
-        }
+        // defaultValue={
+        //   isShipping
+        //     ? defaultValue?.shipping?.city || ''
+        //     : defaultValue?.billing?.city || ''
+        // }
         handleInputChange={handleOnChange}
         autoComplete="off"
         isShipping={isShipping}
@@ -140,11 +140,11 @@ const Address = ({
         <FormInput
           name="postcode"
           inputValue={input?.postcode}
-          defaultValue={
-            isShipping
-              ? defaultValue?.shipping?.postcode || ''
-              : defaultValue?.billing?.postcode || ''
-          }
+          // defaultValue={
+          //   isShipping
+          //     ? defaultValue?.shipping?.postcode || ''
+          //     : defaultValue?.billing?.postcode || ''
+          // }
           handleInputChange={handleOnChange}
           placeholder="Zip"
           autoComplete="off"

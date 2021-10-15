@@ -4,6 +4,7 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 // import { HeaderProps } from 'typings/global';
 import Meta from 'lib/Meta';
 import * as gtag from 'lib/GA';
@@ -16,12 +17,6 @@ function SEO(): JSX.Element {
       <Head>
         <title>Victis Health</title>
         {/* Add extra elements to <head> here. */}
-
-        {/* Square Web Payments API */}
-        {/* <script
-          type="text/javascript"
-          src="https://sandbox.web.squarecdn.com/v1/square.js"
-        ></script> */}
 
         {/* Global Site Code Pixel - Facebook Pixel */}
         <script

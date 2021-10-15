@@ -73,7 +73,7 @@ const FPItemReverse = ({ product }: IFPProps): JSX.Element => {
             ref={ref}
             // height={300}
             // width={400}
-            className="w-5/6 lg:h-7/8 lg:w-4/6  md:invisible lg:visible relative"
+            className="w-5/6 h-5/6 lg:h-7/8 lg:w-4/6 md:invisible lg:visible relative"
           >
             <Image
               src={product?.image.sourceUrl}

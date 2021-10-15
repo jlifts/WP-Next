@@ -50,6 +50,7 @@ module.exports = {
         '3/8': '37.5%',
         'full+': '120%',
         120: '30rem',
+        300: '300px',
       },
       colors: {
         primary: 'var(--primary)',

@@ -74,17 +74,15 @@ export async function getStaticPaths() {
   // Fix this
   /* context: GetStaticPathsContext */
   // const client = getApolloClient(context);
+  const paths: any[] = [];
   const { data } = await Client.query({
     query: LEGAL_MENU_QUERY,
   });
   const menu = data?.menu?.menuItems?.nodes;
-  const slugs = menu?.map((menus: { path: string }) =>
-    menus?.path.slice(0, -1),
-  );
-  // const paths = slugs?.map((slug: any) => slug);
-  const paths = slugs?.map((slug: string) => ({ params: { slug } }));
+  menu?.map((menus: { path: string }) => paths.push(menus?.path.slice(0, -1)));
+
   return {
-    paths: ['/coa', '/privacy-policy', '/tc', '/return-policy'],
+    paths,
     fallback: false,
   };
 }

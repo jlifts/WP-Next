@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -17,10 +20,10 @@ import useAuth from 'hooks/useAuth';
 import { useMutation, useQuery } from '@apollo/client';
 import { USER_ADDRESS } from 'graphql/Queries';
 import {
-  /* UPDATE_USER, */ CLEAR_CART,
+  /* UPDATE_USER, */
   CHECKOUT_MUTATION,
+  // CREATE_ORDER,
 } from 'graphql/Mutations';
-// import { toast } from 'react-toastify';
 import {
   getFormattedCart,
   createCheckoutData,
@@ -28,15 +31,16 @@ import {
 } from 'helpers/functions';
 import { CartContext } from 'Context/CartContext';
 import { GET_CART_QUERY } from 'graphql/Queries/Cart';
-// import { toastConfig } from 'components/ToastConfig';
 import validateAndSanitizeCheckoutForm from 'helpers/validateAndSanatize';
 import { toast } from 'react-toastify';
+import router from 'next/router';
 import Heading from '../UI/Heading';
 import FormInput from './FormInput';
 import Address from './AddressForm';
 import Error from './Errors';
 import SquarePayments from './SquarePaymentForm';
 import axios from '../../pages/api/axios/omni';
+import Modal from './Modal';
 
 type CustomerData = {
   firstName: string;
@@ -63,14 +67,16 @@ const defaultCustomerInfo: CustomerData = {
   state: '',
   postcode: '',
   email: '',
-  phone: '',
+  phone: null,
   company: '',
   errors: null,
 };
 
 // TODO: Create Account from checkout
 
-const CheckoutForm = (): JSX.Element => {
+const CheckoutForm = ({ setShowModal, showModal }: any): JSX.Element => {
+  const [orderId, setOrderId] = useState('');
+  const [wooId, setWooId] = useState();
   const initialState = {
     billing: {
       ...defaultCustomerInfo,
@@ -81,6 +87,7 @@ const CheckoutForm = (): JSX.Element => {
     createAccount: false,
     billingDifferentThanShipping: false,
     paymentMethod: 'square_credit_card',
+    // status: 'PENDING',
   };
 
   const { user } = useAuth();
@@ -90,12 +97,16 @@ const CheckoutForm = (): JSX.Element => {
   const [orderData, setOrderData] = useState(null);
   const [input, setInput] = useState(initialState);
 
-  const { data: addressData, loading } = useQuery(USER_ADDRESS, {
-    variables: { customerId: user?.userId },
-  });
+  // FILL IN USER INFO
 
-  const shipping = addressData?.customer?.shipping;
-  const billing = addressData?.customer?.billing;
+  // const { data: addressData, loading } = useQuery(USER_ADDRESS, {
+  //   variables: { customerId: user?.userId },
+  // });
+
+  // const shipping = addressData?.customer?.shipping;
+  // const billing = addressData?.customer?.billing;
+
+  // CREATE PROFILE AT CHECKOUT
 
   // const [updateProfile, { data: userData, loading, error }] =
   //   useMutation(UPDATE_USER);
@@ -116,21 +127,109 @@ const CheckoutForm = (): JSX.Element => {
   });
 
   // Create New order: Checkout Mutation.
-  const [
-    checkout,
-    { data: checkoutResponse, loading: checkoutLoading, error },
-  ] = useMutation(CHECKOUT_MUTATION, {
-    variables: {
-      input: orderData,
+  const [checkout, { loading: checkoutLoading, error }] = useMutation(
+    CHECKOUT_MUTATION,
+    {
+      variables: {
+        input: orderData,
+      },
     },
-  });
+  );
 
-  const [clearCartMutation] = useMutation(CLEAR_CART);
+  const handleClick = async () => {
+    const lineItem: any[] = [];
+
+    cart.products.forEach(
+      (item: { regularPrice: any; name: any; qty: any }) => {
+        const reqBodyItem = {
+          amount: item.regularPrice.toString().replace('.', ''),
+          name: item.name,
+          quantity: item.qty.toString(),
+        };
+        lineItem.push(reqBodyItem);
+      },
+    );
+    const discountName =
+      cart.discountCode === undefined || null ? '' : cart.discountCode;
+    const discount =
+      cart.dicountAmount === undefined || null
+        ? 0
+        : cart.discountAmount.replace('$', '').replace('.', '');
+
+    const body = JSON.stringify({
+      discountName,
+      discount,
+      lineItem,
+      // lineItem: [
+      //   {
+      //     name: 'T-Shirt',
+      //     quantity: '2',
+      //     amount: 2500,
+      //     variationName: 'Medium',
+      //   },
+      // ],
+    });
+
+    const orderResponse = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    });
+
+    if (orderResponse.ok) {
+      setShowModal(true);
+      const res = orderResponse.json();
+      res.then((value) => setOrderId(value?.order?.id));
+      return res;
+    }
+
+    const errorBody = await orderResponse.text();
+  };
+
+  const handleShippingChange = (target: any) => {
+    const newState = {
+      ...input,
+      shipping: { ...input?.shipping, [target.name]: target.value },
+    };
+    setInput(newState);
+  };
+
+  const handleBillingChange = (target: any) => {
+    const newState = {
+      ...input,
+      billing: { ...input?.billing, [target.name]: target.value },
+    };
+    setInput(newState);
+  };
+
+  const handleOnChange = (
+    event: any,
+    isShipping = false,
+    isBillingOrShipping = false,
+  ) => {
+    const { target } = event || {};
+
+    // if (target.name === 'createAccount') {
+    //   handleCreateAccount(input, setInput, target);
+    // } else
+    if (target.name === 'billingDifferentThanShipping') {
+      handleBillingDifferentThanShipping(input, setInput, target);
+    } else if (isBillingOrShipping) {
+      if (isShipping) {
+        handleShippingChange(target);
+      } else {
+        handleBillingChange(target);
+      }
+    } else {
+      const newState = { ...input, [target.name]: target.value };
+      setInput(newState);
+    }
+  };
 
   const handleFormSubmit = async (event: any) => {
     event.preventDefault();
-    // const formData = new FormData(event.currentTarget);
-    // const values = Object.fromEntries(formData);
 
     /**
      * Validate Billing and Shipping Details
@@ -216,6 +315,9 @@ const CheckoutForm = (): JSX.Element => {
      *  because 'orderData' is added in useEffect as a dependency.
      */
     setOrderData(checkOutData);
+
+    await handleClick();
+    // setWooId(checkoutResponse?.checkout?.order?.databaseId);
   };
 
   const clicked = () => {
@@ -241,227 +343,248 @@ const CheckoutForm = (): JSX.Element => {
   //   toast.error(`ERROR: ${error}`, toastConfig);
   // }
 
-  const handleShippingChange = (target: any) => {
-    const newState = {
-      ...input,
-      shipping: { ...input?.shipping, [target.name]: target.value },
-    };
-    setInput(newState);
-  };
-
-  const handleBillingChange = (target: any) => {
-    const newState = {
-      ...input,
-      billing: { ...input?.billing, [target.name]: target.value },
-    };
-    setInput(newState);
-  };
-
-  const handleOnChange = (
-    event: any,
-    isShipping = false,
-    isBillingOrShipping = false,
-  ) => {
-    const { target } = event || {};
-
-    // if (target.name === 'createAccount') {
-    //   handleCreateAccount(input, setInput, target);
-    // } else
-    if (target.name === 'billingDifferentThanShipping') {
-      handleBillingDifferentThanShipping(input, setInput, target);
-    } else if (isBillingOrShipping) {
-      if (isShipping) {
-        handleShippingChange(target);
-      } else {
-        handleBillingChange(target);
-      }
-    } else {
-      const newState = { ...input, [target.name]: target.value };
-      setInput(newState);
-    }
-  };
-
   useEffect(() => {
     async function checkedout() {
       if (orderData !== null) {
         // Call the checkout mutation when the value for orderData changes/updates.
-        await checkout();
+        await checkout().then((res) =>
+          setWooId(res.data.checkout.order.databaseId),
+        );
       }
     }
     checkedout();
   }, [checkout, orderData]);
 
-  const isOrderProcessing = checkoutLoading || loading;
+  const isOrderProcessing = checkoutLoading; /* || loading */
 
+  useEffect(() => {
+    // return new Promise<void>((resolve, reject) => {
+    function loadSDK() {
+      const sqPaymentScript = document.createElement('script');
+      sqPaymentScript.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
+      sqPaymentScript.crossOrigin = 'anonymous';
+      sqPaymentScript.type = 'text/javascript';
+      sqPaymentScript.onload = () => {
+        // resolve();
+        document.getElementsByTagName('head')[0].appendChild(sqPaymentScript);
+      };
+      // sqPaymentScript.onerror = () => {
+      //   reject(`Failed to load ${sqPaymentScript.src}`);
+      // };
+      document.getElementsByTagName('head')[0].appendChild(sqPaymentScript);
+    }
+    return loadSDK();
+  }, []);
+
+  // console.log(checkoutResponse?.checkout?.order?.orderNumber);
   // console.log(input);
+  // console.log(wooId);
 
   return (
     <>
       {cart ? (
-        <form
-          className="flex flex-col w-full font-mont"
-          id="payment-form"
-          onSubmit={handleFormSubmit}
-        >
-          <fieldset disabled={isOrderProcessing} aria-busy={isOrderProcessing}>
-            {error && (
-              <div
-                className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mb-4 cursor-default"
-                role="alert"
-              >
-                <p className="font-bold font-items">Error:</p>
-                <p>{error?.graphQLErrors?.[0]?.message ?? ''}</p>
-                <p>&#9785; Please try again</p>
-              </div>
-            )}
-            <div className="flex items-center justify-between">
-              <Heading level="h5" className="text-xl">
-                Contact Information
-              </Heading>
-              {/* {!user ? (
-                <p className="text-sm">
-                  Already Have an Account?
-                  <span className="text-primary">Log In</span>
-                </p>
-              ) : (
-                <p className="text-sm">Hi, {user?.firstName}!</p>
-              )} */}
-              {/* User login modal */}
-              {user && <p className="text-sm">Hi, {user?.firstName}!</p>}
-            </div>
-            <FormInput
-              type="email"
-              name="email"
-              defaultValue={user?.email || ''}
-              inputValue={input?.shipping?.email || ''}
-              placeholder="Email"
-              handleInputChange={(event: any) =>
-                handleOnChange(event, true, true)
-              }
-              autoComplete="off"
-              className="my-3 w-full"
-              required
-            />
-            <Error errors={input?.shipping?.errors} fieldName="email" />
-            <FormInput
-              type="phone"
-              name="phone"
-              defaultValue=""
-              inputValue={input?.shipping?.phone || ''}
-              handleInputChange={(event: any) =>
-                handleOnChange(event, true, true)
-              }
-              placeholder="Phone Number (optional)"
-              autoComplete="off"
-              className="my-3 w-full"
-              required={false}
-            />
-            <Error errors={input?.shipping?.errors} fieldName="phone" />
-            {/* className={`w-full focus:outline-none bg-transparent rounded-md border text-sm ${
-            errors.email && 'border-red-500'
-          } p-2 my-3`}
-          {...register('email', { required: true, pattern: EMAIL_REGEX })}
-        />
-        {errors.email && (
-          <span className="text-red-500 text-base">This field is required</span>
-        )} */}
-            {!user && (
-              <div>
-                <label htmlFor="signup-check" className="flex text-xs">
-                  <input
-                    type="checkbox"
-                    id="signup-check"
-                    className="relative mb-3 appearance-none rounded-md border-2 h-4 w-4 mr-2 cursor-pointer"
-                    onClick={clicked}
-                  />
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                    className={`h-4 text-primary absolute cursor-pointer ${
-                      click ? 'visible' : 'invisible'
-                    }`}
-                  />
-                  Keep me up to date on news and offers
-                </label>
-              </div>
-            )}
-            <Heading level="h5" className="text-xl mt-1">
-              Shipping Address
-            </Heading>
-            <Address
-              input={input?.shipping}
-              defaultValue={shipping}
-              handleOnChange={(event: any) => handleOnChange(event, true, true)}
-              isShipping
-              // isBillingOrShipping
-            />
-            {/* {user && (
-          <>
-            <button
-              type="submit"
-              className="text-xs text-white bg-primary rounded-lg p-3"
-              onClick={(event) => handleUpdate(event)}
+        <>
+          <form
+            className="flex flex-col w-full font-mont"
+            onSubmit={handleFormSubmit}
+          >
+            <fieldset
+              disabled={isOrderProcessing}
+              aria-busy={isOrderProcessing}
             >
-              Save information for next time
-            </button>
-          </>
-        )} */}{' '}
-            <label htmlFor="billingDifferentThanShipping" className="text-sm">
-              <input
-                name="billingDifferentThanShipping"
-                type="checkbox"
-                className="mr-3 color-primary"
-                checked={input?.billingDifferentThanShipping}
-                onChange={handleOnChange}
-              />
-              Billing Different From Shipping?
-            </label>
-            {/* {user && (
-          <>
-            <button
-              type="submit"
-              className="text-xs text-white bg-primary rounded-lg p-3"
-              onClick={(event) => handleUpdate(event)}
-            >
-              Save information for next time
-            </button>
-          </>
-        )} */}
-            {input?.billingDifferentThanShipping ? (
-              <>
-                {' '}
-                <Heading level="h5" className="text-xl my-2">
-                  Billing Address
+              {error && (
+                <div
+                  className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mb-4 cursor-default"
+                  role="alert"
+                >
+                  <p className="font-bold font-items">Error:</p>
+                  <p>{error?.graphQLErrors?.[0]?.message ?? ''}</p>
+                  <p>&#9785; Please try again</p>
+                </div>
+              )}
+              <div className="flex items-center justify-between">
+                <Heading level="h5" className="text-xl">
+                  Contact Information
                 </Heading>
-                <Address
-                  input={input?.billing}
-                  defaultValue={billing}
-                  handleOnChange={(event: any) =>
-                    handleOnChange(event, false, true)
-                  }
-                  isShipping={false}
-                  // isBillingOrShipping
+                {/* {!user ? (
+      <p className="text-sm">
+        Already Have an Account?
+        <span className="text-primary">Log In</span>
+      </p>
+    ) : (
+      <p className="text-sm">Hi, {user?.firstName}!</p>
+    )} */}
+                {/* User login modal */}
+                {user && <p className="text-sm">Hi, {user?.firstName}!</p>}
+              </div>
+              <FormInput
+                type="email"
+                name="email"
+                // defaultValue={user?.email || ''}
+                inputValue={input?.shipping?.email || ''}
+                placeholder="Email"
+                handleInputChange={(event: any) =>
+                  handleOnChange(event, true, true)
+                }
+                autoComplete="off"
+                className="my-3 w-full"
+                required
+              />
+              <Error errors={input?.shipping?.errors} fieldName="email" />
+              <FormInput
+                type="phone"
+                name="phone"
+                // defaultValue=""
+                inputValue={input?.shipping?.phone || ''}
+                handleInputChange={(event: any) =>
+                  handleOnChange(event, true, true)
+                }
+                placeholder="Phone Number (optional)"
+                autoComplete="off"
+                className="my-3 w-full"
+                required={false}
+              />
+              <Error errors={input?.shipping?.errors} fieldName="phone" />
+              {/* className={`w-full focus:outline-none bg-transparent rounded-md border text-sm ${
+    errors.email && 'border-red-500'
+  } p-2 my-3`}
+  {...register('email', { required: true, pattern: EMAIL_REGEX })}
+/>
+{errors.email && (
+  <span className="text-red-500 text-base">This field is required</span>
+)} */}
+              {!user && (
+                <div>
+                  <label htmlFor="signup-check" className="flex text-xs">
+                    <input
+                      type="checkbox"
+                      id="signup-check"
+                      className="relative mb-3 appearance-none rounded-md border-2 h-4 w-4 mr-2 cursor-pointer"
+                      onClick={clicked}
+                    />
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      className={`h-4 text-primary absolute cursor-pointer ${
+                        click ? 'visible' : 'invisible'
+                      }`}
+                    />
+                    Keep me up to date on news and offers
+                  </label>
+                </div>
+              )}
+              <Heading level="h5" className="text-xl mt-1">
+                Shipping Address
+              </Heading>
+              <Address
+                input={input?.shipping}
+                // defaultValue={shipping}
+                handleOnChange={(event: any) =>
+                  handleOnChange(event, true, true)
+                }
+                isShipping
+              />
+              {/* {user && (
+  <>
+    <button
+      type="submit"
+      className="text-xs text-white bg-primary rounded-lg p-3"
+      onClick={(event) => handleUpdate(event)}
+    >
+      Save information for next time
+    </button>
+  </>
+)} */}{' '}
+              <label htmlFor="billingDifferentThanShipping" className="text-sm">
+                <input
+                  name="billingDifferentThanShipping"
+                  type="checkbox"
+                  className="mr-3 color-primary"
+                  checked={input?.billingDifferentThanShipping}
+                  onChange={handleOnChange}
                 />
-              </>
-            ) : null}
-            <div className="flex items-center pt-6">
-              <button
-                aria-label="Coninue"
-                disabled={isOrderProcessing}
-                type="submit"
-                className="w-1/4 px-2 py-4 text-white bg-primary rounded-xl focus:bg-secondary focus:outline-none text-sm"
-              >
-                {isOrderProcessing ? 'Processing...' : 'Pay'}
-              </button>
-            </div>
-          </fieldset>
-          <SquarePayments />
+                Billing Different From Shipping?
+              </label>
+              {/* {user && (
+  <>
+    <button
+      type="submit"
+      className="text-xs text-white bg-primary rounded-lg p-3"
+      onClick={(event) => handleUpdate(event)}
+    >
+      Save information for next time
+    </button>
+  </>
+)} */}
+              {input?.billingDifferentThanShipping ? (
+                <>
+                  {' '}
+                  <Heading level="h5" className="text-xl my-2">
+                    Billing Address
+                  </Heading>
+                  <FormInput
+                    type="email"
+                    name="email"
+                    // defaultValue={user?.email || ''}
+                    inputValue={input?.billing?.email || ''}
+                    placeholder="Email"
+                    handleInputChange={(event: any) =>
+                      handleOnChange(event, false, true)
+                    }
+                    autoComplete="off"
+                    className="my-3 w-full"
+                    required
+                  />
+                  <Error errors={input?.billing?.errors} fieldName="email" />
+                  <FormInput
+                    type="phone"
+                    name="phone"
+                    // defaultValue=""
+                    inputValue={input?.billing?.phone || ''}
+                    handleInputChange={(event: any) =>
+                      handleOnChange(event, false, true)
+                    }
+                    placeholder="Phone Number (optional)"
+                    autoComplete="off"
+                    className="my-3 w-full"
+                    required={false}
+                  />
+                  <Error errors={input?.billing?.errors} fieldName="phone" />
+                  <Address
+                    input={input?.billing}
+                    // defaultValue={billing}
+                    handleOnChange={(event: any) =>
+                      handleOnChange(event, false, true)
+                    }
+                    isShipping={false}
+                  />
+                </>
+              ) : null}
+            </fieldset>
+            <button
+              disabled={isOrderProcessing}
+              type="submit"
+              className={`${
+                isOrderProcessing
+                  ? 'bg-gray-500 text-gray-300 cursor-default'
+                  : 'bg-black text-white hover:bg-white hover:text-black hover:border-black'
+              } "flex mt-16 justify-center w-full border-white border rounded-lg py-3 "`}
+            >
+              {isOrderProcessing ? 'Processing...' : 'Pay'}
+            </button>
+          </form>
+
+          <Modal onClose={() => setShowModal(false)} show={showModal}>
+            <SquarePayments orderId={orderId} wooId={wooId} />
+          </Modal>
           <Link href="/shop/all">
-            <p className="text-primary px-6 cursor-pointer text-sm">
+            <p className="text-primary py-7 cursor-pointer text-sm w-1/4">
               Return to Shop
             </p>
           </Link>
-        </form>
-      ) : null}
+        </>
+      ) : (
+        router.back()
+      )}
     </>
   );
 };

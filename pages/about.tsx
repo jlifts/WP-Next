@@ -71,7 +71,7 @@ const about = ({ deets }: any): JSX.Element => {
           <Heading level="h4">About</Heading>
         </div>
       </div>
-      <section className="h-screen+ py-20 lg:mt-20 overflow-hidden">
+      <section className="h-full md:h-screen+ py-20 lg:mt-20 overflow-hidden">
         <div ref={ref} />
         <motion.img
           src="/images/richFroning.webp"

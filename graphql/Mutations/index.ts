@@ -1,7 +1,7 @@
 import { ADD_COMMENT } from './AddComment';
 import { ADD_TO_CART } from './AddToCart';
 import { APPLY_COUPON } from './ApplyCoupon';
-import CHECKOUT_MUTATION from './Checkout';
+import { CHECKOUT_MUTATION, CREATE_ORDER, UPDATE_ORDER } from './Checkout';
 import { CLEAR_CART } from './ClearCart';
 import { REGISTER_USER } from './CreateUser';
 import { DELETE } from './DeleteUser';
@@ -26,5 +26,7 @@ export {
   APPLY_COUPON,
   REMOVE_COUPONS,
   CHECKOUT_MUTATION,
+  UPDATE_ORDER,
+  CREATE_ORDER,
   ADD_COMMENT,
 };

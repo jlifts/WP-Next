@@ -28,21 +28,25 @@ function Hero({
           ` md:h-4/6 w-full lg:w-5/8 absolute z-20 bg-black opacity-30 `
         }
       />
-      <div
-        // style={{
-        //   backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
-        // }}
-        className="h-4/6 w-full lg:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
-      >
-        <Image
-          src={bgImage}
-          alt="Hero background"
-          layout="fill"
-          priority
-          placeholder="blur"
-          blurDataURL={bgImage}
-        />
-      </div>
+      {bgImage && (
+        <div
+          // style={{
+          //   backgroundImage: bgImage ? ` url(${bgImage})` : 'none',
+          // }}
+          className="h-4/6 w-full lg:w-5/8 absolute z-10 md:bg-cover bg-contain bg-no-repeat bg-center invisible md:visible"
+        >
+          <Image
+            src={bgImage}
+            alt="Hero background"
+            layout="fill"
+            priority
+            // placeholder="blur"
+            // blurDataURL={bgImage}
+            objectFit="cover"
+            quality={100}
+          />
+        </div>
+      )}
       <div className="z-30">
         <motion.div
           className="flex flex-col items-center justify-center opacity-0"
