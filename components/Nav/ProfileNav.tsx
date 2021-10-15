@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   // faLevelUpAlt,
-  faCalendarAlt,
+  // faCalendarAlt,
   faCogs,
   faSignOutAlt,
   faUser,
@@ -63,12 +63,12 @@ const ProfileNav = (): JSX.Element => {
                   />
                   Victis Test
                 </p> */}
-        <Link href="/events">
+        {/* <Link href="/events">
           <p className="border-b w-full py-3 px-3 flex justify-between cursor-pointer">
             <FontAwesomeIcon icon={faCalendarAlt} />
             Giveaways &amp; Events
           </p>
-        </Link>
+        </Link> */}
         <Link href="/members/settings">
           <p className="border-b w-full py-3 px-3 flex justify-between cursor-pointer">
             <FontAwesomeIcon icon={faCogs} />
