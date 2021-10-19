@@ -37,9 +37,11 @@ export default function App({
             <GoogleAnalyticsTag>
               <FacebookPixel>
                 <Head />
-                <Component {...pageProps} />
-                <div id="modal-root" />
-                <div id="cookie-modal-root" />
+                <main className="w-screen">
+                  <Component {...pageProps} />
+                  <div id="modal-root" />
+                  <div id="cookie-modal-root" />
+                </main>
                 <CookieModal>
                   We use cookies on our site to improve your experience and show
                   you relevant information.

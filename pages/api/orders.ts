@@ -24,14 +24,20 @@ const { ordersApi } = squareClient;
 
 // For updating the codeuse big int literal n, but since it is targeting lower than 2020 use BIgInt()
 export const handler = async (
-  req: { body: { lineItem: any[]; discountName: string; discount: number } },
+  req: { body: { lineItem?: any; discountName?: any; discount?: any } },
   res: {
-    json: (arg0: any) => void;
-    status: (arg0: unknown) => {
+    status: (arg0: number) => {
+      (): any;
+      new (): any;
+      json: {
+        (arg0: any): { (): any; new (): any; end: { (): void; new (): any } };
+        new (): any;
+      };
+    };
+    json: (arg0: any) => {
       (): any;
       new (): any;
       end: { (): void; new (): any };
-      json: { (arg0: {}): void; new (): any };
     };
   },
 ) => {
@@ -87,7 +93,7 @@ export const handler = async (
     idempotencyKey,
     order: {
       state: 'OPEN',
-      locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC
+      locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC 3R5GR5D9RKG4Z
       lineItems,
       discounts,
     },
@@ -100,19 +106,36 @@ export const handler = async (
 
   try {
     const { result } = await ordersApi.createOrder(body);
-    res.json(JSONBig.parse(JSONBig.stringify(result)));
+    res
+      .status(200)
+      .json(JSONBig.parse(JSONBig.stringify(result)))
+      .end();
     // console.log(result);
-    // res.status(200);
   } catch (error) {
     if (error instanceof ApiError) {
       // console.error(error);
       const errors = error.result;
-      res.json(errors);
-      const { statusCode } = error;
-      console.log(statusCode);
+      res.json(errors).end();
+      // const { statusCode } = error;
+      // console.log(statusCode);
     }
-    res.status(error).json({});
+    // res.status(200).end();
   }
 };
+//   return new Promise<void>((resolve, reject) => {
+//     ordersApi
+//       .createOrder(body)
+//       .then((response) => {
+//         res.status = 200;
+//         res.end(JSONBig.parse(JSONBig.stringify(response)));
+//         resolve();
+//       })
+//       .catch((error) => {
+//         res.json(error);
+//         res.end((res.status = 405));
+//         return resolve(); // in case something goes wrong in the catch block (as vijay) commented
+//       });
+//   });
+// };
 
 export default handler;

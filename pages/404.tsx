@@ -8,14 +8,14 @@ export default function Page(): JSX.Element {
   return (
     <>
       {/* <Header title={settings?.title} description={settings?.description} /> */}
-      <div className="sticky top-0 z-70 mx-6" key="drawer">
+      <div className="sticky top-0 z-70 " key="drawer">
         <Cart />
         <Drawer />
         <div className="transform rotate-90 absolute translate-y-8 -translate-x-14 text-xl ml-6">
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <main className="flex flex-col items-center h-screen">
+      <main className="flex flex-col items-center h-screen mx-4">
         <MainHero title="404" subtitle="Oops! This page cannot be found..." />
         <div className="">
           <div>

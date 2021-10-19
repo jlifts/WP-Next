@@ -22,13 +22,15 @@ export const handler = async (
     body: { token?: any; amount?: any; orderId?: any; referenceId?: any };
   },
   res: {
-    json: (arg0: any) => void;
-    status: (arg0: unknown) => {
+    status: (arg0: number) => {
       (): any;
       new (): any;
-      end: { (): void; new (): any };
-      json: { (arg0: {}): void; new (): any };
+      json: {
+        (arg0: any): { (): any; new (): any; end: { (): void; new (): any } };
+        new (): any;
+      };
     };
+    json: (arg0: any) => void;
   },
 ) => {
   const { token } = req.body;
@@ -48,7 +50,7 @@ export const handler = async (
     // Refrence the orderID created in square
     orderId,
     referenceId,
-    locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC
+    locationId: '3R5GR5D9RKG4Z', //  L1MBBAVEE0STC 3R5GR5D9RKG4Z
   };
   // If we save cards on file with create customer API
   // body.customerId = '';
@@ -61,17 +63,16 @@ export const handler = async (
       result: { payment },
     } = await paymentsApi.createPayment(body);
     const json = JSONBig.parse(JSONBig.stringify(payment));
-    res.json(json);
+    res.status(200).json(json).end();
     // console.log(payment);
     // res.status(200).end();
   } catch (error) {
     if (error instanceof ApiError) {
       const errors = error.result;
       res.json(errors);
-      const { statusCode } = error;
-      console.log(statusCode);
+      // const { statusCode } = error;
+      // console.log(statusCode);
     }
-    res.status(error).json({});
   }
 };
 

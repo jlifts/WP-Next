@@ -55,7 +55,7 @@ const about = ({ deets }: any): JSX.Element => {
   }
 
   return (
-    <main className="">
+    <main className="overflow-hidden">
       <div className="sticky top-0 z-70 ml-12" key="drawer">
         <Cart />
         <Drawer />

@@ -37,14 +37,14 @@ const CookieModal = ({ children, title }: any) => {
 
   return show ? (
     <div className="sticky bottom-0 z-90">
-      <div className=" w-screen bg-white h-1/6 p-8 pt-6 z-30">
+      <div className="w-screen bg-white h-1/6 p-8 pt-6 z-30">
         <span className="flex justify-end text-lg">
           <span onClick={handleCloseClick} className="cursor-pointer">
             x
           </span>
         </span>
         {title && <Heading level="h4">{title}</Heading>}
-        <div className="flex items-center justify-between px-32">
+        <div className="flex items-center justify-between md:px-32">
           <div className="flex items-center text-black text-base cursor-default">
             {children}
           </div>

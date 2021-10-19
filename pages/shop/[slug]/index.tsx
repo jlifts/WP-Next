@@ -32,7 +32,7 @@ const Products = ({ product }: any): JSX.Element => {
   // console.log(product);
 
   return (
-    <main className="font-cochin">
+    <main className="font-cochin overflow-hidden">
       <div className="sticky top-0 z-70" key="drawer">
         <Cart />
         <Drawer />

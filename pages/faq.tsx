@@ -30,7 +30,7 @@ const faq = ({ faqs }: any): JSX.Element => {
           <ShopNav catagory="Shop" link="/shop/all" />
         </div>
       </div>
-      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default">
+      <div className="flex flex-col font-mont tracking-widest uppercase justify-center items-center pt-10 cursor-default overflow-hidden">
         <div className="text-3xl pt-20 md:pt-0 md:text-5xl font-bold md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>

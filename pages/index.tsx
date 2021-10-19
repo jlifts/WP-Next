@@ -59,7 +59,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
 
   return (
     <AnimatePresence>
-      <div className="sticky top-0 bg-primary z-50 text-white" key="drawer">
+      <div className="sticky top-0 bg-primary z-50 text-white " key="drawer">
         <Cart />
         <Drawer />
       </div>
@@ -67,7 +67,7 @@ const FrontPage = ({ deets, featuredProducts }: any): JSX.Element => {
         className="bg-primary w-screen h-full overflow-hidden static z-10"
         key="main"
       >
-        <section className="h-screen z-20">
+        <section className="h-screen z-20 overflow-x-hidden">
           <div className="absolute top-7 md:top-3 left-3 text-white font-cochin z-1 text-sm md:text-base">
             <motion.div
               className="flex items-center justify-center z-10 opacity-0"

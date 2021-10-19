@@ -22,15 +22,15 @@ const index = ({ catagories }: any): JSX.Element => {
   // console.log(catagories);
 
   return (
-    <main className="font-cochin">
+    <main className="font-cochin overflow-y-hidden">
       <div className="sticky top-0 z-70" key="drawer">
         <Cart />
         <Drawer />
-        <div className="transform rotate-90 absolute translate-y-14 -translate-x-6 text-xl overflow-hidden">
+        <div className="transform rotate-90 absolute translate-y-14 -translate-x-16 md:-translate-x-6 text-xl overflow-hidden">
           <ShopNav catagory="Collections" link="/shop" />
         </div>
       </div>
-      <section className="overflow-hidden">
+      <section className="">
         <div className="flex font-bold font-mont md:text-5xl uppercase justify-center md:pt-10 cursor-default text-3xl pt-20 md:tracking-widest">
           <Heading level="h4">Victis Health</Heading>
         </div>
